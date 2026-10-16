@@ -138,3 +138,5 @@ dialog h2 { margin: 0 0 1rem; font: 700 1.3rem var(--font-display); color: var(-
 .dot--rec { box-shadow: 0 0 0 2px #e8685a; }
 
 .page--cover-bottom .cover-actions { bottom: 3%; }
+/* Title sits a fixed distance above the start button (button size is fixed, page size is not). */
+.book .page--cover-bottom .cover__head { bottom: calc(3% + 4.4rem); }
