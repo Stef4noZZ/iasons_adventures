@@ -78,9 +78,9 @@ describe("settings", () => {
 
   it("keeps progress per story and repairs bad entries", () => {
     const s = sanitize({ progress: { a: { position: 4, lastRead: 4 }, b: { position: -2, lastRead: 0 } } });
-    expect(progressOf(s, "a")).toEqual({ position: 4, lastRead: 4 });
-    expect(progressOf(s, "b")).toEqual({ position: 0, lastRead: 1 });
-    expect(progressOf(s, "unseen")).toEqual({ position: 0, lastRead: 1 });
+    expect(progressOf(s, "a")).toEqual({ position: 4, lastRead: 4, finished: false });
+    expect(progressOf(s, "b")).toEqual({ position: 0, lastRead: 1, finished: false });
+    expect(progressOf(s, "unseen")).toEqual({ position: 0, lastRead: 1, finished: false });
   });
 
   it("recovers from corrupt storage", () => {
@@ -91,5 +91,22 @@ describe("settings", () => {
 describe("i18n", () => {
   it("interpolates variables", () => {
     expect(t("en", "pageOf", { current: 2, total: 16 })).toBe("Page 2 of 16");
+  });
+});
+
+describe("series slots", () => {
+  it("needs at least as many slots as stories", () => {
+    const s = series();
+    s.slots = 0;
+    expect(validateSeries(s)).toEqual(["Series: 'slots' must be a whole number, at least the number of stories."]);
+  });
+});
+
+describe("progress", () => {
+  it("remembers finished books and defaults to not finished", () => {
+    const s = sanitize({ progress: { a: { position: 17, lastRead: 1, finished: true }, b: { position: 2, lastRead: 2, finished: "yes" } } });
+    expect(progressOf(s, "a").finished).toBe(true);
+    expect(progressOf(s, "b").finished).toBe(false);
+    expect(progressOf(s, "unseen")).toEqual({ position: 0, lastRead: 1, finished: false });
   });
 });

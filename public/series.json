@@ -5,6 +5,7 @@
     "en": "The Adventures of Little Jason"
   },
   "stories": ["iasons_and_the_magic_forest"],
+  "slots": 4,
   "copyright": {
     "holder": "Stefanos Dimitriou",
     "year": 2026,

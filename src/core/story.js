@@ -92,6 +92,9 @@ export function validateSeries(series) {
     if (!Array.isArray(series?.copyright?.lines?.[lang])) errors.push(`Series: missing copyright lines ${lang}.`);
   }
   if (!Array.isArray(series?.stories) || !series.stories.length) errors.push("Series: 'stories' must be a non-empty list.");
+  if (!Number.isInteger(series?.slots) || series.slots < (series?.stories?.length ?? 0)) {
+    errors.push("Series: 'slots' must be a whole number, at least the number of stories.");
+  }
   if (!series?.copyright?.holder || !Number.isInteger(series?.copyright?.year)) errors.push("Series: copyright holder/year missing.");
   return errors;
 }

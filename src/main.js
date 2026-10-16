@@ -8,12 +8,16 @@ import { chime, pageTurn } from "./core/sound.js";
 import { clipKey, deleteClip, exportClips, importClips, listClips, saveClip } from "./core/recordings.js";
 import { recordingSupported, startRecorder } from "./core/recorder.js";
 import { renderCover, renderPage } from "./ui/page.js";
+import { renderHome } from "./ui/home.js";
+import { formatRoute, HOME, parseRoute } from "./core/router.js";
 
 const root = document.getElementById("app");
 const settings = loadSettings();
 let series;
 let stories = {};
-let story;
+let story = null; // null on the home screen
+let route = HOME;
+let routeToken = 0;
 let direction = "next";
 let audio = null;
 let installPrompt = null;
@@ -33,27 +37,69 @@ const h = (html) => {
 
 const last = () => story.pages.length + 1; // position 0 = cover, last = end card
 const clamp = (n) => Math.min(Math.max(n, 0), last());
-const position = () => progressOf(settings, story.id).position;
-const currentPage = () => story.pages[position() - 1] ?? null;
+const position = () => (story ? route.position : 0);
+const currentPage = () => story?.pages[position() - 1] ?? null;
 const keyFor = (pageId, lang = settings.storyLang, mode = settings.mode) => clipKey(story.id, lang, mode, pageId);
+const refStory = () => story ?? stories[series.stories[0]];
 
-function setProgress(next) {
-  const current = progressOf(settings, story.id);
-  const lastRead = next >= 1 && next <= story.pages.length ? next : current.lastRead;
-  settings.progress[story.id] = { position: next, lastRead };
+function remember() {
+  const pos = position();
+  const previous = progressOf(settings, story.id);
+  const reading = pos >= 1 && pos <= story.pages.length;
+  settings.progress[story.id] = {
+    position: pos,
+    lastRead: pos === last() ? 1 : reading ? pos : previous.lastRead,
+    finished: previous.finished || pos === last(),
+  };
   saveSettings(settings);
 }
 
-function go(target) {
-  const next = clamp(target);
-  const current = position();
-  if (next === current) return;
-  direction = next > current ? "next" : "prev";
-  finishRecording();
-  setProgress(next);
+/** Moves between screens by changing the address; applyRoute() does the work, so Back works like a book. */
+function navigate(next) {
+  const hash = formatRoute(next);
+  if (location.hash === hash || (hash === "#/" && !location.hash)) return;
+  location.hash = hash;
+}
+/** Where the address points right now; it moves before the screen finishes updating, so quick presses add up. */
+const hashPosition = () => {
+  const target = parseRoute(location.hash, series.stories);
+  return target.screen === "book" ? target.position : 0;
+};
+const goPage = (n) => navigate({ screen: "book", id: story.id, position: clamp(n) });
+const goHome = () => navigate(HOME);
+
+async function applyRoute() {
+  const token = ++routeToken;
+  const next = parseRoute(location.hash, series.stories);
+  const sameBook = next.screen === "book" && story?.id === next.id;
+  const before = position();
+
+  // Route state changes straight away so quick key presses build on each other; the awaits below only finish side effects.
+  const savingVoice = finishRecording();
   stopAudio();
-  if (settings.sound) (next === last() ? chime : pageTurn)();
-  render(true);
+  if (!sameBook) recordMode = false;
+  if (next.screen === "book") {
+    story = stories[next.id];
+    route = { ...next, position: Math.min(next.position, story.pages.length + 1) };
+    settings.storyId = story.id;
+    remember();
+  } else {
+    story = null;
+    route = HOME;
+  }
+  const opened = story;
+
+  await savingVoice;
+  if (opened && !sameBook) await loadClips();
+  if (token !== routeToken) return;
+
+  const after = position();
+  if (sameBook && after !== before) {
+    direction = after > before ? "next" : "prev";
+    if (settings.sound) (after === last() ? chime : pageTurn)();
+  }
+  render(sameBook && after !== before);
+  window.scrollTo(0, 0);
   autoplay();
 }
 
@@ -93,7 +139,7 @@ function playAudio(src, { advance = false } = {}) {
     if (audio !== player) return;
     audio = null;
     syncListen();
-    if (advance && settings.readAlong) setTimeout(() => !audio && !recording && go(position() + 1), 900);
+    if (advance && settings.readAlong) setTimeout(() => !audio && !recording && story && goPage(hashPosition() + 1), 900);
   };
   player.play().then(syncListen).catch(() => {
     if (audio === player) audio = null;
@@ -145,7 +191,7 @@ async function beginRecording() {
   recordError = "";
   try {
     const handle = await startRecorder();
-    recording = { handle, pageId: page.id, lang: settings.storyLang, mode: settings.mode, startedAt: Date.now() };
+    recording = { handle, storyId: story.id, pageId: page.id, lang: settings.storyLang, mode: settings.mode, startedAt: Date.now() };
     recordTimer = setInterval(tickTimer, 250);
   } catch (error) {
     recordError = error?.name === "NotAllowedError" ? "micDenied" : "micUnsupported";
@@ -155,14 +201,14 @@ async function beginRecording() {
 
 async function finishRecording() {
   if (!recording) return;
-  const { handle, pageId, lang, mode } = recording;
+  const { handle, storyId, pageId, lang, mode } = recording;
   recording = null;
   clearInterval(recordTimer);
   const blob = await handle.stop();
   if (blob.size) {
-    const key = clipKey(story.id, lang, mode, pageId);
-    await saveClip({ key, storyId: story.id, lang, mode, pageId, blob, createdAt: Date.now() });
-    setClip(key, blob);
+    const key = clipKey(storyId, lang, mode, pageId);
+    await saveClip({ key, storyId, lang, mode, pageId, blob, createdAt: Date.now() });
+    if (story?.id === storyId) setClip(key, blob);
   }
   refreshFooter();
 }
@@ -232,8 +278,10 @@ function buildStage(animate) {
 
   if (pos === 0) {
     const cover = renderCover(story, opts);
-    const label = progressOf(settings, story.id).lastRead > 1 ? "resume" : "start";
-    cover.append(h(`<div class="cover-actions"><button class="btn btn--primary btn--pulse" data-act="start">${t(lang, label)}</button></div>`));
+    const resume = progressOf(settings, story.id).lastRead;
+    if (resume > 1) cover.classList.add("page--cover-continue");
+    cover.append(h(`<div class="cover-actions"><button class="btn btn--primary btn--pulse" data-act="start">${t(lang, "start")}</button>
+      ${resume > 1 ? `<button class="btn btn--small" data-act="continue">${t(lang, "continueFrom", { n: resume })}</button>` : ""}</div>`));
     book.append(cover, fireflies());
   } else if (pos === last()) {
     book.append(renderPage(story, story.pages.at(-1), opts));
@@ -262,7 +310,7 @@ function buildFooter() {
   story.pages.forEach((page, i) => {
     const recorded = recordMode && clips.has(keyFor(page.id));
     const dot = h(`<button class="dot${pos > i + 1 ? " dot--read" : ""}${recorded ? " dot--rec" : ""}" role="tab" aria-label="${t(lang, "pageOf", { current: i + 1, total: story.pages.length })}" ${pos === i + 1 ? 'aria-current="true"' : ""}></button>`);
-    dot.addEventListener("click", () => go(i + 1));
+    dot.addEventListener("click", () => goPage(i + 1));
     dots.append(dot);
   });
   const inBook = pos >= 1 && pos <= story.pages.length;
@@ -273,14 +321,15 @@ function buildFooter() {
 
 function buildTopbar() {
   const lang = settings.uiLang;
-  const many = series.stories.length > 1;
+  const langToggle = `<div class="lang-toggle" role="group" aria-label="${t(lang, "language")}">${["el", "en"].map((code) =>
+    `<button data-act="lang" data-lang="${code}" aria-pressed="${settings.uiLang === code}">${code.toUpperCase()}</button>`).join("")}</div>`;
   return h(`<header class="topbar">
-    <h1 class="sr-only">${story.series_title[lang]}: ${story.title[lang]}</h1>
+    ${story ? `<h1 class="sr-only">${story.series_title[lang]}: ${story.title[lang]}</h1>` : ""}
     <div class="topbar__actions">
       ${installPrompt ? `<button class="btn btn--small" data-act="install">${t(lang, "install")}</button>` : ""}
-      ${recordingSupported() ? `<button class="icon-btn${recordMode ? " icon-btn--on" : ""}" data-act="record" aria-pressed="${recordMode}" aria-label="${t(lang, "recordMode")}">🎙</button>` : ""}
-      ${many ? `<button class="icon-btn" data-act="library" aria-label="${t(lang, "library")}">▤</button>` : ""}
-      <button class="icon-btn" data-act="home" aria-label="${t(lang, "toCover")}">⌂</button>
+      ${story ? "" : langToggle}
+      ${story && recordingSupported() ? `<button class="icon-btn${recordMode ? " icon-btn--on" : ""}" data-act="record" aria-pressed="${recordMode}" aria-label="${t(lang, "recordMode")}">🎙</button>` : ""}
+      ${story ? `<button class="icon-btn" data-act="home" aria-label="${t(lang, "home")}">⌂</button>` : ""}
       <button class="icon-btn" data-act="fullscreen" aria-label="${t(lang, "fullscreen")}">⛶</button>
       <button class="icon-btn" data-act="settings" aria-label="${t(lang, "settings")}">⚙</button>
     </div></header>`);
@@ -301,9 +350,9 @@ const SETTING_FIELDS = new Set(["uiLang", "storyLang", "mode", "sound", "readAlo
 function openSettings() {
   const lang = settings.uiLang;
   const langs = [["el", "Ελληνικά"], ["en", "English"]];
-  const modes = ["mode1", "mode2"].map((m) => [m, story.modes[m].label[lang]]);
+  const modes = ["mode1", "mode2"].map((m) => [m, refStory().modes[m].label[lang]]);
   const onOff = [[true, t(lang, "on")], [false, t(lang, "off")]];
-  const voice = recordingSupported() ? `<fieldset class="field"><legend>${t(lang, "myVoice")}</legend>
+  const voice = story && recordingSupported() ? `<fieldset class="field"><legend>${t(lang, "myVoice")}</legend>
       <p class="about">${t(lang, "recordedCount", { n: recordedCount(), total: story.pages.length })} (${settings.storyLang.toUpperCase()}, ${story.modes[settings.mode].label[lang]}). ${t(lang, "voiceNote")}</p>
       <div class="row"><button class="btn btn--small" data-voice="export">${t(lang, "exportVoice")}</button>
       <button class="btn btn--small" data-voice="import">${t(lang, "importVoice")}</button>
@@ -359,52 +408,26 @@ async function downloadVoice() {
   URL.revokeObjectURL(link.href);
 }
 
-function openLibrary() {
-  const lang = settings.uiLang;
-  const cards = series.stories.map((id) => {
-    const s = stories[id];
-    const cover = `${import.meta.env.BASE_URL}stories/${id}/images/${s.cover_image.replace(/\.\w+$/, ".jpg")}`;
-    return `<button class="card${id === story.id ? " card--current" : ""}" data-story="${id}"><img src="${cover}" alt="" onerror="this.remove()"><span>${s.title[lang]}</span></button>`;
-  }).join("");
-  const dialog = h(`<dialog><h2>${series.title[lang]}</h2><div class="cards">${cards}</div></dialog>`);
-  dialog.addEventListener("click", (e) => {
-    const id = e.target.closest("[data-story]")?.dataset.story;
-    if (!id) return;
-    finishRecording();
-    stopAudio();
-    selectStory(id);
-    dialog.close();
-  });
-  openDialog(dialog);
-}
-
-async function selectStory(id) {
-  story = stories[id];
-  settings.storyId = id;
-  const errors = validateStory(story);
-  if (errors.length) console.warn(`Story ${id}:`, errors);
-  const p = progressOf(settings, id);
-  settings.progress[id] = { ...p, position: clamp(p.position) };
-  saveSettings(settings);
-  direction = "next";
-  await loadClips();
-  render();
-}
-
 function render(animate = false) {
   document.documentElement.lang = settings.uiLang;
-  document.title = story.series_title[settings.uiLang];
-  root.replaceChildren(buildTopbar(), buildStage(animate), buildFooter());
+  document.title = story ? `${story.title[settings.uiLang]} · ${series.title[settings.uiLang]}` : series.title[settings.uiLang];
+  root.classList.toggle("app--home", !story);
+  root.replaceChildren(buildTopbar(), ...(story ? [buildStage(animate), buildFooter()] : [renderHome({ series, stories, settings })]));
 }
 
 const actions = {
-  prev: () => go(position() - 1),
-  next: () => go(position() + 1),
-  start: () => go(Math.max(progressOf(settings, story.id).lastRead, 1)),
-  again: () => go(1),
-  home: () => go(0),
+  prev: () => story && goPage(hashPosition() - 1),
+  next: () => story && goPage(hashPosition() + 1),
+  start: () => goPage(1),
+  continue: () => goPage(progressOf(settings, story.id).lastRead),
+  again: () => goPage(1),
+  home: goHome,
+  lang: (el) => {
+    settings.uiLang = settings.storyLang = el.dataset.lang;
+    saveSettings(settings);
+    render();
+  },
   settings: openSettings,
-  library: openLibrary,
   listen: () => {
     const page = currentPage();
     const src = page && narrationSrc(page);
@@ -436,14 +459,17 @@ const actions = {
   fullscreen: () => (document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen?.()),
 };
 
-root.addEventListener("click", (e) => actions[e.target.closest("[data-act]")?.dataset.act]?.());
+root.addEventListener("click", (e) => {
+  const el = e.target.closest("[data-act]");
+  actions[el?.dataset.act]?.(el);
+});
 
 document.addEventListener("keydown", (e) => {
-  if (document.querySelector("dialog[open]")) return;
+  if (document.querySelector("dialog[open]") || !story) return;
   if (e.key === "ArrowRight" || e.key === "PageDown") actions.next();
   else if (e.key === "ArrowLeft" || e.key === "PageUp") actions.prev();
-  else if (e.key === "Home") go(0);
-  else if (e.key === "End") go(last());
+  else if (e.key === "Home") goPage(0);
+  else if (e.key === "End") goPage(last());
 });
 
 let touchX = null;
@@ -452,13 +478,13 @@ root.addEventListener("pointerup", (e) => {
   if (touchX == null) return;
   const dx = e.clientX - touchX;
   touchX = null;
-  if (Math.abs(dx) > 50) go(position() + (dx < 0 ? 1 : -1));
+  if (Math.abs(dx) > 50 && story) goPage(hashPosition() + (dx < 0 ? 1 : -1));
 });
 
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   installPrompt = e;
-  if (story) render();
+  if (series) render();
 });
 window.addEventListener("appinstalled", () => (installPrompt = null));
 
@@ -469,7 +495,12 @@ if ("serviceWorker" in navigator && import.meta.env.PROD) {
 try {
   series = await fetchSeries();
   stories = Object.fromEntries(await Promise.all(series.stories.map(async (id) => [id, await fetchStory(id)])));
-  await selectStory(series.stories.includes(settings.storyId) ? settings.storyId : series.stories[0]);
+  for (const [id, loaded] of Object.entries(stories)) {
+    const errors = validateStory(loaded);
+    if (errors.length) console.warn(`Story ${id}:`, errors);
+  }
+  window.addEventListener("hashchange", applyRoute);
+  await applyRoute();
 } catch (error) {
   console.error(error);
   root.textContent = t(settings.uiLang, "loadError");

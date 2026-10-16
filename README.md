@@ -27,7 +27,9 @@ npm run export:pdf   # print PDFs into exports/ (needs Google Chrome)
 - Optional per-page narration audio files (`audio` fields in `story.json`) are used when there is no own recording.
 - Installable (PWA) and fully offline after the first visit: Chrome/Edge show an "Install" button, on iPad use Share, then Add to Home Screen.
   The service worker is only active in the production build (`npm run build && npm run preview`).
-- A library button appears automatically once `series.json` lists more than one book.
+- **Home screen** (the app always opens on it): the series title and one card per book, in Greek or English (EL/EN switch in the top bar, also in Settings). Cards show New, the page reached or Finished. Slots not filled yet appear as "Coming soon" cards.
+- A book opens on its cover. Start always begins at page 1; "Continue from page N" appears when you stopped partway. The home button returns to the home screen and your place is kept.
+- Every screen has its own address (`#/`, `#/<book>`, `#/<book>/<page>`), so the phone's Back button goes page by page, then to the cover, then to home, and pages can be linked directly.
 
 ## Publishing (GitHub Pages)
 
@@ -38,10 +40,10 @@ Print PDFs are not published; only the app and the small web images are.
 
 ## The series
 
-`public/series.json` holds what is shared by every book: series title, copyright holder and year, copyright lines (Greek and English), optional ISBN and the ordered list of books.
+`public/series.json` holds what is shared by every book: series title, copyright holder and year, copyright lines (Greek and English), optional ISBN, the ordered list of books (`stories`) and the number of shelf places on the home screen (`slots`, currently 4; unused places show as "Coming soon").
 Each book lives in `public/stories/<id>/story.json` (its own title, pages, `print` front and back matter) with art in `assets/stories/<id>/images/`.
 
-To add a book: copy the story folder, change the id, title, pages and images, and add the id to `stories` in `series.json`. `npm run validate` checks all of it.
+To add a book: copy the story folder, change the id, title, pages and images, and add the id to `stories` in `series.json` (it takes the next free place on the home screen). `npm run validate` checks all of it.
 The copyright page text in `series.json` was drafted without input from you, so check it (author credit, year, ISBN, publisher) before printing.
 
 ## Print

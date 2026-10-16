@@ -23,7 +23,7 @@ export function sanitize(raw) {
   for (const [id, p] of Object.entries(s.progress && typeof s.progress === "object" ? s.progress : {})) {
     const position = Number.isInteger(p?.position) && p.position >= 0 ? p.position : 0;
     const lastRead = Number.isInteger(p?.lastRead) && p.lastRead >= 1 ? p.lastRead : 1;
-    progress[id] = { position, lastRead };
+    progress[id] = { position, lastRead, finished: p?.finished === true };
   }
   s.progress = progress;
   s.narration = Boolean(s.narration);
@@ -32,7 +32,7 @@ export function sanitize(raw) {
   return s;
 }
 
-export const progressOf = (settings, id) => settings.progress[id] ?? { position: 0, lastRead: 1 };
+export const progressOf = (settings, id) => settings.progress[id] ?? { position: 0, lastRead: 1, finished: false };
 
 export function loadSettings(storage = globalThis.localStorage) {
   try {
