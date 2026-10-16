@@ -7,23 +7,24 @@ import { t } from "../src/core/i18n.js";
 const json = (path) => JSON.parse(readFileSync(path, "utf8"));
 const story = () => json("public/stories/iasons_and_the_magic_forest/story.json");
 const series = () => json("public/series.json");
+const shared = () => series().art_direction.characters;
 
 describe("validateStory", () => {
   it("accepts the bundled story", () => {
-    expect(validateStory(story())).toEqual([]);
+    expect(validateStory(story(), { sharedCharacters: shared() })).toEqual([]);
   });
 
   it("reports a missing translation", () => {
     const s = story();
     delete s.pages[3].text.en.mode2;
-    expect(validateStory(s)).toEqual(["Page 'page_04' missing text en/mode2."]);
+    expect(validateStory(s, { sharedCharacters: shared() })).toEqual(["Page 'page_04' missing text en/mode2."]);
   });
 
   it("reports wrong page count and numbering", () => {
     const s = story();
     s.pages.pop();
     s.pages[0].number = 9;
-    const errors = validateStory(s);
+    const errors = validateStory(s, { sharedCharacters: shared() });
     expect(errors).toContain("Expected 16 pages, found 15.");
     expect(errors).toContain("Page 'page_01' must have number=1.");
   });
@@ -32,13 +33,19 @@ describe("validateStory", () => {
     const s = story();
     s.pages[0].characters.push("dragon");
     s.cover_characters.push("wizard");
-    expect(validateStory(s)).toEqual(["Page 'page_01' uses unknown character 'dragon'.", "Cover uses unknown character 'wizard'."]);
+    expect(validateStory(s, { sharedCharacters: shared() })).toEqual(["Page 'page_01' uses unknown character 'dragon'.", "Cover uses unknown character 'wizard'."]);
+  });
+
+  it("needs the shared characters from the series", () => {
+    const errors = validateStory(story());
+    expect(errors.some((e) => e.includes("unknown character 'jason'"))).toBe(true);
+    expect(validateStory(story(), { sharedCharacters: shared() })).toEqual([]);
   });
 
   it("rejects unknown print pages", () => {
     const s = story();
     s.print.front_matter.push("dedication");
-    expect(validateStory(s)).toEqual(["Unknown print page 'dedication' in front_matter."]);
+    expect(validateStory(s, { sharedCharacters: shared() })).toEqual(["Unknown print page 'dedication' in front_matter."]);
   });
 });
 
@@ -91,6 +98,14 @@ describe("settings", () => {
 describe("i18n", () => {
   it("interpolates variables", () => {
     expect(t("en", "pageOf", { current: 2, total: 16 })).toBe("Page 2 of 16");
+  });
+});
+
+describe("series art direction", () => {
+  it("requires the shared Jason and Phoebus descriptions", () => {
+    const s = series();
+    delete s.art_direction.characters.phoebus;
+    expect(validateSeries(s)).toEqual(["Series: missing shared character 'phoebus'."]);
   });
 });
 

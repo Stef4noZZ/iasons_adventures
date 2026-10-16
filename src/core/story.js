@@ -31,8 +31,11 @@ export function imageUrl(story, name, { print = false } = {}) {
 
 const isText = (value) => typeof value === "string" && value.trim() !== "";
 
+/** Characters of one book: the series-wide ones (Jason, Phoebus) plus the book's own. */
+export const bookCharacters = (story, shared = {}) => ({ ...shared, ...(story.art_direction?.characters ?? {}) });
+
 /** Pure structural validation; returns error strings. Shared by the app and scripts/validate.mjs. */
-export function validateStory(story, { expectedPages = 16 } = {}) {
+export function validateStory(story, { expectedPages = 16, sharedCharacters = {} } = {}) {
   const errors = [];
   if (!story || typeof story !== "object") return ["Story root must be an object."];
 
@@ -55,6 +58,7 @@ export function validateStory(story, { expectedPages = 16 } = {}) {
     }
   }
 
+  const known = bookCharacters(story, sharedCharacters);
   const pages = Array.isArray(story.pages) ? story.pages : [];
   if (!Array.isArray(story.pages)) errors.push("'pages' must be a list.");
   if (pages.length !== expectedPages) {
@@ -76,11 +80,11 @@ export function validateStory(story, { expectedPages = 16 } = {}) {
       }
     }
     for (const name of page.characters ?? []) {
-      if (!story.art_direction?.characters?.[name]) errors.push(`Page '${id}' uses unknown character '${name}'.`);
+      if (!known[name]) errors.push(`Page '${id}' uses unknown character '${name}'.`);
     }
   });
   for (const name of story.cover_characters ?? []) {
-    if (!story.art_direction?.characters?.[name]) errors.push(`Cover uses unknown character '${name}'.`);
+    if (!known[name]) errors.push(`Cover uses unknown character '${name}'.`);
   }
   return errors;
 }
@@ -94,6 +98,9 @@ export function validateSeries(series) {
   if (!Array.isArray(series?.stories) || !series.stories.length) errors.push("Series: 'stories' must be a non-empty list.");
   if (!Number.isInteger(series?.slots) || series.slots < (series?.stories?.length ?? 0)) {
     errors.push("Series: 'slots' must be a whole number, at least the number of stories.");
+  }
+  for (const name of ["jason", "phoebus"]) {
+    if (!series?.art_direction?.characters?.[name]) errors.push(`Series: missing shared character '${name}'.`);
   }
   if (!series?.copyright?.holder || !Number.isInteger(series?.copyright?.year)) errors.push("Series: copyright holder/year missing.");
   return errors;

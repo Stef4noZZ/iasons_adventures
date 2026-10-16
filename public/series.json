@@ -4,8 +4,18 @@
     "el": "Οι Περιπέτειες του μικρού Ιάσονα",
     "en": "The Adventures of Little Jason"
   },
-  "stories": ["iasons_and_the_magic_forest"],
+  "stories": [
+    "iasons_and_the_magic_forest"
+  ],
   "slots": 4,
+  "art_direction": {
+    "negative_prompt": "text, letters, captions, speech bubbles, logo, watermark, signature, photorealistic, 3D render, harsh shadows, scary, creepy, dark horror, cluttered background, extra fingers, deformed hands, extra limbs",
+    "composition_note": "Square 1:1. Keep every character and focal point inside the upper 60% of the frame. The lowest 35-40% must be calm, simple foreground (grass, floor, path) with no important detail, because the story text is printed over it.",
+    "characters": {
+      "jason": "Jason: a storybook toddler boy of about 2-3 years old with a round face, rosy cheeks and short brown hair. Explorer outfit: olive-green jacket, beige trousers, brown boots, small brown backpack and an olive explorer hat with a brown band (no hat and soft blue pyjamas in bedroom scenes). Use the attached reference photo of Jason only for his face and hair likeness; keep the outfit exactly as described.",
+      "phoebus": "Phoebus: a friendly rust-orange fox with a cream muzzle and chest, big kind expressive dark eyes, pointed ears with cream inside, and a fluffy tail with a pale cream tip. Dark brown paws. Sits like a dog most of the time."
+    }
+  },
   "copyright": {
     "holder": "Stefanos Dimitriou",
     "year": 2026,

@@ -506,7 +506,7 @@ try {
   series = await fetchSeries();
   stories = Object.fromEntries(await Promise.all(series.stories.map(async (id) => [id, await fetchStory(id)])));
   for (const [id, loaded] of Object.entries(stories)) {
-    const errors = validateStory(loaded);
+    const errors = validateStory(loaded, { sharedCharacters: series.art_direction?.characters });
     if (errors.length) console.warn(`Story ${id}:`, errors);
   }
   window.addEventListener("hashchange", applyRoute);

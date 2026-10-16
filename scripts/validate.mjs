@@ -1,5 +1,5 @@
 // Usage: npm run validate [-- <story-id>]  (default: every story in series.json)
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { imageSize } from "image-size";
 import { interiorPageCount, validateSeries, validateStory } from "../src/core/story.js";
@@ -17,15 +17,18 @@ function report(label, errors, warnings) {
   failed ||= errors.length > 0;
 }
 
-report("series", validateSeries(series), []);
+const unregistered = readdirSync(join(root, "public", "stories"), { withFileTypes: true })
+  .filter((entry) => entry.isDirectory() && !series.stories.includes(entry.name) && existsSync(join(root, "public", "stories", entry.name, "story.json")))
+  .map((entry) => entry.name);
+report("series", validateSeries(series), unregistered.map((id) => `story '${id}' exists but is not in "stories" (it will not show on the home screen yet)`));
 
-for (const id of process.argv[2] ? [process.argv[2]] : series.stories) {
+for (const id of process.argv[2] ? [process.argv[2]] : [...series.stories, ...unregistered]) {
   const story = readJson("public", "stories", id, "story.json");
   const masters = join(root, "assets", "stories", id, "images");
   const web = join(root, "public", "stories", id, "images");
   const minPx = Math.round(((story.trim_size_cm[0] * 10 + 2 * BLEED_MM) / 25.4) * 300); // 300 dpi incl. bleed
 
-  const errors = validateStory(story);
+  const errors = validateStory(story, { sharedCharacters: series.art_direction?.characters });
   const warnings = [];
   const interior = interiorPageCount(story);
   if (interior % 4) warnings.push(`${interior} interior pages; printers usually need a multiple of 4`);

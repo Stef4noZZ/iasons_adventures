@@ -9,7 +9,13 @@ mkdirSync(join(root, "docs", "prompts"), { recursive: true });
 
 for (const id of ids) {
   const story = JSON.parse(readFileSync(join(root, "public", "stories", id, "story.json"), "utf8"));
-  const art = story.art_direction;
+  const shared = series.art_direction ?? {};
+  const art = {
+    ...story.art_direction,
+    negative_prompt: story.art_direction.negative_prompt ?? shared.negative_prompt,
+    composition_note: story.art_direction.composition_note ?? shared.composition_note,
+    characters: { ...shared.characters, ...story.art_direction.characters },
+  };
   const [w] = story.trim_size_cm;
   const px = Math.round(((w * 10 + 6) / 25.4) * 300);
 
