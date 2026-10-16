@@ -275,7 +275,7 @@ function buildTopbar() {
   const lang = settings.uiLang;
   const many = series.stories.length > 1;
   return h(`<header class="topbar">
-    <h1 class="topbar__title">${position() === 0 ? "" : story.series_title[lang]}</h1>
+    <h1 class="sr-only">${story.series_title[lang]}: ${story.title[lang]}</h1>
     <div class="topbar__actions">
       ${installPrompt ? `<button class="btn btn--small" data-act="install">${t(lang, "install")}</button>` : ""}
       ${recordingSupported() ? `<button class="icon-btn${recordMode ? " icon-btn--on" : ""}" data-act="record" aria-pressed="${recordMode}" aria-label="${t(lang, "recordMode")}">🎙</button>` : ""}

@@ -11,8 +11,8 @@ body {
 
 .app { height: 100dvh; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto; padding: .9rem 1.2rem 1rem; gap: .6rem; }
 
-.topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-.topbar__title { flex: 1 1 6rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 700 1.05rem var(--font-display); color: var(--gold); margin: 0; }
+.topbar { display: flex; align-items: center; justify-content: flex-end; gap: 1rem; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .topbar__actions { display: flex; flex: 0 1 auto; flex-wrap: wrap; justify-content: flex-end; gap: .5rem; }
 
 .icon-btn, .btn {
@@ -70,7 +70,6 @@ dialog h2 { margin: 0 0 1rem; font: 700 1.3rem var(--font-display); color: var(-
 
 .mobile-nav { display: none; }
 @media (max-width: 640px) {
-  .topbar__title { display: none; }
   .topbar__actions { flex: 1; flex-wrap: nowrap; gap: .35rem; }
   .btn--small { padding: .45rem .8rem; font-size: .8rem; margin-right: auto; }
   .icon-btn { width: 2.4rem; height: 2.4rem; }
