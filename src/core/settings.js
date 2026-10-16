@@ -6,9 +6,10 @@ export const DEFAULTS = Object.freeze({
   uiLang: "el",
   storyLang: "el",
   mode: "mode1",
-  position: 0,
-  lastRead: 1,
+  storyId: null,
+  progress: {},
   narration: true,
+  sound: true,
 });
 
 export function sanitize(raw) {
@@ -16,17 +17,26 @@ export function sanitize(raw) {
   if (!LANGUAGES.includes(s.uiLang)) s.uiLang = DEFAULTS.uiLang;
   if (!LANGUAGES.includes(s.storyLang)) s.storyLang = DEFAULTS.storyLang;
   if (!MODES.includes(s.mode)) s.mode = DEFAULTS.mode;
-  s.position = Number.isInteger(s.position) && s.position >= 0 ? s.position : 0;
-  s.lastRead = Number.isInteger(s.lastRead) && s.lastRead >= 1 ? s.lastRead : 1;
+  if (typeof s.storyId !== "string") s.storyId = null;
+  const progress = {};
+  for (const [id, p] of Object.entries(s.progress && typeof s.progress === "object" ? s.progress : {})) {
+    const position = Number.isInteger(p?.position) && p.position >= 0 ? p.position : 0;
+    const lastRead = Number.isInteger(p?.lastRead) && p.lastRead >= 1 ? p.lastRead : 1;
+    progress[id] = { position, lastRead };
+  }
+  s.progress = progress;
   s.narration = Boolean(s.narration);
+  s.sound = Boolean(s.sound);
   return s;
 }
+
+export const progressOf = (settings, id) => settings.progress[id] ?? { position: 0, lastRead: 1 };
 
 export function loadSettings(storage = globalThis.localStorage) {
   try {
     return sanitize(JSON.parse(storage.getItem(KEY)));
   } catch {
-    return { ...DEFAULTS };
+    return sanitize(null);
   }
 }
 

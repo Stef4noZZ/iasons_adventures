@@ -1,0 +1,27 @@
+{
+  "id": "adventures_of_little_jason",
+  "title": {
+    "el": "Οι Περιπέτειες του μικρού Ιάσονα",
+    "en": "The Adventures of Little Jason"
+  },
+  "stories": ["iasons_and_the_magic_forest"],
+  "copyright": {
+    "holder": "Stefanos Dimitriou",
+    "year": 2026,
+    "lines": {
+      "el": [
+        "Κείμενο και εικονογράφηση: Stefanos Dimitriou",
+        "Πρώτη έκδοση, 2026",
+        "Με επιφύλαξη παντός δικαιώματος. Απαγορεύεται η αναπαραγωγή ή διανομή μέρους ή του συνόλου του βιβλίου χωρίς γραπτή άδεια του δημιουργού.",
+        "Όλοι οι χαρακτήρες και τα γεγονότα είναι επινοημένα."
+      ],
+      "en": [
+        "Text and illustrations: Stefanos Dimitriou",
+        "First edition, 2026",
+        "All rights reserved. No part of this book may be reproduced or distributed in any form without written permission from the creator.",
+        "All characters and events are fictional."
+      ]
+    },
+    "isbn": ""
+  }
+}

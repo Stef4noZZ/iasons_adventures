@@ -85,3 +85,40 @@ dialog h2 { margin: 0 0 1rem; font: 700 1.3rem var(--font-display); color: var(-
   animation: twinkle 5s ease-in-out infinite alternate;
 }
 @keyframes twinkle { from { opacity: .45; } }
+
+/* Gentle motion; all of it is disabled by prefers-reduced-motion above. */
+.btn--small { padding: .5rem 1rem; font-size: .9rem; }
+.about { font-size: .8rem; opacity: .6; margin: 0 0 1rem; }
+
+.book .page__art img, .book .page__art svg { animation: drift 22s ease-in-out infinite alternate; transform-origin: 50% 40%; }
+@keyframes drift { to { transform: scale(1.06) translate(-.8%, -.5%); } }
+
+.book .page__text { animation: text-in .8s .25s cubic-bezier(.2, .8, .2, 1) both; }
+@keyframes text-in { from { opacity: 0; transform: translateY(.6rem); } }
+
+.book .cover__series { animation: text-in 1s .2s cubic-bezier(.2, .8, .2, 1) both; }
+.book .cover__title { animation: text-in 1s .4s cubic-bezier(.2, .8, .2, 1) both; }
+
+.btn--pulse { animation: pulse 2.4s ease-in-out infinite; }
+@keyframes pulse { 50% { box-shadow: 0 0 0 .7rem #e8c46a33, 0 0 1.6rem #e8c46a88; } }
+
+.icon-btn:active:not(:disabled), .btn:active:not(:disabled) { transform: scale(.94); }
+.dot[aria-current="true"] { animation: glow 2.6s ease-in-out infinite; }
+@keyframes glow { 50% { box-shadow: 0 0 1.1rem var(--gold); } }
+
+.flies { position: absolute; inset: 0 0 38% 0; pointer-events: none; z-index: 1; }
+.flies i {
+  position: absolute; left: var(--x); top: var(--y); width: .5rem; height: .5rem; border-radius: 50%;
+  background: #fff8d6; box-shadow: 0 0 .8rem .3rem #f2c867aa;
+  animation: wander var(--t) ease-in-out var(--d) infinite alternate, blink calc(var(--t) / 2) ease-in-out var(--d) infinite alternate;
+}
+@keyframes wander { from { translate: 0 0; } to { translate: 2.2rem -1.6rem; } }
+@keyframes blink { from { opacity: .15; } to { opacity: 1; } }
+
+.end-card__stars { color: var(--gold); letter-spacing: .6rem; font-size: 1.4rem; margin-bottom: 1.2rem; animation: glow 2.6s ease-in-out infinite; }
+.end-card h2 { animation: text-in 1s both; }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr)); gap: .8rem; }
+.card { border: 2px solid transparent; background: #fff8; border-radius: .8rem; padding: .4rem; font: inherit; cursor: pointer; display: grid; gap: .4rem; text-align: center; color: var(--ink); }
+.card img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: .5rem; }
+.card--current { border-color: var(--gold-deep); }

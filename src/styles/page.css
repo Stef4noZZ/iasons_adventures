@@ -58,3 +58,34 @@
 .back__series { color: var(--gold); font: 600 3.2cqw var(--font-display); letter-spacing: .06em; text-align: center; padding: 8cqw; }
 
 .page--cover .page__soon { display: none; }
+
+/* Print front and back matter */
+.page--title, .page--copyright, .page--end, .page--series { display: flex; flex-direction: column; align-items: center; }
+.ornament { color: var(--gold-deep); font-size: 3cqw; letter-spacing: 1.4cqw; text-align: center; }
+
+.page--title { padding: calc(14cqw + var(--bleed)) 10cqw 10cqw; gap: 3cqw; }
+.title__series { margin: 0; font: 600 3.2cqw var(--font-display); letter-spacing: .06em; color: var(--gold-deep); text-align: center; }
+.title__main { margin: 0; font: 700 8cqw/1.15 var(--font-display); color: var(--sage-deep); text-align: center; text-wrap: balance; }
+.title__medallion {
+  margin-top: auto; width: 46cqw; aspect-ratio: 1; border-radius: 50%; overflow: hidden;
+  border: 1cqw solid var(--gold); box-shadow: 0 0 0 .6cqw var(--beige), 0 0 0 1.2cqw var(--gold-deep);
+  background: var(--midnight);
+}
+.title__medallion img { width: 100%; height: 100%; object-fit: cover; object-position: center 78%; display: block; }
+
+.page--copyright { justify-content: flex-end; padding: 10cqw calc(14cqw + var(--bleed)) calc(14cqw + var(--bleed)); }
+.copyright__block { text-align: center; color: var(--ink); display: grid; gap: 2cqw; }
+.copyright__title { margin: 0 0 1cqw; font: 700 3.2cqw var(--font-display); color: var(--sage-deep); }
+.copyright__holder { margin: 0; font: 600 2.8cqw var(--font-body); }
+.copyright__line { margin: 0; font: 400 2.3cqw/1.5 var(--font-body); text-wrap: pretty; }
+
+.page--end { justify-content: center; gap: 4cqw; }
+.end__text { margin: 0; font: 700 9cqw var(--font-display); color: var(--sage-deep); }
+
+.page--series { justify-content: center; padding: 12cqw; gap: 4cqw; }
+.series__title { margin: 0; font: 700 5.4cqw/1.2 var(--font-display); color: var(--sage-deep); text-align: center; text-wrap: balance; }
+.series__list { list-style: none; margin: 4cqw 0 0; padding: 0; display: grid; gap: 3cqw; text-align: center; }
+.series__item { font: 500 3.6cqw var(--font-body); }
+.series__item--current { font-weight: 700; color: var(--gold-deep); }
+.series__item--soon { margin-top: 3cqw; font-size: 2.8cqw; opacity: .7; }
+.page__art { overflow: hidden; }

@@ -1,10 +1,10 @@
 import "./styles/tokens.css";
 import "./styles/page.css";
 import "./styles/print.css";
-import { fetchStory } from "./core/story.js";
-import { renderBackCover, renderCover, renderPage } from "./ui/page.js";
+import { fetchSeries, fetchStory, printLayout } from "./core/story.js";
+import { renderBackCover, renderCopyrightPage, renderCover, renderEndPage, renderPage, renderSeriesPage, renderTitlePage } from "./ui/page.js";
 
-// ?lang=el|en  ?mode=mode1|mode2  ?proof=1 (shows placeholder captions)
+// ?story=<id>  ?lang=el|en  ?mode=mode1|mode2  ?proof=1 (shows placeholder captions)
 const params = new URLSearchParams(location.search);
 const lang = params.get("lang") === "en" ? "en" : "el";
 const mode = params.get("mode") === "mode2" ? "mode2" : "mode1";
@@ -18,11 +18,25 @@ const sheet = (node) => {
   return wrap;
 };
 
-const story = await fetchStory();
+const series = await fetchSeries();
+const storyId = params.get("story") ?? series.stories[0];
+const story = await fetchStory(storyId);
+const titles = await Promise.all(series.stories.map(async (id) => [id, (await fetchStory(id)).title]));
+document.title = `${story.series_title[lang]}: ${story.title[lang]}`;
+
+const { front_matter, back_matter } = printLayout(story);
+const matter = {
+  title: () => renderTitlePage(story, { lang, print: true }),
+  copyright: () => renderCopyrightPage(story, series, { lang }),
+  the_end: () => renderEndPage(story, { lang }),
+  series: () => renderSeriesPage(story, series, titles, { lang }),
+};
 const opts = { lang, mode, print: true };
 document.getElementById("sheets").append(
   sheet(renderCover(story, opts)),
-  ...story.pages.map((page) => sheet(renderPage(story, page, opts))),
+  ...front_matter.map((name) => sheet(matter[name]())),
+  ...story.pages.map((page) => sheet(renderPage(story, page, { ...opts, folio: front_matter.length + page.number }))),
+  ...back_matter.map((name) => sheet(matter[name]())),
   sheet(renderBackCover(story, opts)),
 );
 

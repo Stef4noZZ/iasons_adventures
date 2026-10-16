@@ -1,37 +1,48 @@
+// Usage: npm run validate [-- <story-id>]  (default: every story in series.json)
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { imageSize } from "image-size";
-import { validateStory } from "../src/core/story.js";
+import { interiorPageCount, validateSeries, validateStory } from "../src/core/story.js";
 
-const ID = process.argv[2] ?? "iasons_and_the_magic_forest";
-const dir = join(import.meta.dirname, "..", "assets", "stories", ID);
-const webDir = join(import.meta.dirname, "..", "public", "stories", ID, "images");
-const story = JSON.parse(readFileSync(join(import.meta.dirname, "..", "public", "stories", ID, "story.json"), "utf8"));
-
-const [w, h] = story.trim_size_cm;
+const root = join(import.meta.dirname, "..");
+const readJson = (...parts) => JSON.parse(readFileSync(join(root, ...parts), "utf8"));
 const BLEED_MM = 3;
-const minPx = Math.round(((w * 10 + 2 * BLEED_MM) / 25.4) * 300); // 300 dpi incl. bleed
 
-const errors = validateStory(story);
-const warnings = [];
+const series = readJson("public", "series.json");
+let failed = false;
 
-const files = [["cover", story.cover_image], ...story.pages.map((p) => [p.id, p.image])];
-for (const [label, name] of files) {
-  const path = join(dir, "images", name);
-  if (!existsSync(path)) {
-    warnings.push(`${label}: missing image ${name}`);
-    continue;
-  }
-  if (!existsSync(join(webDir, name.replace(/\.\w+$/, ".jpg")))) warnings.push(`${label}: no web version, run npm run images`);
-  const { width, height } = imageSize(readFileSync(path));
-  if (width !== height) warnings.push(`${label}: not square (${width}x${height})`);
-  if (Math.min(width, height) < minPx) warnings.push(`${label}: ${width}x${height}px is below ${minPx}px needed for 300 dpi print`);
+function report(label, errors, warnings) {
+  warnings.forEach((m) => console.log(`WARN  ${label}: ${m}`));
+  errors.forEach((m) => console.error(`ERROR ${label}: ${m}`));
+  failed ||= errors.length > 0;
 }
 
-console.log(`${story.title.en}: ${story.pages.length} pages, ${files.filter(([, n]) => existsSync(join(dir, "images", n))).length}/${files.length} images`);
-const missing = warnings.filter((m) => m.includes("missing image"));
-if (missing.length === files.length) console.log("WARN  no images yet; expected in assets/stories/%s/images/", ID);
-else missing.forEach((m) => console.log(`WARN  ${m}`));
-warnings.filter((m) => !missing.includes(m)).forEach((m) => console.log(`WARN  ${m}`));
-errors.forEach((m) => console.error(`ERROR ${m}`));
-process.exit(errors.length ? 1 : 0);
+report("series", validateSeries(series), []);
+
+for (const id of process.argv[2] ? [process.argv[2]] : series.stories) {
+  const story = readJson("public", "stories", id, "story.json");
+  const masters = join(root, "assets", "stories", id, "images");
+  const web = join(root, "public", "stories", id, "images");
+  const minPx = Math.round(((story.trim_size_cm[0] * 10 + 2 * BLEED_MM) / 25.4) * 300); // 300 dpi incl. bleed
+
+  const errors = validateStory(story);
+  const warnings = [];
+  const interior = interiorPageCount(story);
+  if (interior % 4) warnings.push(`${interior} interior pages; printers usually need a multiple of 4`);
+
+  const files = [["cover", story.cover_image], ...story.pages.map((p) => [p.id, p.image])];
+  const present = files.filter(([, name]) => existsSync(join(masters, name)));
+  if (!present.length) warnings.push(`no images yet; expected in assets/stories/${id}/images/`);
+  for (const [name, file] of present) {
+    if (!existsSync(join(web, file.replace(/\.\w+$/, ".jpg")))) warnings.push(`${name}: no web version, run npm run images`);
+    const { width, height } = imageSize(readFileSync(join(masters, file)));
+    if (width !== height) warnings.push(`${name}: not square (${width}x${height})`);
+    if (Math.min(width, height) < minPx) warnings.push(`${name}: ${width}x${height}px is below ${minPx}px needed for 300 dpi print`);
+  }
+  if (present.length && present.length < files.length) warnings.push(`missing images: ${files.filter((f) => !present.includes(f)).map(([n]) => n).join(", ")}`);
+
+  console.log(`${story.title.en}: ${story.pages.length} story pages, ${interior} interior pages, ${present.length}/${files.length} images`);
+  report(id, errors, warnings);
+}
+
+process.exit(failed ? 1 : 0);

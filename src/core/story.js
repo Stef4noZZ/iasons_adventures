@@ -1,13 +1,22 @@
 export const LANGUAGES = ["el", "en"];
 export const MODES = ["mode1", "mode2"];
-export const STORY_ID = "iasons_and_the_magic_forest";
+export const PRINT_PAGES = ["title", "copyright", "the_end", "series"];
+export const DEFAULT_PRINT = { front_matter: ["title", "copyright"], back_matter: ["the_end", "series"] };
 
-export const storyBase = (id = STORY_ID) => `${import.meta.env?.BASE_URL ?? "/"}stories/${id}`;
+const base = () => import.meta.env?.BASE_URL ?? "/";
+export const storyBase = (id) => `${base()}stories/${id}`;
 
-export async function fetchStory(id = STORY_ID) {
-  const response = await fetch(`${storyBase(id)}/story.json`);
-  if (!response.ok) throw new Error(`Story not found: ${id}`);
+async function getJson(url, what) {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`${what} not found`);
   return response.json();
+}
+
+export const fetchSeries = () => getJson(`${base()}series.json`, "Series");
+export const fetchStory = (id) => getJson(`${storyBase(id)}/story.json`, `Story ${id}`);
+
+export function printLayout(story) {
+  return { ...DEFAULT_PRINT, ...(story.print ?? {}) };
 }
 
 export function pageText(page, lang, mode) {
@@ -40,6 +49,11 @@ export function validateStory(story, { expectedPages = 16 } = {}) {
       if (!isText(story.modes?.[mode]?.label?.[lang])) errors.push(`Missing label ${mode}/${lang}.`);
     }
   }
+  for (const key of ["front_matter", "back_matter"]) {
+    for (const name of story.print?.[key] ?? []) {
+      if (!PRINT_PAGES.includes(name)) errors.push(`Unknown print page '${name}' in ${key}.`);
+    }
+  }
 
   const pages = Array.isArray(story.pages) ? story.pages : [];
   if (!Array.isArray(story.pages)) errors.push("'pages' must be a list.");
@@ -63,4 +77,21 @@ export function validateStory(story, { expectedPages = 16 } = {}) {
     }
   });
   return errors;
+}
+
+export function validateSeries(series) {
+  const errors = [];
+  for (const lang of LANGUAGES) {
+    if (!isText(series?.title?.[lang])) errors.push(`Series: missing title ${lang}.`);
+    if (!Array.isArray(series?.copyright?.lines?.[lang])) errors.push(`Series: missing copyright lines ${lang}.`);
+  }
+  if (!Array.isArray(series?.stories) || !series.stories.length) errors.push("Series: 'stories' must be a non-empty list.");
+  if (!series?.copyright?.holder || !Number.isInteger(series?.copyright?.year)) errors.push("Series: copyright holder/year missing.");
+  return errors;
+}
+
+/** Physical interior pages for print; printers want a multiple of 4. */
+export function interiorPageCount(story) {
+  const { front_matter, back_matter } = printLayout(story);
+  return front_matter.length + story.pages.length + back_matter.length;
 }

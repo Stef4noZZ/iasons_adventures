@@ -30,6 +30,10 @@
     }
   },
   "trim_size_cm": [21, 21],
+  "print": {
+    "front_matter": ["title", "copyright"],
+    "back_matter": ["the_end", "series"]
+  },
   "cover_image": "cover.png",
   "art_direction": {
     "style": "soft watercolor, handmade texture, soft outlines, no text embedded in illustrations",

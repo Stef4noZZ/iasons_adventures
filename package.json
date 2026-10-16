@@ -11,7 +11,8 @@
     "export:pdf": "node scripts/export-pdf.mjs",
     "test": "vitest run",
     "images": "node scripts/optimize-images.mjs",
-    "art": "node art/build.mjs && node scripts/optimize-images.mjs"
+    "art": "node art/build.mjs && node scripts/optimize-images.mjs",
+    "icons": "node scripts/make-icons.mjs"
   },
   "devDependencies": {
     "@fontsource-variable/comfortaa": "^5.3.0",
