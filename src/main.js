@@ -290,7 +290,8 @@ function buildStage(animate) {
   } else if (pos === last()) {
     book.append(renderPage(story, story.pages.at(-1), opts));
     book.append(h(`<div class="end-card"><h2>${t(lang, "theEnd")}</h2><div class="end-card__stars" aria-hidden="true">✦ ✦ ✦</div>
-      <button class="btn btn--primary" data-act="again">${t(lang, "readAgain")}</button></div>`));
+      <button class="btn btn--primary" data-act="again">${t(lang, "readAgain")}</button>
+      <button class="btn btn--small" data-act="home">${t(lang, "anotherAdventure")}</button></div>`));
   } else {
     const page = currentPage();
     book.append(renderPage(story, page, opts), fireflies());

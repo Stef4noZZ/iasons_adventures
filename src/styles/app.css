@@ -204,3 +204,8 @@ a.book-card:active .book-card__cover { transform: scale(.98); }
   .book .page--cover-bottom .cover__head { bottom: calc(2.5% + 3.4rem); }
   .book .page--cover-continue.page--cover-bottom .cover__head { bottom: calc(2.5% + 5.7rem); }
 }
+
+.end-card { gap: .7rem; }
+.end-card h2 { margin-bottom: .2rem; }
+.end-card__stars { margin-bottom: .6rem; }
+.end-card .btn--small { padding: .4rem .95rem; font-size: .78rem; }
