@@ -1,0 +1,425 @@
+{
+  "schema_version": 1,
+  "id": "iasons_and_the_valley_of_dinosaurs",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": {
+    "el": "Ο Ιάσονας και η Κοιλάδα των Δεινοσαύρων",
+    "en": "Jason and the Valley of Dinosaurs"
+  },
+  "series_title": {
+    "el": "Οι Περιπέτειες του μικρού Ιάσονα",
+    "en": "The Adventures of Little Jason"
+  },
+  "language_codes": [
+    "el",
+    "en"
+  ],
+  "modes": {
+    "mode1": {
+      "label": {
+        "el": "Παραμύθι για καληνύχτα",
+        "en": "Bedtime Story"
+      },
+      "font_size_hint": "large"
+    },
+    "mode2": {
+      "label": {
+        "el": "Περιπετειώδης αφήγηση",
+        "en": "Adventure Story"
+      },
+      "font_size_hint": "regular"
+    }
+  },
+  "trim_size_cm": [
+    21,
+    21
+  ],
+  "print": {
+    "front_matter": [
+      "title",
+      "copyright"
+    ],
+    "back_matter": [
+      "the_end",
+      "series"
+    ]
+  },
+  "cover_image": "cover.png",
+  "cover": { "title_position": "bottom", "medallion_focus": "50% 42%", "medallion_zoom": 1.45 },
+  "cover_characters": ["jason", "phoebus"],
+  "cover_prompt": "Jason and Phoebus standing in a lush prehistoric valley with giant ferns and a friendly baby dinosaur. Soft watercolor style, warm sunlight.",
+  "art_direction": {
+    "style": "soft watercolor, handmade texture, soft outlines, no text embedded in illustrations",
+    "style_prompt": "Children's picture book illustration, soft watercolor with gouache details, visible paper grain, gentle hand-drawn outlines, rounded friendly shapes, warm sunlight over a lush prehistoric valley. Palette: sage green, midnight blue, lavender, starlight gold, warm beige, forest green.",
+    "negative_prompt": "text, letters, captions, speech bubbles, logo, watermark, signature, photorealistic, 3D render, harsh shadows, scary, creepy, dark horror, cluttered background, extra fingers, deformed hands, extra limbs",
+    "composition_note": "Square 1:1. Keep every character and focal point inside the upper 60% of the frame. The lowest 35-40% must be calm, simple foreground with no important detail, because the story text is printed over it.",
+    "palette": [
+      "sage green",
+      "midnight blue",
+      "lavender",
+      "starlight gold",
+      "warm beige",
+      "forest green"
+    ],
+    "characters": {
+      "jason": "Jason: a storybook toddler boy of about 2-3 years old with a round face, rosy cheeks and short brown hair. Explorer outfit: olive-green jacket, beige trousers, brown boots, small brown backpack and an olive explorer hat.",
+      "phoebus": "Phoebus: a friendly rust-orange fox with a cream muzzle and chest, big kind expressive dark eyes, pointed ears with cream inside, and a fluffy tail with a pale cream tip.",
+      "dino": "Dino: a small cute green baby dinosaur with round friendly eyes and soft rounded back plates."
+    }
+  },
+  "pages": [
+    {
+      "id": "page_01",
+      "number": 1,
+      "image": "page_01.png",
+      "image_note": "Jason and Phoebus finding a small antique glowing clock beneath a tree.",
+      "characters": ["jason", "phoebus"],
+      "image_prompt": "Jason and Phoebus discovering an old antique glowing clock beneath a large familiar tree in the garden at dusk.",
+      "text": {
+        "el": {
+          "mode1": "Ο Ιάσονας βρήκε ένα παράξενο ρολόι που έλαμπε.",
+          "mode2": "Μια μέρα, ο Ιάσονας και ο Φοίβος ανακάλυψαν ένα παλιό ρολόι κάτω από ένα δέντρο. Οι δείκτες του γύριζαν ανάποδα και στο καπάκι του υπήρχε ζωγραφισμένο ένα μικρό απολίθωμα."
+        },
+        "en": {
+          "mode1": "Jason found a strange glowing clock.",
+          "mode2": "One day, Jason and Phoebus discovered an old clock beneath a tree. Its hands turned backward, and a tiny fossil was painted on its lid."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_02",
+      "number": 2,
+      "image": "page_02.png",
+      "image_note": "A gentle glowing time portal opening in front of the boy and fox.",
+      "characters": ["jason", "phoebus"],
+      "image_prompt": "As Jason turns the key, the glowing clock creates a magical circle of light—a doorway leading to another time.",
+      "text": {
+        "el": {
+          "mode1": "Το ρολόι έκανε «τικ-τακ» και άνοιξε μια λαμπερή πόρτα.",
+          "mode2": "Μόλις ο Ιάσονας γύρισε το κλειδί, το ρολόι έκανε «τικ-τακ, τικ-τακ». Μπροστά τους εμφανίστηκε ένας κύκλος φωτός, σαν πόρτα που οδηγούσε σε έναν άλλο χρόνο."
+        },
+        "en": {
+          "mode1": "The clock went tick-tock and opened a glowing door.",
+          "mode2": "When Jason turned the key, the clock went “tick-tock, tick-tock.” A circle of light appeared before them, like a doorway leading to another time."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_03",
+      "number": 3,
+      "image": "page_03.png",
+      "image_note": "Jason and Phoebus stepping safely through a magical time portal.",
+      "characters": ["jason", "phoebus"],
+      "image_prompt": "Jason holding Phoebus's paw as they step together through the golden, glowing doorway of light into a bright new realm.",
+      "text": {
+        "el": {
+          "mode1": "«Πάμε να δούμε τι υπάρχει εκεί!» είπε ο Ιάσονας.",
+          "mode2": "Ο Ιάσονας κράτησε το χέρι του Φοίβου και πέρασαν μαζί την πόρτα του φωτός. Για μια στιγμή όλα γύρω τους έγιναν χρυσά και λαμπερά."
+        },
+        "en": {
+          "mode1": "“Let’s see what’s there!” Jason said.",
+          "mode2": "Jason held Phoebus’s paw and stepped through the glowing doorway. For a moment, everything around them turned golden and bright."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_04",
+      "number": 4,
+      "image": "page_04.png",
+      "image_note": "Lush prehistoric valley with giant ferns, flowers, and distant gentle dinosaurs.",
+      "characters": ["jason", "phoebus"],
+      "image_prompt": "A lush prehistoric valley filled with giant ferns, tall trees, and colorful flowers under a warm sunny sky. Gentle dinosaurs in the background.",
+      "text": {
+        "el": {
+          "mode1": "Βρέθηκαν σε μια καταπράσινη κοιλάδα με τεράστια φύλλα.",
+          "mode2": "Όταν το φως χάθηκε, βρέθηκαν σε μια κοιλάδα γεμάτη γιγάντια φτέρες, ψηλά δέντρα και πολύχρωμα λουλούδια. Μακριά ακούστηκε ένα βαθύ, αλλά όχι τρομακτικό, «μπρουμ!»"
+        },
+        "en": {
+          "mode1": "They arrived in a green valley full of enormous leaves.",
+          "mode2": "When the light faded, they stood in a valley of giant ferns, tall trees, and colorful flowers. In the distance came a deep, but not frightening, “bruum!”"
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_05",
+      "number": 5,
+      "image": "page_05.png",
+      "image_note": "Cute baby green dinosaur peeking shyly from a giant fern.",
+      "characters": ["dino"],
+      "image_prompt": "A cute little green baby dinosaur named Dino with big round eyes peeking shyly from behind a giant fern leaf.",
+      "text": {
+        "el": {
+          "mode1": "Ένα μικρό δεινοσαυράκι ξεπρόβαλε πίσω από μια φτέρη.",
+          "mode2": "Πίσω από μια τεράστια φτέρη εμφανίστηκε ένα μικρό πράσινο δεινοσαυράκι με στρογγυλά μάτια. «Με λένε Ντίνο», είπε σιγανά. «Δεν βρίσκω την οικογένειά μου»."
+        },
+        "en": {
+          "mode1": "A baby dinosaur peeked out from behind a fern.",
+          "mode2": "A little green dinosaur with round eyes peeked from behind a giant fern. “My name is Dino,” it said softly. “I can’t find my family.”"
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_06",
+      "number": 6,
+      "image": "page_06.png",
+      "image_note": "Jason sitting reassuringly beside Dino while Phoebus smiles kindly.",
+      "characters": ["jason", "phoebus", "dino"],
+      "image_prompt": "Jason sitting down gently and reassuringly beside Dino, while Phoebus smiles warmly to make the little dinosaur feel safe.",
+      "text": {
+        "el": {
+          "mode1": "Ο Ιάσονας είπε: «Θα σε βοηθήσουμε να τους βρεις».",
+          "mode2": "Ο Ιάσονας κάθισε κοντά στον Ντίνο για να μην τον τρομάξει. «Θα ψάξουμε μαζί», είπε. Ο Φοίβος πρόσφερε στο μικρό δεινοσαυράκι ένα φιλικό χαμόγελο."
+        },
+        "en": {
+          "mode1": "Jason said, “We’ll help you find them.”",
+          "mode2": "Jason sat near Dino so he would not frighten him. “We’ll search together,” he said. Phoebus gave the little dinosaur a friendly smile."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_07",
+      "number": 7,
+      "image": "page_07.png",
+      "image_note": "The friends listening carefully as distant dinosaur footprints shake tiny leaves.",
+      "characters": ["jason", "phoebus", "dino"],
+      "image_prompt": "Jason, Phoebus, and Dino standing still and listening intently as a distant steady thumping sound echoes through the valley.",
+      "text": {
+        "el": {
+          "mode1": "Άκουσαν ένα μακρινό «τουπ-τουπ» πάνω στο χώμα.",
+          "mode2": "Οι φίλοι στάθηκαν ακίνητοι και άκουσαν. Από μακριά ερχόταν ένας ρυθμικός ήχος: «τουπ, τουπ, τουπ». Ίσως να ήταν τα μεγάλα βήματα της οικογένειας του Ντίνο."
+        },
+        "en": {
+          "mode1": "They heard a distant thump-thump on the ground.",
+          "mode2": "The friends stood still and listened. A steady sound came from far away: “thump, thump, thump.” Perhaps it was the big footsteps of Dino’s family."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_08",
+      "number": 8,
+      "image": "page_08.png",
+      "image_note": "Jason and Dino examining large three-toed footprints in soft mud.",
+      "characters": ["jason", "dino"],
+      "image_prompt": "Jason and Dino examining large three-toed dinosaur footprints pressed into the soft muddy trail with curious expressions.",
+      "text": {
+        "el": {
+          "mode1": "Βρήκαν μεγάλα πατηματάκια στη λάσπη.",
+          "mode2": "Στο μαλακό χώμα υπήρχαν μεγάλες πατημασιές. Ο Ιάσονας τις κοίταξε προσεκτικά και ο Ντίνο χαμογέλασε. «Έτσι περπατά η μαμά μου!» είπε."
+        },
+        "en": {
+          "mode1": "They found big footprints in the mud.",
+          "mode2": "There were large footprints in the soft ground. Jason studied them carefully, and Dino smiled. “That’s how my mommy walks!” he said."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_09",
+      "number": 9,
+      "image": "page_09.png",
+      "image_note": "Phoebus leading Jason and Dino along a leafy trail of dinosaur footprints.",
+      "characters": ["jason", "phoebus", "dino"],
+      "image_prompt": "Phoebus sniffing the ground and leading Jason and Dino along a leafy trail between giant prehistoric ferns.",
+      "text": {
+        "el": {
+          "mode1": "Ο Φοίβος ακολούθησε τα ίχνη ανάμεσα στα δέντρα.",
+          "mode2": "Ο Φοίβος μύρισε το χώμα και ακολούθησε τις πατημασιές ανάμεσα στις φτέρες. Ο Ιάσονας και ο Ντίνο περπατούσαν δίπλα του, σταματώντας κάθε τόσο για να ελέγξουν τα ίχνη."
+        },
+        "en": {
+          "mode1": "Phoebus followed the tracks between the trees.",
+          "mode2": "Phoebus sniffed the ground and followed the footprints between the ferns. Jason and Dino walked beside him, stopping now and then to check the trail."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_10",
+      "number": 10,
+      "image": "page_10.png",
+      "image_note": "Gentle long-necked herbivore dinosaur bending down to greet the travelers.",
+      "characters": ["jason", "phoebus", "dino"],
+      "image_prompt": "A friendly tall long-necked herbivore dinosaur bending its long neck down in a sunlit clearing to greet Jason, Phoebus, and Dino kindly.",
+      "text": {
+        "el": {
+          "mode1": "Συνάντησαν έναν ψηλό δεινόσαυρο που έτρωγε φύλλα.",
+          "mode2": "Σε ένα ξέφωτο, ένας ψηλός, φυτοφάγος δεινόσαυρος μασουλούσε φύλλα από ένα δέντρο. Χαμήλωσε το μακρύ του λαιμό και τους χαιρέτησε ευγενικά."
+        },
+        "en": {
+          "mode1": "We met a tall dinosaur eating leaves.",
+          "mode2": "In a clearing, a tall plant-eating dinosaur munched leaves from a tree. It lowered its long neck and greeted them kindly."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_11",
+      "number": 11,
+      "image": "page_11.png",
+      "image_note": "The long-necked dinosaur pointing toward a trail lined with blue flowers.",
+      "characters": ["dino"],
+      "image_prompt": "The long-necked dinosaur pointing gently with its snout toward a path lined with bright blue flowers. Dino looking inspired and brave.",
+      "text": {
+        "el": {
+          "mode1": "Ο μεγάλος δεινόσαυρος έδειξε τον δρόμο προς το ποτάμι.",
+          "mode2": "«Είδα μια οικογένεια δεινοσαύρων κοντά στο ποτάμι», είπε ο μεγάλος δεινόσαυρος. «Ακολουθήστε το μονοπάτι με τα μπλε λουλούδια». Ο Ντίνο πήρε θάρρος."
+        },
+        "en": {
+          "mode1": "The big dinosaur pointed toward the river.",
+          "mode2": "“I saw a dinosaur family near the river,” said the big dinosaur. “Follow the path with blue flowers.” Dino felt braver."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_12",
+      "number": 12,
+      "image": "page_12.png",
+      "image_note": "Dino hearing his family calling across a peaceful prehistoric river.",
+      "characters": ["jason", "phoebus", "dino"],
+      "image_prompt": "By a peaceful prehistoric river, Dino lifting his head with shining joyful eyes as a warm familiar voice calls his name.",
+      "text": {
+        "el": {
+          "mode1": "Στο ποτάμι, ο Ντίνο άκουσε μια γνώριμη φωνή.",
+          "mode2": "Όταν έφτασαν στο ποτάμι, ακούστηκε μια ζεστή φωνή που φώναζε «Ντίνο!». Το μικρό δεινοσαυράκι σήκωσε το κεφάλι του και τα μάτια του γέμισαν χαρά."
+        },
+        "en": {
+          "mode1": "At the river, Dino heard a familiar voice.",
+          "mode2": "When they reached the river, a warm voice called, “Dino!” The little dinosaur lifted his head, and his eyes filled with joy."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_13",
+      "number": 13,
+      "image": "page_13.png",
+      "image_note": "Baby dinosaur reunited with two gentle parent dinosaurs by the river.",
+      "characters": ["dino"],
+      "image_prompt": "Dino joyfully reunited with his mother and father dinosaurs by the river, nestled warmly between their big comforting snouts.",
+      "text": {
+        "el": {
+          "mode1": "Η οικογένεια του Ντίνο έτρεξε να τον αγκαλιάσει.",
+          "mode2": "Η μαμά και ο μπαμπάς του Ντίνο πλησίασαν και τον αγκάλιασαν με τις μεγάλες, ζεστές μουσούδες τους. Ο Ντίνο χώθηκε ανάμεσά τους, χαρούμενος που είχε γυρίσει σπίτι."
+        },
+        "en": {
+          "mode1": "Dino’s family hurried over to hug him.",
+          "mode2": "Dino’s mother and father came close and hugged him with their big, warm snouts. Dino nestled between them, happy to be home."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_14",
+      "number": 14,
+      "image": "page_14.png",
+      "image_note": "Dino thanking Jason and Phoebus while his family stands nearby.",
+      "characters": ["jason", "phoebus", "dino"],
+      "image_prompt": "Dino smiling gratefully at Jason and Phoebus, while his loving dinosaur family stands proudly nearby in the sunlit valley.",
+      "text": {
+        "el": {
+          "mode1": "Ο Ντίνο ευχαρίστησε τον Ιάσονα και τον Φοίβο.",
+          "mode2": "«Δεν θα τα κατάφερνα χωρίς εσάς», είπε ο Ντίνο. Ο Ιάσονας χαμογέλασε. «Βρήκαμε τον δρόμο επειδή ακούσαμε, κοιτάξαμε και βοηθήσαμε ο ένας τον άλλον»."
+        },
+        "en": {
+          "mode1": "Dino thanked Jason and Phoebus.",
+          "mode2": "“I couldn’t have done it without you,” Dino said. Jason smiled. “We found the way because we listened, looked carefully, and helped one another.”"
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_15",
+      "number": 15,
+      "image": "page_15.png",
+      "image_note": "Jason and Phoebus waving goodbye to Dino’s family as a gentle portal opens.",
+      "characters": ["jason", "phoebus", "dino"],
+      "image_prompt": "Jason and Phoebus waving a friendly goodbye to Dino and his family as the glowing magic clock in Jason's hand opens a portal home.",
+      "text": {
+        "el": {
+          "mode1": "Το μαγικό ρολόι άναψε ξανά και τους κάλεσε πίσω.",
+          "mode2": "Το ρολόι άστραψε στην τσέπη του Ιάσονα. Ήταν ώρα να επιστρέψουν. Οι φίλοι αποχαιρέτησαν τον Ντίνο και την οικογένειά του, υποσχόμενοι να θυμούνται πάντα την κοιλάδα."
+        },
+        "en": {
+          "mode1": "The magic clock glowed again and called them home.",
+          "mode2": "The clock sparkled in Jason’s pocket. It was time to return. The friends said goodbye to Dino and his family, promising to remember the valley."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_16",
+      "number": 16,
+      "image": "page_16.png",
+      "image_note": "Jason and Phoebus back beneath the tree, holding the quiet clock in the soft evening light.",
+      "characters": ["jason", "phoebus"],
+      "image_prompt": "Cozy bedtime scene. Jason and Phoebus back beneath their familiar tree in the soft evening light, holding the quiet clock peacefully.",
+      "text": {
+        "el": {
+          "mode1": "Στο σπίτι, ο Ιάσονας έκλεισε το ρολόι και χαμογέλασε, ονειρευόμενος περιπέτειες.",
+          "mode2": "Σε μια στιγμή, ο Ιάσονας και ο Φοίβος βρέθηκαν ξανά κάτω από το γνώριμο δέντρο, ενώ το βράδυ ο μικρός έκλεισε τα μάτια ονειρευόμενος την πράσινη κοιλάδα."
+        },
+        "en": {
+          "mode1": "At home, Jason closed the clock and smiled, dreaming of adventures.",
+          "mode2": "In a moment, Jason and Phoebus were back beneath their familiar tree, and that night Jason closed his eyes dreaming of the green valley."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    }
+  ]
+}

@@ -1,0 +1,426 @@
+{
+  "schema_version": 1,
+  "id": "iasons_and_the_secret_of_the_blue_sea",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": {
+    "el": "Ο Ιάσονας και το Μυστικό της Γαλάζιας Θάλασσας",
+    "en": "Jason and the Secret of the Blue Sea"
+  },
+  "series_title": {
+    "el": "Οι Περιπέτειες του μικρού Ιάσονα",
+    "en": "The Adventures of Little Jason"
+  },
+  "language_codes": [
+    "el",
+    "en"
+  ],
+  "modes": {
+    "mode1": {
+      "label": {
+        "el": "Παραμύθι για καληνύχτα",
+        "en": "Bedtime Story"
+      },
+      "font_size_hint": "large"
+    },
+    "mode2": {
+      "label": {
+        "el": "Περιπετειώδης αφήγηση",
+        "en": "Adventure Story"
+      },
+      "font_size_hint": "regular"
+    }
+  },
+  "trim_size_cm": [
+    21,
+    21
+  ],
+  "print": {
+    "front_matter": [
+      "title",
+      "copyright"
+    ],
+    "back_matter": [
+      "the_end",
+      "series"
+    ]
+  },
+  "cover_image": "cover.png",
+  "cover": { "title_position": "bottom", "medallion_focus": "50% 42%", "medallion_zoom": 1.45 },
+  "cover_characters": ["jason", "phoebus"],
+  "cover_prompt": "Jason and Phoebus sailing in a small wooden boat on calm turquoise water. Soft watercolor style, gentle waves, sunny peaceful beach in the background.",
+  "art_direction": {
+    "style": "soft watercolor, handmade texture, soft outlines, no text embedded in illustrations",
+    "style_prompt": "Children's picture book illustration, soft watercolor with gouache details, visible paper grain, gentle hand-drawn outlines, rounded friendly shapes, warm sunlight over a calm turquoise sea. Palette: sage green, midnight blue, lavender, starlight gold, warm beige, ocean turquoise.",
+    "negative_prompt": "text, letters, captions, speech bubbles, logo, watermark, signature, photorealistic, 3D render, harsh shadows, scary, creepy, dark horror, cluttered background, extra fingers, deformed hands, extra limbs",
+    "composition_note": "Square 1:1. Keep every character and focal point inside the upper 60% of the frame. The lowest 35-40% must be calm, simple foreground with no important detail, because the story text is printed over it.",
+    "palette": [
+      "sage green",
+      "midnight blue",
+      "lavender",
+      "starlight gold",
+      "warm beige",
+      "ocean turquoise"
+    ],
+    "characters": {
+      "jason": "Jason: a storybook toddler boy of about 2-3 years old with a round face, rosy cheeks and short brown hair. Explorer outfit: olive-green jacket, beige trousers, brown boots, small brown backpack and an olive explorer hat.",
+      "phoebus": "Phoebus: a friendly rust-orange fox with a cream muzzle and chest, big kind expressive dark eyes, pointed ears with cream inside, and a fluffy tail with a pale cream tip.",
+      "neri": "Neri: a friendly smiling dolphin with smooth grey-blue skin and kind dark eyes.",
+      "turtle": "The little turtle: a small sea turtle with a patterned green-brown shell and tiny gentle flippers."
+    }
+  },
+  "pages": [
+    {
+      "id": "page_01",
+      "number": 1,
+      "image": "page_01.png",
+      "image_note": "Jason and the rust-orange fox beside a small wooden boat on a sunny, gentle beach.",
+      "characters": ["jason", "phoebus"],
+      "image_prompt": "A sunny, gentle beach with light sand. Jason and Phoebus discover a small wooden boat resting behind a large smooth rock.",
+      "text": {
+        "el": {
+          "mode1": "Μια μέρα, ο Ιάσονας και ο Φοίβος βρήκαν ένα μικρό καραβάκι στην ακτή.",
+          "mode2": "Ένα ήσυχο πρωινό, ο Ιάσονας περπατούσε στην αμμουδιά μαζί με τον φίλο του, τον Φοίβο. Εκεί, πίσω από έναν βράχο, τους περίμενε ένα μικρό ξύλινο καραβάκι."
+        },
+        "en": {
+          "mode1": "One day, Jason and Phoebus found a little boat on the shore.",
+          "mode2": "On a quiet morning, Jason walked along the sandy shore with his friend Phoebus. Behind a rock, they discovered a little wooden boat."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_02",
+      "number": 2,
+      "image": "page_02.png",
+      "image_note": "The pair sailing in a tiny boat across calm turquoise water.",
+      "characters": ["jason", "phoebus"],
+      "image_prompt": "Jason and Phoebus sitting inside the small wooden boat, gliding gently over calm turquoise water under a bright friendly sun.",
+      "text": {
+        "el": {
+          "mode1": "«Πάμε να εξερευνήσουμε!» είπε ο Ιάσονας. Και οι δυο τους ανέβηκαν στο καραβάκι.",
+          "mode2": "«Ας δούμε τι κρύβει η θάλασσα», είπε ο Ιάσονας. Ο Φοίβος κούνησε την αφράτη ουρά του και κάθισε δίπλα του, καθώς το καραβάκι άρχισε να γλιστρά απαλά στο νερό."
+        },
+        "en": {
+          "mode1": "“Let’s explore!” said Jason, and they climbed aboard.",
+          "mode2": "“Let’s discover what the sea is hiding,” Jason said. Phoebus swished his fluffy tail and sat beside him as the boat began to glide gently over the water."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_03",
+      "number": 3,
+      "image": "page_03.png",
+      "image_note": "Close view of small sparkling waves beside the boat, Jason and Phoebus listening.",
+      "characters": ["jason", "phoebus"],
+      "image_prompt": "Close-up of sparkling small waves splashing playfully against the boat. Jason and Phoebus listening with delighted expressions.",
+      "text": {
+        "el": {
+          "mode1": "Τα κύματα τους χαιρετούσαν: πλαφ, πλαφ, πλαφ!",
+          "mode2": "Τα μικρά κύματα χτυπούσαν παιχνιδιάρικα στα πλευρά του σκάφους. Ο Ιάσονας άκουγε τον ρυθμό τους και ο Φοίβος προσπαθούσε να τους απαντήσει με ένα αστείο «πλαφ!»"
+        },
+        "en": {
+          "mode1": "The waves greeted them: splash, splash, splash!",
+          "mode2": "Little waves tapped playfully against the boat. Jason listened to their rhythm while Phoebus tried to answer with a funny “splash!”"
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_04",
+      "number": 4,
+      "image": "page_04.png",
+      "image_note": "A friendly dolphin named Neri leaping near the boat, looking worried but safe.",
+      "characters": ["jason", "phoebus", "neri"],
+      "image_prompt": "A friendly dolphin named Neri leaping gracefully out of the turquoise water near the boat, looking slightly worried.",
+      "text": {
+        "el": {
+          "mode1": "Ξαφνικά, ένα δελφίνι πετάχτηκε έξω από το νερό. «Χρειάζομαι βοήθεια!»",
+          "mode2": "Ξαφνικά, ένα δελφίνι ξεπήδησε από τη θάλασσα και έκανε μια λαμπερή καμπύλη στον αέρα. «Γεια σας! Είμαι ο Νέρι», είπε. «Δεν βρίσκω τον δρόμο για τον ήσυχο κόλπο όπου με περιμένει η οικογένειά μου»."
+        },
+        "en": {
+          "mode1": "Suddenly, a dolphin leaped from the water. “I need help!”",
+          "mode2": "Suddenly, a dolphin sprang from the sea in a shining arc. “Hello! I’m Neri,” he said. “I can’t find the way to the quiet cove where my family is waiting for me.”"
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_05",
+      "number": 5,
+      "image": "page_05.png",
+      "image_note": "Jason and Phoebus reassuring the dolphin as he swims alongside.",
+      "characters": ["jason", "phoebus", "neri"],
+      "image_prompt": "Jason leaning over the boat with a kind smile to reassure Neri, who swims happily alongside in the clear water.",
+      "text": {
+        "el": {
+          "mode1": "Ο Ιάσονας είπε: «Θα σε βοηθήσουμε, Νέρι!»",
+          "mode2": "Ο Ιάσονας κοίταξε τον Νέρι με καλοσύνη. «Θα σε βοηθήσουμε να βρεις το σπίτι σου», υποσχέθηκε. Ο Φοίβος έγνεψε και ο Νέρι κολύμπησε δίπλα στο καραβάκι."
+        },
+        "en": {
+          "mode1": "Jason said, “We’ll help you, Neri!”",
+          "mode2": "Jason looked kindly at Neri. “We’ll help you find your home,” he promised. Phoebus nodded, and Neri swam beside the boat."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_06",
+      "number": 6,
+      "image": "page_06.png",
+      "image_note": "Colorful coral garden seen through clear water, tiny fish and boat above.",
+      "characters": [],
+      "image_prompt": "Underwater view beneath the boat: vibrant red, yellow, and purple coral gardens with tiny colorful fish swimming like sparkling brushstrokes.",
+      "text": {
+        "el": {
+          "mode1": "Πέρασαν δίπλα από κοράλλια κόκκινα, κίτρινα και μωβ.",
+          "mode2": "Κάτω από το διάφανο νερό, κοράλλια σαν μικρά δέντρα γέμιζαν τον βυθό με χρώματα. Ψαράκια περνούσαν ανάμεσά τους σαν αστραφτερές πινελιές."
+        },
+        "en": {
+          "mode1": "They passed red, yellow, and purple coral.",
+          "mode2": "Under the clear water, coral like tiny trees filled the seabed with color. Little fish darted between them like sparkling brushstrokes."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_07",
+      "number": 7,
+      "image": "page_07.png",
+      "image_note": "A small sea turtle gently caught in seaweed near a rock, the friends noticing.",
+      "characters": ["jason", "phoebus", "turtle"],
+      "image_prompt": "A small sea turtle gently caught in long strands of green seaweed near an underwater rock. Jason and Phoebus looking down from the boat.",
+      "text": {
+        "el": {
+          "mode1": "Μια μικρή χελώνα είχε μπλεχτεί ανάμεσα στα φύκια.",
+          "mode2": "Στο πλάι ενός βράχου, είδαν μια μικρή θαλάσσια χελώνα να προσπαθεί να ξεμπλεχτεί από μακριά φύκια. Ο Νέρι σταμάτησε αμέσως και ο Ιάσονας πλησίασε προσεκτικά."
+        },
+        "en": {
+          "mode1": "A little turtle was tangled in seaweed.",
+          "mode2": "Beside a rock, they spotted a little sea turtle struggling in long strands of seaweed. Neri stopped at once, and Jason approached carefully."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_08",
+      "number": 8,
+      "image": "page_08.png",
+      "image_note": "Jason carefully freeing the turtle while Phoebus watches nearby.",
+      "characters": ["jason", "phoebus", "turtle"],
+      "image_prompt": "Jason carefully untangling the seaweed from the little turtle with focused, gentle hands, while Phoebus watches closely.",
+      "text": {
+        "el": {
+          "mode1": "Με προσοχή, ο Ιάσονας τη βοήθησε να ελευθερωθεί.",
+          "mode2": "Ο Ιάσονας τράβηξε τα φύκια απαλά, ένα-ένα, ώσπου η χελωνίτσα ελευθερώθηκε. «Ευχαριστώ!» είπε εκείνη και κούνησε τα μικρά της πτερύγια."
+        },
+        "en": {
+          "mode1": "Carefully, Jason helped set her free.",
+          "mode2": "Jason gently moved the seaweed aside, one strand at a time, until the little turtle was free. “Thank you!” she said, fluttering her small flippers."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_09",
+      "number": 9,
+      "image": "page_09.png",
+      "image_note": "The turtle pointing toward a trail of white foam on the water.",
+      "characters": ["turtle"],
+      "image_prompt": "The freed little turtle swimming happily, pointing with a tiny flipper toward a shining trail of white foamy waves.",
+      "text": {
+        "el": {
+          "mode1": "Η χελωνίτσα έδειξε ένα μονοπάτι με αφρώδη κύματα.",
+          "mode2": "«Ακολουθήστε τα λευκά αφρισμένα κύματα», είπε η χελωνίτσα. «Θα σας οδηγήσουν στον ήσυχο κόλπο». Ο Ιάσονας την ευχαρίστησε και το καραβάκι συνέχισε το ταξίδι."
+        },
+        "en": {
+          "mode1": "The little turtle showed them a path marked by foamy waves.",
+          "mode2": "“Follow the little white foamy waves,” said the turtle. “They will lead you to the quiet cove.” Jason thanked her, and the boat continued on its journey."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_10",
+      "number": 10,
+      "image": "page_10.png",
+      "image_note": "The small sail billowing in a gentle breeze as the fox listens.",
+      "characters": ["phoebus"],
+      "image_prompt": "The boat's little sail billowing nicely in a gentle breeze. Phoebus lifting his ears with a curious, happy expression.",
+      "text": {
+        "el": {
+          "mode1": "Ο Φοίβος άκουσε έναν απαλό ήχο: φουου, φουου.",
+          "mode2": "Ο αέρας φύσηξε απαλά και γέμισε το μικρό πανί του καραβιού. Ο Φοίβος σήκωσε τα αυτιά του. «Νομίζω πως η θάλασσα μάς δείχνει τον δρόμο», είπε."
+        },
+        "en": {
+          "mode1": "Phoebus heard a gentle sound: whooo, whooo.",
+          "mode2": "A gentle breeze filled the boat’s little sail. Phoebus lifted his ears. “I think the sea is showing us the way,” he said."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_11",
+      "number": 11,
+      "image": "page_11.png",
+      "image_note": "A peaceful cove with two dolphins waiting near the shore.",
+      "characters": [],
+      "image_prompt": "A sheltered, peaceful blue cove behind a tall rock. Calm water and two friendly dolphins waiting near the sandy shore.",
+      "text": {
+        "el": {
+          "mode1": "Μπροστά τους άνοιξε ένας ήσυχος, γαλάζιος κόλπος.",
+          "mode2": "Πέρα από έναν ψηλό βράχο, η ακτή σχημάτιζε έναν προστατευμένο κόλπο. Το νερό ήταν γαλήνιο και στην άμμο περίμεναν δύο δελφίνια, κοιτάζοντας ανυπόμονα προς τη θάλασσα."
+        },
+        "en": {
+          "mode1": "Ahead, a quiet blue cove opened before them.",
+          "mode2": "Beyond a tall rock, the coast formed a sheltered cove. The water was calm, and two dolphins waited on the sandy edge, looking out to sea."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_12",
+      "number": 12,
+      "image": "page_12.png",
+      "image_note": "Neri reuniting with his dolphin family in the calm cove.",
+      "characters": ["neri"],
+      "image_prompt": "Neri leaping joyfully as he reunites with his dolphin family in the calm cove, touching noses lovingly.",
+      "text": {
+        "el": {
+          "mode1": "«Η οικογένειά μου!» φώναξε χαρούμενα ο Νέρι.",
+          "mode2": "Ο Νέρι αναγνώρισε αμέσως την οικογένειά του. Πήδηξε ψηλά από τη χαρά του και τα άλλα δελφίνια κολύμπησαν κοντά του, ακουμπώντας απαλά τις μουσούδες τους."
+        },
+        "en": {
+          "mode1": "“My family!” Neri cried happily.",
+          "mode2": "Neri recognized his family at once. He leaped with joy as the other dolphins swam close, gently touching their noses to his."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_13",
+      "number": 13,
+      "image": "page_13.png",
+      "image_note": "Dolphins circling the boat in joyful arcs, Jason laughing and Phoebus mimicking them.",
+      "characters": ["jason", "phoebus", "neri"],
+      "image_prompt": "Several dolphins dancing in joyful arcs around the boat. Jason laughing delightedly while Phoebus mimics their moves.",
+      "text": {
+        "el": {
+          "mode1": "Τα δελφίνια χόρεψαν γύρω από το καραβάκι.",
+          "mode2": "Η οικογένεια του Νέρι ευχαρίστησε τον Ιάσονα και τον Φοίβο με έναν παιχνιδιάρικο χορό στο νερό. Ο Ιάσονας γέλασε, ενώ ο Φοίβος προσπάθησε να μιμηθεί τις κινήσεις τους από το καραβάκι."
+        },
+        "en": {
+          "mode1": "The dolphins danced around the boat.",
+          "mode2": "Neri’s family thanked Jason and Phoebus with a playful dance in the water. Jason laughed while Phoebus tried to copy their moves from the boat."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_14",
+      "number": 14,
+      "image": "page_14.png",
+      "image_note": "Jason picking up a plastic bottle from the clean beach while Phoebus helps.",
+      "characters": ["jason", "phoebus"],
+      "image_prompt": "Jason picking up a stray plastic bottle from the sandy shore to place it in the boat's basket, with Phoebus helping.",
+      "text": {
+        "el": {
+          "mode1": "Πριν φύγουν, μάζεψαν ένα πλαστικό μπουκάλι από την ακτή.",
+          "mode2": "Καθώς ετοιμάζονταν να επιστρέψουν, ο Ιάσονας είδε ένα πλαστικό μπουκάλι στην άμμο. Το μάζεψε και το έβαλε στο καλαθάκι του καραβιού, για να το πετάξει στον σωστό κάδο αργότερα."
+        },
+        "en": {
+          "mode1": "Before leaving, they picked up a plastic bottle from the shore.",
+          "mode2": "As they prepared to return, Jason spotted a plastic bottle on the sand. He picked it up and placed it in the boat’s basket to put it in the proper bin later."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_15",
+      "number": 15,
+      "image": "page_15.png",
+      "image_note": "The boat returning toward shore, the sea bright and peaceful.",
+      "characters": ["jason", "phoebus"],
+      "image_prompt": "The small boat sailing smoothly back toward the home shore under a bright, peaceful sky. Jason and Phoebus looking thoughtfully at the sea.",
+      "text": {
+        "el": {
+          "mode1": "«Η θάλασσα είναι σπίτι για πολλούς φίλους», είπε ο Ιάσονας.",
+          "mode2": "Στο ταξίδι της επιστροφής, ο Ιάσονας σκέφτηκε τη χελώνα, τα ψαράκια και τον Νέρι. «Η θάλασσα είναι το σπίτι τους. Πρέπει να την κρατάμε καθαρή», είπε. Ο Φοίβος συμφώνησε σοβαρά."
+        },
+        "en": {
+          "mode1": "“The sea is home to many friends,” Jason said.",
+          "mode2": "On the way back, Jason thought of the turtle, the little fish, and Neri. “The sea is their home. We should keep it clean,” he said. Phoebus nodded solemnly."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_16",
+      "number": 16,
+      "image": "page_16.png",
+      "image_note": "Golden sunset over the beach, Jason and Phoebus beside their boat, calm storybook ending.",
+      "characters": ["jason", "phoebus"],
+      "image_prompt": "A warm golden sunset over the beach. Jason and Phoebus standing beside their resting boat, waving a peaceful goodbye to the sea.",
+      "text": {
+        "el": {
+          "mode1": "Κι έτσι, ο Ιάσονας και ο Φοίβος γύρισαν σπίτι με μια θαλασσινή ιστορία.",
+          "mode2": "Όταν το καραβάκι ακούμπησε ξανά στην ακτή, ο ήλιος χαμήλωνε στον ορίζοντα. Ο Ιάσονας και ο Φοίβος αποχαιρέτησαν τη θάλασσα, χαρούμενοι που είχαν βοηθήσει έναν φίλο και φροντίσει το σπίτι τόσων πλασμάτων."
+        },
+        "en": {
+          "mode1": "And so Jason and Phoebus returned home with a sea story.",
+          "mode2": "When the boat reached shore again, the sun was sinking toward the horizon. Jason and Phoebus said goodbye to the sea, glad they had helped a friend and cared for the home of so many creatures."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    }
+  ]
+}

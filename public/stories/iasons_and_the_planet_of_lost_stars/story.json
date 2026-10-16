@@ -1,0 +1,425 @@
+{
+  "schema_version": 1,
+  "id": "iasons_and_the_planet_of_lost_stars",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": {
+    "el": "Ο Ιάσονας και ο Πλανήτης των Χαμένων Αστεριών",
+    "en": "Jason and the Planet of the Lost Stars"
+  },
+  "series_title": {
+    "el": "Οι Περιπέτειες του μικρού Ιάσονα",
+    "en": "The Adventures of Little Jason"
+  },
+  "language_codes": [
+    "el",
+    "en"
+  ],
+  "modes": {
+    "mode1": {
+      "label": {
+        "el": "Παραμύθι για καληνύχτα",
+        "en": "Bedtime Story"
+      },
+      "font_size_hint": "large"
+    },
+    "mode2": {
+      "label": {
+        "el": "Περιπετειώδης αφήγηση",
+        "en": "Adventure Story"
+      },
+      "font_size_hint": "regular"
+    }
+  },
+  "trim_size_cm": [
+    21,
+    21
+  ],
+  "print": {
+    "front_matter": [
+      "title",
+      "copyright"
+    ],
+    "back_matter": [
+      "the_end",
+      "series"
+    ]
+  },
+  "cover_image": "cover.png",
+  "cover": { "title_position": "bottom", "medallion_focus": "50% 42%", "medallion_zoom": 1.45 },
+  "cover_characters": ["jason", "phoebus"],
+  "cover_prompt": "Jason and Phoebus looking up at a starry night sky with a friendly glowing rocket ready for launch. Soft watercolor style, deep blue space, stars, and a cozy atmosphere.",
+  "art_direction": {
+    "style": "soft watercolor, handmade texture, soft outlines, no text embedded in illustrations",
+    "style_prompt": "Children's picture book illustration, soft watercolor with gouache details, visible paper grain, gentle hand-drawn outlines, rounded friendly shapes, warm glowing light against a deep blue starry night. Palette: sage green, midnight blue, lavender, starlight gold, warm beige.",
+    "negative_prompt": "text, letters, captions, speech bubbles, logo, watermark, signature, photorealistic, 3D render, harsh shadows, scary, creepy, dark horror, cluttered background, extra fingers, deformed hands, extra limbs",
+    "composition_note": "Square 1:1. Keep every character and focal point inside the upper 60% of the frame. The lowest 35-40% must be calm, simple foreground with no important detail, because the story text is printed over it.",
+    "palette": [
+      "sage green",
+      "midnight blue",
+      "lavender",
+      "starlight gold",
+      "warm beige"
+    ],
+    "characters": {
+      "jason": "Jason: a storybook toddler boy of about 2-3 years old with a round face, rosy cheeks and short brown hair. Explorer outfit: olive-green jacket, beige trousers, brown boots, small brown backpack and an olive explorer hat.",
+      "phoebus": "Phoebus: a friendly rust-orange fox with a cream muzzle and chest, big kind expressive dark eyes, pointed ears with cream inside, and a fluffy tail with a pale cream tip.",
+      "spark": "Spark: a tiny golden five-pointed star with a sweet face and warm glow.",
+      "beep": "Beep: a small friendly robot with glowing eyes and rounded metal body."
+    }
+  },
+  "pages": [
+    {
+      "id": "page_01",
+      "number": 1,
+      "image": "page_01.png",
+      "image_note": "Jason and Phoebus watching a tiny glowing star land in the garden at dusk.",
+      "characters": ["jason", "phoebus"],
+      "image_prompt": "Cozy garden at dusk. Jason and Phoebus look up as a small golden glow drifts down and lands gently on the grass.",
+      "text": {
+        "el": {
+          "mode1": "Ένα βράδυ, ο Ιάσονας είδε ένα αστέρι να πέφτει απαλά στον κήπο.",
+          "mode2": "Ένα ήσυχο βράδυ, ο Ιάσονας κοίταζε τον ουρανό μαζί με τον Φοίβο. Ξαφνικά, μια μικρή χρυσή λάμψη κατέβηκε αργά και προσγειώθηκε στο γρασίδι."
+        },
+        "en": {
+          "mode1": "One evening, Jason saw a star gently fall into the garden.",
+          "mode2": "One quiet evening, Jason gazed at the sky with Phoebus. Suddenly, a small golden glow drifted down and landed on the grass."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_02",
+      "number": 2,
+      "image": "page_02.png",
+      "image_note": "A tiny golden star hovering above the grass, speaking to the boy and fox.",
+      "characters": ["jason", "phoebus", "spark"],
+      "image_prompt": "A tiny twinkling star hovering above the grass, talking to Jason and Phoebus with a friendly expression.",
+      "text": {
+        "el": {
+          "mode1": "Το αστεράκι είπε: «Χάθηκα. Μπορείτε να με βοηθήσετε;»",
+          "mode2": "Η λάμψη ήταν ένα μικρό αστεράκι που τρεμόπαιζε. «Με λένε Σπίθα», ψιθύρισε. «Έφυγα από τον ουρανό και δεν ξέρω πώς να γυρίσω στον Πλανήτη των Αστεριών»."
+        },
+        "en": {
+          "mode1": "The little star said, “I’m lost. Can you help me?”",
+          "mode2": "The glow was a tiny twinkling star. “My name is Spark,” it whispered. “I drifted away from the sky, and I don’t know how to return to the Planet of Stars.”"
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_03",
+      "number": 3,
+      "image": "page_03.png",
+      "image_note": "Jason and Phoebus in child-friendly astronaut gear beside a small whimsical rocket.",
+      "characters": ["jason", "phoebus"],
+      "image_prompt": "Jason in his little explorer suit and Phoebus wearing a round space helmet, standing beside a small whimsical rocket in a forest clearing.",
+      "text": {
+        "el": {
+          "mode1": "Ο Ιάσονας φόρεσε τη στολή του αστροναύτη.",
+          "mode2": "Ο Ιάσονας έβαλε τη μικρή στολή εξερευνητή του και ο Φοίβος φόρεσε ένα στρογγυλό διαστημικό κράνος. Μαζί μπήκαν σε έναν μικρό πύραυλο που περίμενε στο ξέφωτο."
+        },
+        "en": {
+          "mode1": "Jason put on his astronaut suit.",
+          "mode2": "Jason put on his little explorer suit, and Phoebus wore a round space helmet. Together they climbed into a small rocket waiting in the clearing."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_04",
+      "number": 4,
+      "image": "page_04.png",
+      "image_note": "Small rocket lifting above clouds toward a sparkling starry sky.",
+      "characters": ["jason", "phoebus"],
+      "image_prompt": "A small friendly rocket rising gently above soft clouds into a dark, star-filled night sky.",
+      "text": {
+        "el": {
+          "mode1": "Τρία, δύο, ένα… φσσσσ! Ο πύραυλος πέταξε στα αστέρια.",
+          "mode2": "«Τρία, δύο, ένα… εκτόξευση!» μέτρησε ο Ιάσονας. Ο πύραυλος ανέβηκε απαλά πάνω από τα σύννεφα και πέρασε μέσα στη σκοτεινή, γεμάτη αστέρια νύχτα."
+        },
+        "en": {
+          "mode1": "Three, two, one… whoosh! The rocket flew toward the stars.",
+          "mode2": "“Three, two, one… launch!” Jason counted. The rocket rose gently above the clouds and entered the dark, star-filled night."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_05",
+      "number": 5,
+      "image": "page_05.png",
+      "image_note": "Rocket passing a friendly smiling Moon in a gentle watercolor space scene.",
+      "characters": ["jason", "phoebus"],
+      "image_prompt": "The rocket passing a large, smiling silver Moon in a cozy watercolor space scene. Phoebus waving a paw from the window.",
+      "text": {
+        "el": {
+          "mode1": "Πέρασαν δίπλα από τη Σελήνη, που τους χαμογέλασε.",
+          "mode2": "Στο παράθυρο φάνηκε η μεγάλη, ασημένια Σελήνη. «Καλό ταξίδι!» τους είπε. Ο Φοίβος της χαιρέτησε με την πατούσα του."
+        },
+        "en": {
+          "mode1": "They passed the Moon, who smiled at them.",
+          "mode2": "The great silver Moon appeared in the window. “Have a good journey!” she said. Phoebus waved a paw."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_06",
+      "number": 6,
+      "image": "page_06.png",
+      "image_note": "Jason, Phoebus, and a friendly small robot on a colorful alien landscape.",
+      "characters": ["jason", "phoebus", "beep"],
+      "image_prompt": "Jason and Phoebus on a colorful planet with purple hills and blue stones, greeted by a friendly small robot named Beep with glowing eyes.",
+      "text": {
+        "el": {
+          "mode1": "Ένα μικρό ρομπότ τούς περίμενε σε έναν πολύχρωμο πλανήτη.",
+          "mode2": "Ο πύραυλος προσγειώθηκε σε έναν πλανήτη με μωβ βουνά και γαλάζιες πέτρες. Εκεί τους περίμενε ένα μικρό ρομπότ με φωτεινά μάτια. «Είμαι ο Μπιπ. Μπορώ να σας βοηθήσω να βρείτε τον δρόμο», είπε."
+        },
+        "en": {
+          "mode1": "A little robot was waiting for them on a colorful planet.",
+          "mode2": "The rocket landed on a planet with purple hills and blue stones. A little robot with glowing eyes was waiting there. “I’m Beep. I can help you find the way,” it said."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_07",
+      "number": 7,
+      "image": "page_07.png",
+      "image_note": "Robot showing a glowing star map to Jason and Phoebus.",
+      "characters": ["jason", "phoebus", "beep"],
+      "image_prompt": "Beep opening a glowing star map that shines like the night sky, showing Jason and Phoebus the path.",
+      "text": {
+        "el": {
+          "mode1": "Ο Μπιπ έδειξε έναν χάρτη με φωτεινά μονοπάτια.",
+          "mode2": "Ο Μπιπ άνοιξε έναν χάρτη που έλαμπε σαν νυχτερινός ουρανός. Ένα μονοπάτι οδηγούσε στον Πλανήτη των Αστεριών, αλλά μερικά φωτάκια είχαν σβήσει."
+        },
+        "en": {
+          "mode1": "Beep showed them a map of glowing paths.",
+          "mode2": "Beep opened a map that glowed like the night sky. One path led to the Planet of Stars, but some of its little lights had gone dark."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_08",
+      "number": 8,
+      "image": "page_08.png",
+      "image_note": "Jason touching a glowing point on the map as a trail of stars lights up.",
+      "characters": ["jason", "beep"],
+      "image_prompt": "Jason carefully touching the first light on the glowing map, making it shine brightly with Beep watching happily.",
+      "text": {
+        "el": {
+          "mode1": "«Θα ανάψουμε τα φωτάκια ένα-ένα», είπε ο Ιάσονας.",
+          "mode2": "Ο Ιάσονας δεν βιάστηκε. Άγγιξε το πρώτο φωτάκι στον χάρτη και αυτό άναψε. Ο Μπιπ χαμογέλασε: κάθε μικρό φως έδειχνε και το επόμενο βήμα."
+        },
+        "en": {
+          "mode1": "“We’ll light the little lights one by one,” Jason said.",
+          "mode2": "Jason did not rush. He touched the first light on the map, and it shone. Beep smiled: each little light showed them the next step."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_09",
+      "number": 9,
+      "image": "page_09.png",
+      "image_note": "The trio hopping across tiny craters and sparkling rocks on the alien planet.",
+      "characters": ["jason", "phoebus", "beep"],
+      "image_prompt": "Jason, Phoebus, and Beep hopping over small craters and sparkling candy-like stones on the alien landscape.",
+      "text": {
+        "el": {
+          "mode1": "Πήδηξαν πάνω από μικρούς κρατήρες και λαμπερές πέτρες.",
+          "mode2": "Οι τρεις φίλοι ακολούθησαν το φωτεινό μονοπάτι. Πέρασαν από μικρούς κρατήρες και πέτρες που άστραφταν σαν ζαχαρωτά. Ο Φοίβος έκανε ένα μεγάλο πήδημα και προσγειώθηκε με ένα αστείο «ποπ!»"
+        },
+        "en": {
+          "mode1": "They hopped over little craters and sparkling stones.",
+          "mode2": "The three friends followed the glowing path. They passed little craters and stones that sparkled like candy. Phoebus made a big hop and landed with a funny “pop!”"
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_10",
+      "number": 10,
+      "image": "page_10.png",
+      "image_note": "Jason and friends standing on a hill looking toward a distant star-filled planet.",
+      "characters": ["jason", "phoebus", "beep"],
+      "image_prompt": "Jason, Phoebus, and Beep standing at the top of a hill, looking out at a magnificent distant planet full of shining stars.",
+      "text": {
+        "el": {
+          "mode1": "Στο τέλος του μονοπατιού, είδαν έναν ουρανό γεμάτο μικρά αστέρια.",
+          "mode2": "Στην κορυφή ενός λόφου, ο ουρανός άνοιξε μπροστά τους. Χιλιάδες αστέρια έλαμπαν πάνω από έναν μακρινό πλανήτη, σαν να τους καλούσαν σπίτι."
+        },
+        "en": {
+          "mode1": "At the end of the path, they saw a sky full of little stars.",
+          "mode2": "At the top of a hill, the sky opened before them. Thousands of stars shone above a distant planet, as if calling them home."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_11",
+      "number": 11,
+      "image": "page_11.png",
+      "image_note": "Spark rejoining a group of tiny glowing stars above a colorful planet.",
+      "characters": ["spark"],
+      "image_prompt": "Spark surrounded by other tiny twinkling stars, shining brighter than ever with joy.",
+      "text": {
+        "el": {
+          "mode1": "Τα χαμένα αστεράκια περίμεναν τον Σπίθα.",
+          "mode2": "Μικρά αστέρια είχαν κατέβει χαμηλά και περίμεναν τον Σπίθα. Όταν τον είδαν, άρχισαν να τρεμοπαίζουν χαρούμενα. Ο Σπίθας έλαμψε πιο δυνατά από ποτέ."
+        },
+        "en": {
+          "mode1": "The lost little stars were waiting for Spark.",
+          "mode2": "Little stars had drifted low and were waiting for Spark. When they saw him, they twinkled with joy. Spark shone brighter than ever."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_12",
+      "number": 12,
+      "image": "page_12.png",
+      "image_note": "The little star floating into a constellation with its star friends.",
+      "characters": ["spark"],
+      "image_prompt": "Spark floating back into the night sky to join a new little constellation of friendly stars.",
+      "text": {
+        "el": {
+          "mode1": "Ο Σπίθας ανέβηκε στον ουρανό και βρήκε τη θέση του.",
+          "mode2": "Με τη βοήθεια του Μπιπ, ο Σπίθας ανέβηκε αργά στον ουρανό και μπήκε ανάμεσα στους φίλους του. Ένα νέο μικρό αστερισμό σχηματίστηκε πάνω από τον πλανήτη."
+        },
+        "en": {
+          "mode1": "Spark rose into the sky and found his place.",
+          "mode2": "With Beep’s help, Spark floated back into the sky and joined his friends. A new little constellation formed above the planet."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_13",
+      "number": 13,
+      "image": "page_13.png",
+      "image_note": "Jason, Phoebus, and Beep sharing a quiet happy moment beneath the stars.",
+      "characters": ["jason", "phoebus", "beep"],
+      "image_prompt": "Jason, Phoebus, and Beep sharing a warm, happy moment together under the starry sky.",
+      "text": {
+        "el": {
+          "mode1": "«Δεν χρειάζεται να τα κάνουμε όλα μόνος μας», είπε ο Μπιπ.",
+          "mode2": "Ο Μπιπ κοίταξε τον Ιάσονα. «Ο χάρτης δεν θα άναβε χωρίς τη βοήθειά σου», είπε. Ο Ιάσονας κατάλαβε πως κάθε φίλος είχε κάτι σημαντικό να προσφέρει."
+        },
+        "en": {
+          "mode1": "“We don’t have to do everything alone,” Beep said.",
+          "mode2": "Beep looked at Jason. “The map would not have lit up without your help,” it said. Jason realized that every friend had something important to offer."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_14",
+      "number": 14,
+      "image": "page_14.png",
+      "image_note": "The rocket preparing to leave the colorful planet, Beep waving goodbye.",
+      "characters": ["jason", "phoebus", "beep"],
+      "image_prompt": "Jason and Phoebus inside the rocket getting ready to leave, while Beep waves a friendly goodbye from the ground.",
+      "text": {
+        "el": {
+          "mode1": "Οι φίλοι μπήκαν στον πύραυλο για το ταξίδι της επιστροφής.",
+          "mode2": "Αφού αποχαιρέτησαν τον Μπιπ, ο Ιάσονας και ο Φοίβος μπήκαν στον πύραυλο. Ο Σπίθας τους χάρισε μια μικρή λάμψη για να θυμούνται το ταξίδι τους."
+        },
+        "en": {
+          "mode1": "The friends climbed into the rocket for the journey home.",
+          "mode2": "After saying goodbye to Beep, Jason and Phoebus climbed into the rocket. Spark gave them a tiny glimmer to remember their journey."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_15",
+      "number": 15,
+      "image": "page_15.png",
+      "image_note": "Jason and Phoebus watching the starry sky through the rocket window.",
+      "characters": ["jason", "phoebus"],
+      "image_prompt": "Jason looking out the rocket window at Spark shining brightly high in the sky, smiling warmly.",
+      "text": {
+        "el": {
+          "mode1": "Ο Ιάσονας κοίταξε τα αστέρια και χαμογέλασε.",
+          "mode2": "Καθώς ο πύραυλος περνούσε ξανά πάνω από τα σύννεφα, ο Ιάσονας είδε τον Σπίθα να λάμπει ψηλά στον ουρανό. «Τώρα ξέρω πού ανήκει», είπε."
+        },
+        "en": {
+          "mode1": "Jason looked at the stars and smiled.",
+          "mode2": "As the rocket passed above the clouds again, Jason saw Spark shining high in the sky. “Now I know where he belongs,” he said."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_16",
+      "number": 16,
+      "image": "page_16.png",
+      "image_note": "Peaceful bedtime scene with Jason tucked in, Phoebus sleeping nearby, stars outside.",
+      "characters": ["jason", "phoebus"],
+      "image_prompt": "Cozy bedroom at night. Jason sleeping peacefully in bed, Phoebus curled up sleeping nearby, and quiet stars shining through the window.",
+      "text": {
+        "el": {
+          "mode1": "Κι εκείνο το βράδυ, τα αστέρια έλαμπαν λίγο πιο φωτεινά.",
+          "mode2": "Πίσω στο σπίτι, ο Ιάσονας κουλουριάστηκε στο κρεβάτι. Ο Φοίβος αποκοιμήθηκε δίπλα του και έξω από το παράθυρο, τα αστέρια έλαμπαν ήσυχα, σαν να τους έλεγαν καληνύχτα."
+        },
+        "en": {
+          "mode1": "And that night, the stars shone a little brighter.",
+          "mode2": "Back at home, Jason curled up in bed. Phoebus fell asleep beside him, and outside the window the stars shone quietly, as if saying goodnight."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    }
+  ]
+}
