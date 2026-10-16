@@ -26,9 +26,10 @@ body {
 .btn { padding: .8rem 1.6rem; font-weight: 700; font-size: 1.05rem; }
 .btn--primary { background: var(--gold); }
 
-.stage { position: relative; min-height: 0; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: .8rem; }
+.stage { container-type: size; position: relative; min-height: 0; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: .8rem; }
 .book {
-  justify-self: center; height: 100%; max-height: 100%; aspect-ratio: 1; max-width: 100%;
+  /* Always a square: as wide as fits, never taller than the stage. 6.8rem leaves room for the side arrows. */
+  width: min(100cqh, calc(100cqw - 6.8rem)); aspect-ratio: 1; justify-self: center; align-self: center;
   position: relative; border-radius: 1rem; overflow: hidden;
   box-shadow: 0 1.5rem 3rem #0009, 0 0 0 .35rem #f6efe014;
   touch-action: pan-y;
@@ -72,6 +73,7 @@ dialog h2 { margin: 0 0 1rem; font: 700 1.3rem var(--font-display); color: var(-
   .mobile-nav { display: flex; gap: 2rem; }
   .stage { grid-template-columns: 1fr; }
   .stage > .nav { display: none; }
+  .book { width: min(100cqh, 100cqw); }
   .app { padding: .6rem .6rem .8rem; }
 }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
