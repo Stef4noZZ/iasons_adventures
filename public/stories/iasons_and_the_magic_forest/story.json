@@ -35,6 +35,7 @@
     "back_matter": ["the_end", "series"]
   },
   "cover_image": "cover.png",
+  "cover": { "title_position": "bottom", "medallion_focus": "50% 42%", "medallion_zoom": 1.45 },
   "cover_characters": ["jason", "phoebus"],
   "cover_prompt": "Jason and Phoebus the fox walk side by side along a glowing golden path that leads into a magical moonlit forest. A huge full moon, glowing lavender and gold flowers, fireflies and tall pine trees. Characters in the lower half, seen from the front, smiling and curious. The upper third is a calm starry sky with plenty of empty space for the book title (do not draw any text).",
   "art_direction": {

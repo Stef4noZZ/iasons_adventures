@@ -136,3 +136,5 @@ dialog h2 { margin: 0 0 1rem; font: 700 1.3rem var(--font-display); color: var(-
 .rec-dot { width: .9rem; height: .9rem; border-radius: 50%; background: #e8685a; animation: rec-blink 1s ease-in-out infinite; }
 @keyframes rec-blink { 50% { opacity: .25; } }
 .dot--rec { box-shadow: 0 0 0 2px #e8685a; }
+
+.page--cover-bottom .cover-actions { bottom: 3%; }

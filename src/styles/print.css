@@ -7,3 +7,4 @@ body { overflow: visible; }
 .print-sheet .page__soon { display: none; }
 body.proof .print-sheet .page__soon { display: block; }
 @media screen { body { background: #888; } .print-sheet { margin: 1rem auto; } }
+.print-sheet .page--cover-bottom { --cover-bottom: 8cqw; }

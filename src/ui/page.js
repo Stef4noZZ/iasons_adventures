@@ -37,7 +37,7 @@ export function renderPage(story, page, { lang, mode, print = false, folio = nul
 }
 
 export function renderCover(story, { lang, print = false }) {
-  const root = el("article", "page page--cover");
+  const root = el("article", `page page--cover page--cover-${story.cover?.title_position ?? "top"}`);
   root.append(art(story, story.cover_image, 0, lang, story.title[lang], print));
   const head = el("div", "cover__head");
   head.append(el("p", "cover__series", story.series_title[lang]), el("h1", "cover__title", story.title[lang]));
@@ -58,6 +58,8 @@ export function renderTitlePage(story, { lang, print = false }) {
   const medallion = el("div", "title__medallion");
   const img = new Image();
   img.alt = "";
+  img.style.setProperty("--focus", story.cover?.medallion_focus ?? "50% 78%");
+  img.style.setProperty("--zoom", story.cover?.medallion_zoom ?? 1);
   img.src = imageUrl(story, story.cover_image, { print });
   img.onerror = () => img.remove();
   medallion.append(img);
