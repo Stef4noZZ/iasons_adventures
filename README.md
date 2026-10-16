@@ -6,6 +6,8 @@ One codebase produces the installable web app and the print-ready 21 × 21 cm PD
 
 ## Quick start
 
+Requires Node.js 20.19+ or 22.12+ (check with `node -v`).
+
 ```bash
 npm install --legacy-peer-deps
 npm run dev          # app at http://localhost:5173
