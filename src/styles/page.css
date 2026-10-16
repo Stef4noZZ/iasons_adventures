@@ -34,8 +34,8 @@
 
 .page__text { margin: 0; text-align: center; text-wrap: balance; line-height: 1.5; }
 .page--mode1 .page__text { font-size: 4.6cqw; font-weight: 500; }
-.page--mode2 { --panel-h: 38cqw; }
-.page--mode2 .page__text { font-size: 2.95cqw; font-weight: 400; line-height: 1.45; text-wrap: pretty; }
+.page--mode2 { --panel-h: 33cqw; }
+.page--mode2 .page__text { font-size: 2.8cqw; font-weight: 400; line-height: 1.45; text-wrap: pretty; }
 
 .page__number {
   position: absolute; bottom: calc(2cqw + var(--bleed)); left: 50%; translate: -50% 0;
