@@ -29,6 +29,13 @@ npm run export:pdf   # print PDFs into exports/ (needs Google Chrome)
   The service worker is only active in the production build (`npm run build && npm run preview`).
 - A library button appears automatically once `series.json` lists more than one book.
 
+## Publishing (GitHub Pages)
+
+Every push to `main` runs the tests, builds the app and publishes it to GitHub Pages (`.github/workflows/deploy.yml`).
+One-time setup: repository **Settings, Pages, Source: GitHub Actions**. The link is `https://<user>.github.io/<repo>/`.
+The site is public to anyone with the link. Open it on a phone and use Add to Home Screen to install.
+Print PDFs are not published; only the app and the small web images are.
+
 ## The series
 
 `public/series.json` holds what is shared by every book: series title, copyright holder and year, copyright lines (Greek and English), optional ISBN and the ordered list of books.
