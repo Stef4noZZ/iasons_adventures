@@ -4,8 +4,9 @@ import { imageSize } from "image-size";
 import { validateStory } from "../src/core/story.js";
 
 const ID = process.argv[2] ?? "iasons_and_the_magic_forest";
-const dir = join(import.meta.dirname, "..", "public", "stories", ID);
-const story = JSON.parse(readFileSync(join(dir, "story.json"), "utf8"));
+const dir = join(import.meta.dirname, "..", "assets", "stories", ID);
+const webDir = join(import.meta.dirname, "..", "public", "stories", ID, "images");
+const story = JSON.parse(readFileSync(join(import.meta.dirname, "..", "public", "stories", ID, "story.json"), "utf8"));
 
 const [w, h] = story.trim_size_cm;
 const BLEED_MM = 3;
@@ -21,6 +22,7 @@ for (const [label, name] of files) {
     warnings.push(`${label}: missing image ${name}`);
     continue;
   }
+  if (!existsSync(join(webDir, name.replace(/\.\w+$/, ".jpg")))) warnings.push(`${label}: no web version, run npm run images`);
   const { width, height } = imageSize(readFileSync(path));
   if (width !== height) warnings.push(`${label}: not square (${width}x${height})`);
   if (Math.min(width, height) < minPx) warnings.push(`${label}: ${width}x${height}px is below ${minPx}px needed for 300 dpi print`);
@@ -28,7 +30,7 @@ for (const [label, name] of files) {
 
 console.log(`${story.title.en}: ${story.pages.length} pages, ${files.filter(([, n]) => existsSync(join(dir, "images", n))).length}/${files.length} images`);
 const missing = warnings.filter((m) => m.includes("missing image"));
-if (missing.length === files.length) console.log("WARN  no images yet; expected in public/stories/%s/images/", ID);
+if (missing.length === files.length) console.log("WARN  no images yet; expected in assets/stories/%s/images/", ID);
 else missing.forEach((m) => console.log(`WARN  ${m}`));
 warnings.filter((m) => !missing.includes(m)).forEach((m) => console.log(`WARN  ${m}`));
 errors.forEach((m) => console.error(`ERROR ${m}`));

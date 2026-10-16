@@ -19,7 +19,7 @@ npm run export:pdf   # print PDFs into exports/ (needs Google Chrome)
 - App language and story language are independent (Greek / English).
 - Two reading modes: `mode1` bedtime story, `mode2` adventure story.
 - Optional per-page narration audio (`audio` fields in `story.json`).
-- Placeholder night-forest scenes are shown until real illustrations exist.
+- 17 illustrated scenes (cover and 16 pages); a placeholder scene is used for any missing image.
 
 ## Print
 
@@ -28,11 +28,19 @@ npm run export:pdf   # print PDFs into exports/ (needs Google Chrome)
 Pages are 216 × 216 mm (21 × 21 cm trim + 3 mm bleed each side). The app and the PDF use the same page renderer.
 `--proof` shows placeholder captions.
 
-## Adding illustrations
+## Illustrations
 
-Put square images in `public/stories/iasons_and_the_magic_forest/images/` named `cover.png` and `page_01.png` … `page_16.png`,
-with no text inside the art. For 300 dpi print use at least 2551 × 2551 px (21.6 cm). Text is drawn over the lower part of each
-page (30% in `mode1`, 38% in `mode2`), so keep the subject in the upper area. `npm run validate` checks presence, squareness and resolution.
+The current art is hand-coded vector illustration: `art/lib.mjs` holds the characters and scenery, `art/scenes/` one file per page.
+
+```bash
+npm run art          # renders 2551 px masters into assets/stories/<id>/images/ and web JPEGs into public/.../images/
+node art/build.mjs --only page_03   # one scene
+```
+
+To use your own images instead, put square files named `cover.png` and `page_01.png` ... `page_16.png` in
+`assets/stories/iasons_and_the_magic_forest/images/` (no text inside the art, at least 2551 px for 300 dpi), then run `npm run images`.
+The masters are git-ignored; the app uses the small web JPEGs and the PDF export uses the masters.
+Text covers the lower 30% (`mode1`) or 38% (`mode2`) of each page, so keep the subject in the upper area. `npm run validate` checks everything.
 
 ## Structure
 
@@ -42,7 +50,9 @@ src/core/                     story validation, settings, UI strings
 src/ui/                       page renderer (shared by app and print), placeholder art
 src/styles/                   tokens, page, app, print
 scripts/                      validate.mjs, export-pdf.mjs
-public/stories/<id>/          story.json and images/
+public/stories/<id>/          story.json and web images
+assets/stories/<id>/images/   full-resolution masters (git-ignored)
+art/                          vector illustration kit and scenes
 tests/
 ```
 

@@ -11,8 +11,9 @@
   font-family: var(--font-body);
 }
 
+.page, .page * { box-sizing: border-box; }
 .page__art { position: absolute; inset: 0 0 var(--panel-h) 0; background: var(--midnight); }
-.page__art img, .page__art svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+.page__art img, .page__art svg { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
 .page__soon {
   position: absolute; left: 50%; bottom: 5cqw; translate: -50% 0;
   font: 500 2.2cqw var(--font-display); color: #fbeab8cc; letter-spacing: .04em; white-space: nowrap;
@@ -34,7 +35,7 @@
 .page__text { margin: 0; text-align: center; text-wrap: balance; line-height: 1.5; }
 .page--mode1 .page__text { font-size: 4.6cqw; font-weight: 500; }
 .page--mode2 { --panel-h: 38cqw; }
-.page--mode2 .page__text { font-size: 3.1cqw; font-weight: 400; line-height: 1.45; text-wrap: pretty; }
+.page--mode2 .page__text { font-size: 2.95cqw; font-weight: 400; line-height: 1.45; text-wrap: pretty; }
 
 .page__number {
   position: absolute; bottom: calc(2cqw + var(--bleed)); left: 50%; translate: -50% 0;
@@ -42,9 +43,13 @@
 }
 
 .page--cover .page__art { inset: 0; }
+.page--cover::before {
+  content: ""; position: absolute; inset: 0 0 60% 0; z-index: 1;
+  background: linear-gradient(#1f2a52d9, #1f2a5200);
+}
 .cover__head {
+  z-index: 2;
   position: absolute; inset: calc(7cqw + var(--bleed)) 8cqw auto; text-align: center; color: #fff8e4;
-  text-shadow: 0 .4cqw 2cqw #1f2a52cc;
 }
 .cover__series { margin: 0 0 2cqw; font: 600 3cqw var(--font-display); letter-spacing: .06em; color: var(--gold); }
 .cover__title { margin: 0; font: 700 8.4cqw/1.12 var(--font-display); text-wrap: balance; }

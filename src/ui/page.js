@@ -9,7 +9,7 @@ function el(tag, className, text) {
   return node;
 }
 
-function art(story, imageName, seed, lang, alt) {
+function art(story, imageName, seed, lang, alt, print) {
   const wrap = el("div", "page__art");
   const fallback = () => {
     wrap.innerHTML = placeholderSvg(seed, alt);
@@ -20,25 +20,25 @@ function art(story, imageName, seed, lang, alt) {
   img.alt = alt;
   img.decoding = "async";
   img.onerror = fallback;
-  img.src = imageUrl(story, imageName);
+  img.src = imageUrl(story, imageName, { print });
   wrap.append(img);
   return wrap;
 }
 
 /** Interior page: illustration on top, text on a paper panel below. Same markup for app and print. */
-export function renderPage(story, page, { lang, mode }) {
+export function renderPage(story, page, { lang, mode, print = false }) {
   const root = el("article", `page page--${mode}`);
   root.dataset.page = page.number;
-  root.append(art(story, page.image, page.number, lang, page.image_note ?? ""));
+  root.append(art(story, page.image, page.number, lang, page.image_note ?? "", print));
   const panel = el("div", "page__panel");
   panel.append(el("p", "page__text", pageText(page, lang, mode)));
   root.append(panel, el("span", "page__number", String(page.number)));
   return root;
 }
 
-export function renderCover(story, { lang }) {
+export function renderCover(story, { lang, print = false }) {
   const root = el("article", "page page--cover");
-  root.append(art(story, story.cover_image, 0, lang, story.title[lang]));
+  root.append(art(story, story.cover_image, 0, lang, story.title[lang], print));
   const head = el("div", "cover__head");
   head.append(el("p", "cover__series", story.series_title[lang]), el("h1", "cover__title", story.title[lang]));
   root.append(head);

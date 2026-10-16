@@ -1,5 +1,5 @@
 // Usage: npm run export:pdf [-- --lang el|en|all --mode mode1|mode2|all --proof]
-import { mkdirSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { build, preview } from "vite";
 import { chromium } from "playwright-core";
@@ -17,6 +17,8 @@ const outDir = join(import.meta.dirname, "..", "exports");
 mkdirSync(outDir, { recursive: true });
 
 await build({ logLevel: "warn" });
+const masters = join(import.meta.dirname, "..", "assets", "stories", "iasons_and_the_magic_forest", "images");
+if (existsSync(masters)) cpSync(masters, join(import.meta.dirname, "..", "dist", "stories", "iasons_and_the_magic_forest", "images-print"), { recursive: true });
 const server = await preview({ preview: { port: 4173, strictPort: false } });
 const base = server.resolvedUrls.local[0];
 const browser = await chromium.launch({ channel: "chrome" });

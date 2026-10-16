@@ -14,8 +14,10 @@ export function pageText(page, lang, mode) {
   return page.text[lang][mode];
 }
 
-export function imageUrl(story, name) {
-  return name ? `${storyBase(story.id)}/images/${name}` : null;
+/** App uses small web JPEGs; print uses the full-resolution masters copied to images-print/ by the exporter. */
+export function imageUrl(story, name, { print = false } = {}) {
+  if (!name) return null;
+  return print ? `${storyBase(story.id)}/images-print/${name}` : `${storyBase(story.id)}/images/${name.replace(/\.\w+$/, ".jpg")}`;
 }
 
 const isText = (value) => typeof value === "string" && value.trim() !== "";

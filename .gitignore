@@ -10,3 +10,6 @@ exports/*.pdf
 
 # Private reference photos of Jason
 assets/characters/private_reference_photos/
+
+# Full-resolution illustration masters (regenerate with npm run art; web versions are committed)
+assets/stories/*/images/

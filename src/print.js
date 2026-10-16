@@ -19,7 +19,7 @@ const sheet = (node) => {
 };
 
 const story = await fetchStory();
-const opts = { lang, mode };
+const opts = { lang, mode, print: true };
 document.getElementById("sheets").append(
   sheet(renderCover(story, opts)),
   ...story.pages.map((page) => sheet(renderPage(story, page, opts))),
