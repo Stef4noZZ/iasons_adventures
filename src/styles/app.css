@@ -71,7 +71,8 @@ dialog h2 { margin: 0 0 1rem; font: 700 1.3rem var(--font-display); color: var(-
 .mobile-nav { display: none; }
 @media (max-width: 640px) {
   .topbar__actions { flex: 1; flex-wrap: nowrap; gap: .35rem; }
-  .btn--small { padding: .45rem .8rem; font-size: .8rem; margin-right: auto; }
+  .btn--small { padding: .45rem .8rem; font-size: .8rem; }
+  .topbar__actions .btn--small { margin-right: auto; }
   .icon-btn { width: 2.4rem; height: 2.4rem; }
   .mobile-nav { display: flex; gap: 2rem; }
   .stage { grid-template-columns: 1fr; }
@@ -191,3 +192,14 @@ a.book-card:active .book-card__cover { transform: scale(.98); }
 .cover-actions { flex-direction: column; align-items: center; }
 .page--cover-continue.page--cover-bottom .cover__head, .book .page--cover-continue.page--cover-bottom .cover__head { bottom: calc(3% + 7.6rem); }
 @media (max-width: 640px) { .shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem .9rem; padding: 0 .4rem; } .book-card__title { font-size: .95rem; } .home__prompt { margin-top: 1.4rem; } }
+
+.cover-actions .btn--small { padding: .4rem .95rem; font-size: .78rem; }
+
+/* Small covers (phones): smaller buttons so the title stays below the characters. */
+@media (max-width: 640px) {
+  .page--cover .cover-actions { gap: .45rem; bottom: 2.5%; }
+  .page--cover .cover-actions .btn { padding: .6rem 1.3rem; font-size: .95rem; }
+  .page--cover .cover-actions .btn--small { padding: .32rem .85rem; font-size: .72rem; }
+  .book .page--cover-bottom .cover__head { bottom: calc(2.5% + 3.4rem); }
+  .book .page--cover-continue.page--cover-bottom .cover__head { bottom: calc(2.5% + 5.7rem); }
+}
