@@ -75,7 +75,13 @@ export function validateStory(story, { expectedPages = 16 } = {}) {
         if (!isText(page.text?.[lang]?.[mode])) errors.push(`Page '${id}' missing text ${lang}/${mode}.`);
       }
     }
+    for (const name of page.characters ?? []) {
+      if (!story.art_direction?.characters?.[name]) errors.push(`Page '${id}' uses unknown character '${name}'.`);
+    }
   });
+  for (const name of story.cover_characters ?? []) {
+    if (!story.art_direction?.characters?.[name]) errors.push(`Cover uses unknown character '${name}'.`);
+  }
   return errors;
 }
 

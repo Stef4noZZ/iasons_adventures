@@ -35,8 +35,13 @@
     "back_matter": ["the_end", "series"]
   },
   "cover_image": "cover.png",
+  "cover_characters": ["jason", "phoebus"],
+  "cover_prompt": "Jason and Phoebus the fox walk side by side along a glowing golden path that leads into a magical moonlit forest. A huge full moon, glowing lavender and gold flowers, fireflies and tall pine trees. Characters in the lower half, seen from the front, smiling and curious. The upper third is a calm starry sky with plenty of empty space for the book title (do not draw any text).",
   "art_direction": {
     "style": "soft watercolor, handmade texture, soft outlines, no text embedded in illustrations",
+    "style_prompt": "Children's picture book illustration, soft watercolor with gouache details, visible paper grain, gentle hand-drawn outlines, rounded friendly shapes, warm glowing light against a deep blue moonlit night, calm and cosy bedtime mood. Palette: sage green, midnight blue, lavender, starlight gold, warm beige.",
+    "negative_prompt": "text, letters, captions, speech bubbles, logo, watermark, signature, photorealistic, 3D render, harsh shadows, scary, creepy, dark horror, cluttered background, extra fingers, deformed hands, extra limbs",
+    "composition_note": "Square 1:1. Keep every character and focal point inside the upper 60% of the frame. The lowest 35-40% must be calm, simple foreground (grass, floor, path) with no important detail, because the story text is printed over it.",
     "palette": [
       "sage green",
       "midnight blue",
@@ -45,8 +50,11 @@
       "warm beige"
     ],
     "characters": {
-      "jason": "A storybook version of Jason at about 2–3 years old, wearing an explorer outfit in olive, beige and brown. Facial details will be personalized using reference photos later.",
-      "phoebus": "A friendly rust-orange fox with a cream muzzle, fluffy tail with a pale tip, and kind expressive eyes."
+      "jason": "Jason: a storybook toddler boy of about 2-3 years old with a round face, rosy cheeks and short brown hair. Explorer outfit: olive-green jacket, beige trousers, brown boots, small brown backpack and an olive explorer hat with a brown band (no hat and soft blue pyjamas in bedroom scenes). Use the attached reference photo of Jason only for his face and hair likeness; keep the outfit exactly as described.",
+      "phoebus": "Phoebus: a friendly rust-orange fox with a cream muzzle and chest, big kind expressive dark eyes, pointed ears with cream inside, and a fluffy tail with a pale cream tip. Dark brown paws. Sits like a dog most of the time.",
+      "bunny": "The bunny: a small grey-beige rabbit with a cream belly, long ears with pink inside, a round white fluffy tail, a tiny pink nose and big gentle dark eyes.",
+      "owl": "The owl: a small brown owl with a cream feathered chest, very large round dark eyes inside pale face discs, small ear tufts, a tiny golden beak and golden feet; a kind, slightly shy expression.",
+      "star": "The little star: a small golden five-pointed star with soft rounded points, a sweet face (two dot eyes, rosy cheeks, small smile) and a warm glow. When trapped it is pale, dull and sad with a weak glow; when free it shines bright warm gold."
     }
   },
   "pages": [
@@ -55,6 +63,8 @@
       "number": 1,
       "image": "page_01.png",
       "image_note": "Ο Ιάσονας στο παράθυρο, με ένα πεφταστέρι στον νυχτερινό ουρανό.",
+      "characters": ["jason"],
+      "image_prompt": "Cosy bedroom at night. Jason, in soft blue pyjamas and no hat, stands on a small wooden stool at an arched window with lavender curtains. His hand rests on the glass and his mouth is open in wonder. Outside, a golden shooting star streaks across a deep blue starry sky above pine trees.",
       "text": {
         "el": {
           "mode1": "Ο Ιάσονας βλέπει ένα πεφταστέρι. Κλείνει τα μάτια και κάνει μια ευχή.",
@@ -75,6 +85,8 @@
       "number": 2,
       "image": "page_02.png",
       "image_note": "Ένα χρυσό, φωτεινό μονοπάτι εμφανίζεται στον κήπο.",
+      "characters": ["jason"],
+      "image_prompt": "A moonlit garden at night. A path made of tiny golden lights winds through glowing lavender and yellow flowers towards the edge of a forest. Jason, in his explorer outfit, walks along it with a curious smile. Floating sparkles and fireflies.",
       "text": {
         "el": {
           "mode1": "Στον κήπο ανάβει ένα χρυσό μονοπάτι. Ο Ιάσονας το ακολουθεί.",
@@ -95,6 +107,8 @@
       "number": 3,
       "image": "page_03.png",
       "image_note": "Ο Ιάσονας γνωρίζει τον Φοίβο, το φιλικό πορτοκαλί αλεπουδάκι.",
+      "characters": ["jason", "phoebus"],
+      "image_prompt": "A magical forest clearing at night. Jason waves hello with a happy open mouth. Phoebus the fox sits facing him with his head tilted and a friendly smile. Glowing mushrooms, flowers and fireflies, a big moon behind round trees.",
       "text": {
         "el": {
           "mode1": "Ο Ιάσονας γνωρίζει τον Φοίβο, ένα μικρό αλεπουδάκι. Γίνονται φίλοι.",
@@ -115,6 +129,8 @@
       "number": 4,
       "image": "page_04.png",
       "image_note": "Θαμπά λουλούδια στο μαγικό δάσος.",
+      "characters": ["jason", "phoebus"],
+      "image_prompt": "A glade of drooping flowers in dull grey-lavender, their glow gone. Jason walks beside Phoebus, looking thoughtful; Phoebus looks sad. Still gentle and soft, but quieter and less bright than other pages.",
       "text": {
         "el": {
           "mode1": "Τα λουλούδια έχουν χάσει το φως τους. Ο Ιάσονας θέλει να τα βοηθήσει.",
@@ -135,6 +151,8 @@
       "number": 5,
       "image": "page_05.png",
       "image_note": "Ένα μικρό κουνελάκι είναι παγιδευμένο κάτω από πεσμένα κλαδάκια.",
+      "characters": ["jason", "phoebus", "bunny"],
+      "image_prompt": "A small grey rabbit is trapped under a pile of fallen brown twigs, ears drooping, looking sad. Jason and Phoebus hurry towards it from the left, concerned and ready to help. A tiny sparkle of hope above the rabbit.",
       "text": {
         "el": {
           "mode1": "Ακούνε ένα κουνελάκι να ζητά βοήθεια. Έχει παγιδευτεί κάτω από κλαδάκια.",
@@ -155,6 +173,8 @@
       "number": 6,
       "image": "page_06.png",
       "image_note": "Το ελεύθερο κουνελάκι ευχαριστεί τους φίλους και ένα λουλούδι ξαναλάμπει.",
+      "characters": ["jason", "phoebus", "bunny"],
+      "image_prompt": "The freed bunny hops happily with joy. Jason has his arms wide open and Phoebus smiles beside him. In the middle of the scene one large flower starts to glow lavender and gold again, lighting their happy faces.",
       "text": {
         "el": {
           "mode1": "Οι φίλοι ελευθερώνουν το κουνελάκι. Ένα λουλούδι ανάβει ξανά.",
@@ -175,6 +195,8 @@
       "number": 7,
       "image": "page_07.png",
       "image_note": "Ένα μικρό ποταμάκι λαμπυρίζει κάτω από το φεγγάρι.",
+      "characters": ["jason", "phoebus"],
+      "image_prompt": "A little singing stream shimmers under the moon with sparkling ripples that look like musical notes made of light. Jason and Phoebus stand on the near bank looking at the water. The far bank has dark pines and fireflies.",
       "text": {
         "el": {
           "mode1": "Φτάνουν σε ένα ποταμάκι που τραγουδά. Πρέπει να περάσουν απέναντι.",
@@ -195,6 +217,8 @@
       "number": 8,
       "image": "page_08.png",
       "image_note": "Ο Ιάσονας περνά προσεκτικά από τις φωτεινές πέτρες με τον Φοίβο δίπλα του.",
+      "characters": ["jason", "phoebus"],
+      "image_prompt": "Jason carefully steps across the stream on large round glowing stepping stones, arms out for balance, mouth open with concentration. Phoebus waits on the next stone. The moon reflects in the water.",
       "text": {
         "el": {
           "mode1": "Ο Ιάσονας πατά στις φωτεινές πέτρες. Μαζί φτάνουν απέναντι.",
@@ -215,6 +239,8 @@
       "number": 9,
       "image": "page_09.png",
       "image_note": "Μια μικρή κουκουβάγια έχει μπλεχτεί σε λεπτά κλαδάκια.",
+      "characters": ["owl", "jason", "phoebus"],
+      "image_prompt": "A small brown owl is tangled in thin twigs on a low tree branch, looking worried. Jason and Phoebus stand below, looking up with determined, kind faces. Moonlit forest.",
       "text": {
         "el": {
           "mode1": "Μια κουκουβάγια έχει μπλεχτεί σε κλαδάκια. Οι φίλοι αποφασίζουν να τη βοηθήσουν.",
@@ -235,6 +261,8 @@
       "number": 10,
       "image": "page_10.png",
       "image_note": "Η κουκουβάγια ελευθερώνεται και πυγολαμπίδες φωτίζουν το μονοπάτι.",
+      "characters": ["owl", "jason", "phoebus"],
+      "image_prompt": "The owl is free and flaps above with wings spread. A winding trail of glowing fireflies leads into the forest. Jason and Phoebus look up, delighted, Jason pointing at the trail.",
       "text": {
         "el": {
           "mode1": "Η κουκουβάγια ελευθερώνεται. Οι πυγολαμπίδες τούς δείχνουν τον δρόμο.",
@@ -255,6 +283,8 @@
       "number": 11,
       "image": "page_11.png",
       "image_note": "Ένα μικρό αδύναμο αστέρι βρίσκεται ανάμεσα στις ρίζες ενός αρχαίου δέντρου.",
+      "characters": ["star", "jason", "phoebus"],
+      "image_prompt": "A moonlit clearing with a huge ancient tree. Among its twisting roots sits a small pale, dull star with a sad face, trapped. Jason and Phoebus approach gently from the left.",
       "text": {
         "el": {
           "mode1": "Στο ξέφωτο βρίσκουν ένα μικρό αστέρι παγιδευμένο στις ρίζες.",
@@ -275,6 +305,8 @@
       "number": 12,
       "image": "page_12.png",
       "image_note": "Ο Ιάσονας και ο Φοίβος προσπαθούν να ελευθερώσουν το αστέρι.",
+      "characters": ["star", "jason", "phoebus"],
+      "image_prompt": "Jason and Phoebus pull and push the heavy roots around the little star, straining with effort. The star looks hopeful but worried. The roots do not move. Phoebus looks a little discouraged.",
       "text": {
         "el": {
           "mode1": "Ο Ιάσονας προσπαθεί να βοηθήσει το αστέρι, αλλά χρειάζεται κι άλλους φίλους.",
@@ -295,6 +327,8 @@
       "number": 13,
       "image": "page_13.png",
       "image_note": "Ο Ιάσονας, ο Φοίβος, το κουνελάκι και η κουκουβάγια συνεργάζονται για να ελευθερώσουν το αστέρι.",
+      "characters": ["star", "jason", "phoebus", "bunny", "owl"],
+      "image_prompt": "Jason, Phoebus, the bunny and the owl all work together to lift the great root. The little star breaks free and glows brightly, bursting with warm golden light that lights everyone's happy faces.",
       "text": {
         "el": {
           "mode1": "Όλοι συνεργάζονται. Το αστέρι ελευθερώνεται και ξαναλάμπει.",
@@ -315,6 +349,8 @@
       "number": 14,
       "image": "page_14.png",
       "image_note": "Το αστέρι ανεβαίνει στον ουρανό και το δάσος γεμίζει χρυσό φως.",
+      "characters": ["star", "jason", "phoebus", "bunny", "owl"],
+      "image_prompt": "The little star rises into the night sky leaving a golden trail, and the whole forest fills with warm golden light. Jason, Phoebus, the bunny and the owl stand together looking up, Jason with arms raised. Glowing flowers and fireflies all around.",
       "text": {
         "el": {
           "mode1": "Το αστέρι επιστρέφει στον ουρανό. Το δάσος γεμίζει φως.",
@@ -335,6 +371,8 @@
       "number": 15,
       "image": "page_15.png",
       "image_note": "Ο Ιάσονας αποχαιρετά τον Φοίβο στην άκρη του κήπου.",
+      "characters": ["jason", "phoebus"],
+      "image_prompt": "The edge of the garden beside a low wooden fence, blue evening light, a small house with a lit window behind. Jason waves goodbye to Phoebus, who sits on the forest side and waves his tail. A gentle, warm farewell.",
       "text": {
         "el": {
           "mode1": "Ο Ιάσονας αποχαιρετά τον Φοίβο. Υπόσχεται να επιστρέψει.",
@@ -355,6 +393,8 @@
       "number": 16,
       "image": "page_16.png",
       "image_note": "Ο Ιάσονας κοιμάται στο κρεβάτι του. Το αστέρι λάμπει έξω από το παράθυρο.",
+      "characters": ["jason", "star"],
+      "image_prompt": "Jason sleeps peacefully in bed under a star-patterned blue blanket, his face calm. Through the window the little star shines brightly in the night sky. Cosy lavender bedroom, soft warm glow.",
       "text": {
         "el": {
           "mode1": "Ο Ιάσονας κοιμάται γλυκά. Έξω από το παράθυρο, το αστέρι λάμπει.",
