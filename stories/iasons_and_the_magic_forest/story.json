@@ -1,0 +1,371 @@
+
+{
+  "schema_version": 1,
+  "id": "iasons_and_the_magic_forest",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": {
+    "el": "Ο Ιάσονας και το Μαγικό Δάσος",
+    "en": "Jason and the Magic Forest"
+  },
+  "series_title": {
+    "el": "Οι Περιπέτειες του μικρού Ιάσονα",
+    "en": "The Adventures of Little Jason"
+  },
+  "language_codes": ["el", "en"],
+  "modes": {
+    "mode1": {
+      "label": {
+        "el": "Παραμύθι για καληνύχτα",
+        "en": "Bedtime Story"
+      },
+      "font_size_hint": "large"
+    },
+    "mode2": {
+      "label": {
+        "el": "Περιπετειώδης αφήγηση",
+        "en": "Adventure Story"
+      },
+      "font_size_hint": "regular"
+    }
+  },
+  "trim_size_cm": [21, 21],
+  "cover_image": "cover.png",
+  "asset_dir": "assets/images",
+  "art_direction": {
+    "style": "soft watercolor, handmade texture, soft outlines, no text embedded in illustrations",
+    "palette": [
+      "sage green",
+      "midnight blue",
+      "lavender",
+      "starlight gold",
+      "warm beige"
+    ],
+    "characters": {
+      "jason": "A storybook version of Jason at about 2–3 years old, wearing an explorer outfit in olive, beige and brown. Facial details will be personalized using reference photos later.",
+      "phoebus": "A friendly rust-orange fox with a cream muzzle, fluffy tail with a pale tip, and kind expressive eyes."
+    }
+  },
+  "pages": [
+    {
+      "id": "page_01",
+      "number": 1,
+      "image": "page_01.png",
+      "image_note": "Ο Ιάσονας στο παράθυρο, με ένα πεφταστέρι στον νυχτερινό ουρανό.",
+      "text": {
+        "el": {
+          "mode1": "Ο Ιάσονας βλέπει ένα πεφταστέρι. Κλείνει τα μάτια και κάνει μια ευχή.",
+          "mode2": "Ένα βράδυ, λίγο πριν κοιμηθεί, ο Ιάσονας είδε ένα πεφταστέρι να σκίζει τον ουρανό. Έλαμψε για μια στιγμή και χάθηκε πίσω από τα δέντρα. Ο Ιάσονας ακούμπησε το χέρι του στο τζάμι και ψιθύρισε: «Μακάρι να ζήσω μια αληθινή περιπέτεια!»"
+        },
+        "en": {
+          "mode1": "Jason sees a shooting star. He closes his eyes and makes a wish.",
+          "mode2": "One evening, just before bedtime, Jason saw a shooting star streak across the sky. It glimmered for a moment and disappeared behind the trees. Jason placed his hand on the window and whispered, “I wish I could have a real adventure!”"
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_02",
+      "number": 2,
+      "image": "page_02.png",
+      "image_note": "Ένα χρυσό, φωτεινό μονοπάτι εμφανίζεται στον κήπο.",
+      "text": {
+        "el": {
+          "mode1": "Στον κήπο ανάβει ένα χρυσό μονοπάτι. Ο Ιάσονας το ακολουθεί.",
+          "mode2": "Μια χρυσή σπίθα χόρεψε στον κήπο. Ανάμεσα στα λουλούδια άνοιξε ένα μονοπάτι από μικροσκοπικά φωτάκια. Ο Ιάσονας φόρεσε τις μπότες του, πήρε το σακίδιό του και ακολούθησε το μονοπάτι. Κάθε βήμα ακουγόταν σαν απαλή καμπανούλα."
+        },
+        "en": {
+          "mode1": "A golden path appears in the garden. Jason follows it.",
+          "mode2": "A golden spark danced in the garden. Between the flowers, a path of tiny lights appeared. Jason put on his little boots, picked up his backpack, and followed it. Each step sounded like a tiny, gentle bell."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_03",
+      "number": 3,
+      "image": "page_03.png",
+      "image_note": "Ο Ιάσονας γνωρίζει τον Φοίβο, το φιλικό πορτοκαλί αλεπουδάκι.",
+      "text": {
+        "el": {
+          "mode1": "Ο Ιάσονας γνωρίζει τον Φοίβο, ένα μικρό αλεπουδάκι. Γίνονται φίλοι.",
+          "mode2": "Πίσω από έναν κορμό ξεπρόβαλε ένα πορτοκαλί αλεπουδάκι με αφράτη ουρά. «Είμαι ο Φοίβος», είπε. «Το δάσος έχει χάσει τη λάμψη του. Θα με βοηθήσεις να τη βρούμε;» Ο Ιάσονας έγνεψε καταφατικά. «Οι φίλοι βοηθούν ο ένας τον άλλον!»"
+        },
+        "en": {
+          "mode1": "Jason meets Phoebus, a little fox. They become friends.",
+          "mode2": "An orange fox peeked out from behind a tree trunk, its tail soft and fluffy. “I’m Phoebus,” it said. “The forest has lost its glow. Will you help me find it?” Jason nodded. “Friends help each other!”"
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_04",
+      "number": 4,
+      "image": "page_04.png",
+      "image_note": "Θαμπά λουλούδια στο μαγικό δάσος.",
+      "text": {
+        "el": {
+          "mode1": "Τα λουλούδια έχουν χάσει το φως τους. Ο Ιάσονας θέλει να τα βοηθήσει.",
+          "mode2": "Λίγο πιο πέρα, τα λουλούδια έγερναν νυσταγμένα. Τα πέταλά τους, που συνήθως έλαμπαν σαν μικρά φαναράκια, είχαν γίνει θαμπά. «Η μαγεία του δάσους δυναμώνει με την καλοσύνη», εξήγησε ο Φοίβος. «Ίσως πρέπει να βοηθήσουμε κάποιον πρώτα»."
+        },
+        "en": {
+          "mode1": "The flowers have lost their light. Jason wants to help them.",
+          "mode2": "A little farther on, the flowers drooped sleepily. Their petals, usually bright as tiny lanterns, had grown dull. “The forest’s magic grows stronger through kindness,” Phoebus explained. “Perhaps we should help someone first.”"
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_05",
+      "number": 5,
+      "image": "page_05.png",
+      "image_note": "Ένα μικρό κουνελάκι είναι παγιδευμένο κάτω από πεσμένα κλαδάκια.",
+      "text": {
+        "el": {
+          "mode1": "Ακούνε ένα κουνελάκι να ζητά βοήθεια. Έχει παγιδευτεί κάτω από κλαδάκια.",
+          "mode2": "Από τους θάμνους ακούστηκε ένα αδύναμο «βοήθεια!». Ένα μικρό κουνελάκι είχε μπλεχτεί κάτω από πεσμένα κλαδάκια. Ο Ιάσονας γονάτισε προσεκτικά, ενώ ο Φοίβος κράτησε τα κλαδιά για να μην ξαναπέσουν."
+        },
+        "en": {
+          "mode1": "They hear a bunny calling for help. It is trapped beneath some twigs.",
+          "mode2": "A faint “help!” came from the bushes. A little bunny was caught beneath fallen twigs. Jason knelt carefully while Phoebus held the branches steady so they would not fall again."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_06",
+      "number": 6,
+      "image": "page_06.png",
+      "image_note": "Το ελεύθερο κουνελάκι ευχαριστεί τους φίλους και ένα λουλούδι ξαναλάμπει.",
+      "text": {
+        "el": {
+          "mode1": "Οι φίλοι ελευθερώνουν το κουνελάκι. Ένα λουλούδι ανάβει ξανά.",
+          "mode2": "Με μια μικρή προσπάθεια, οι φίλοι ελευθέρωσαν το κουνελάκι. «Σας ευχαριστώ!» είπε εκείνο και τους χάρισε ένα χαμόγελο. Αμέσως, ένα λουλούδι δίπλα στο μονοπάτι άναψε με απαλό χρυσό φως. Ο Ιάσονας χαμογέλασε κι εκείνος."
+        },
+        "en": {
+          "mode1": "The friends free the bunny. One flower begins to glow again.",
+          "mode2": "With a little effort, the friends freed the bunny. “Thank you!” it said with a smile. At once, a flower beside the path glowed with soft golden light. Jason smiled too."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_07",
+      "number": 7,
+      "image": "page_07.png",
+      "image_note": "Ένα μικρό ποταμάκι λαμπυρίζει κάτω από το φεγγάρι.",
+      "text": {
+        "el": {
+          "mode1": "Φτάνουν σε ένα ποταμάκι που τραγουδά. Πρέπει να περάσουν απέναντι.",
+          "mode2": "Το μονοπάτι τους οδήγησε σε ένα ποταμάκι. Το νερό κυλούσε πάνω στις πέτρες και έμοιαζε να τραγουδά. «Για να περάσουμε, πρέπει να πατήσουμε μόνο στις φωτεινές πέτρες», είπε ο Φοίβος. «Και να προσέχουμε ο ένας τον άλλον»."
+        },
+        "en": {
+          "mode1": "They reach a little stream that sings. They must cross to the other side.",
+          "mode2": "The path led them to a little stream. Water rippled over the stones and seemed to sing. “We must step only on the glowing stones,” Phoebus said. “And look out for each other.”"
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_08",
+      "number": 8,
+      "image": "page_08.png",
+      "image_note": "Ο Ιάσονας περνά προσεκτικά από τις φωτεινές πέτρες με τον Φοίβο δίπλα του.",
+      "text": {
+        "el": {
+          "mode1": "Ο Ιάσονας πατά στις φωτεινές πέτρες. Μαζί φτάνουν απέναντι.",
+          "mode2": "Ο Ιάσονας κοίταξε προσεκτικά. Μία πέτρα έλαμπε, μετά άλλη μία, κι άλλη μία πιο πέρα. Ο Φοίβος προχώρησε πρώτος και περίμενε σε κάθε βήμα. Ο Ιάσονας τον ακολούθησε με προσοχή, ώσπου έφτασαν ασφαλείς στην απέναντι όχθη."
+        },
+        "en": {
+          "mode1": "Jason steps on the glowing stones. Together, they reach the other side.",
+          "mode2": "Jason looked carefully. One stone glowed, then another, and another farther away. Phoebus went first and waited at every step. Jason followed carefully until they reached the opposite bank safely."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_09",
+      "number": 9,
+      "image": "page_09.png",
+      "image_note": "Μια μικρή κουκουβάγια έχει μπλεχτεί σε λεπτά κλαδάκια.",
+      "text": {
+        "el": {
+          "mode1": "Μια κουκουβάγια έχει μπλεχτεί σε κλαδάκια. Οι φίλοι αποφασίζουν να τη βοηθήσουν.",
+          "mode2": "Από ένα χαμηλό δέντρο ακούστηκε φτερούγισμα. Μια μικρή κουκουβάγια είχε μπλεχτεί σε λεπτά κλαδάκια. «Δεν μπορώ να ανοίξω τα φτερά μου», είπε. Ο Ιάσονας και ο Φοίβος πλησίασαν αργά, για να μην την τρομάξουν."
+        },
+        "en": {
+          "mode1": "An owl is tangled in twigs. The friends decide to help her.",
+          "mode2": "A flutter came from a low tree. A little owl was tangled in thin twigs. “I can’t spread my wings,” she said. Jason and Phoebus approached slowly so they would not frighten her."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_10",
+      "number": 10,
+      "image": "page_10.png",
+      "image_note": "Η κουκουβάγια ελευθερώνεται και πυγολαμπίδες φωτίζουν το μονοπάτι.",
+      "text": {
+        "el": {
+          "mode1": "Η κουκουβάγια ελευθερώνεται. Οι πυγολαμπίδες τούς δείχνουν τον δρόμο.",
+          "mode2": "Ο Ιάσονας κράτησε τα κλαδάκια ακίνητα και ο Φοίβος τα ξεμπέρδεψε ένα ένα. Η κουκουβάγια τίναξε τα φτερά της ελεύθερη. «Ακολουθήστε τις πυγολαμπίδες», τους είπε. Εκατοντάδες μικρά φωτάκια άναψαν και σχημάτισαν ένα μονοπάτι προς ένα ξέφωτο."
+        },
+        "en": {
+          "mode1": "The owl is free. Fireflies show them the way.",
+          "mode2": "Jason held the twigs still while Phoebus gently untangled them one by one. The owl flapped her wings, free at last. “Follow the fireflies,” she said. Hundreds of tiny lights appeared and made a path toward a clearing."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_11",
+      "number": 11,
+      "image": "page_11.png",
+      "image_note": "Ένα μικρό αδύναμο αστέρι βρίσκεται ανάμεσα στις ρίζες ενός αρχαίου δέντρου.",
+      "text": {
+        "el": {
+          "mode1": "Στο ξέφωτο βρίσκουν ένα μικρό αστέρι παγιδευμένο στις ρίζες.",
+          "mode2": "Στο κέντρο του ξέφωτου, κάτω από ένα πανάρχαιο δέντρο, είδαν κάτι να τρεμοπαίζει. Ήταν ένα μικρό αστέρι, πεσμένο ανάμεσα στις ρίζες. Το φως του ήταν τόσο αδύναμο που μόλις φώτιζε το πρόσωπο του Ιάσονα. «Πρέπει να το βοηθήσουμε να γυρίσει στον ουρανό», είπε."
+        },
+        "en": {
+          "mode1": "In the clearing, they find a little star trapped among the roots.",
+          "mode2": "In the middle of the clearing, beneath an ancient tree, something flickered. It was a little star, fallen among the roots. Its light was so weak it barely lit Jason’s face. “We must help it return to the sky,” he said."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_12",
+      "number": 12,
+      "image": "page_12.png",
+      "image_note": "Ο Ιάσονας και ο Φοίβος προσπαθούν να ελευθερώσουν το αστέρι.",
+      "text": {
+        "el": {
+          "mode1": "Ο Ιάσονας προσπαθεί να βοηθήσει το αστέρι, αλλά χρειάζεται κι άλλους φίλους.",
+          "mode2": "Ο Ιάσονας άπλωσε προσεκτικά τα χέρια του, όμως το αστέρι είχε παγιδευτεί βαθιά. Ο Φοίβος τράβηξε ένα λεπτό κλαδί, αλλά δεν έφτανε. Για μια στιγμή, όλοι σώπασαν. Τότε ο Ιάσονας θυμήθηκε πως στο δάσος κανείς δεν χρειαζόταν να τα καταφέρει μόνος του."
+        },
+        "en": {
+          "mode1": "Jason tries to help the star, but he needs his friends.",
+          "mode2": "Jason carefully reached out, but the star was trapped deep between the roots. Phoebus tugged at a thin branch, but it was not enough. For a moment, everyone fell silent. Then Jason remembered that in the forest, no one had to manage alone."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_13",
+      "number": 13,
+      "image": "page_13.png",
+      "image_note": "Ο Ιάσονας, ο Φοίβος, το κουνελάκι και η κουκουβάγια συνεργάζονται για να ελευθερώσουν το αστέρι.",
+      "text": {
+        "el": {
+          "mode1": "Όλοι συνεργάζονται. Το αστέρι ελευθερώνεται και ξαναλάμπει.",
+          "mode2": "Ο Ιάσονας φώναξε τους φίλους τους. Το κουνελάκι έσπρωξε απαλά το χώμα, η κουκουβάγια έδειξε από ψηλά το ασφαλέστερο σημείο και ο Φοίβος τράβηξε το κλαδάκι. Ο Ιάσονας στήριξε το αστέρι με τις δυο παλάμες του. Μαζί, με υπομονή, το ελευθέρωσαν. Το αστέρι άστραψε ξανά!"
+        },
+        "en": {
+          "mode1": "Everyone works together. The star is free and shines again.",
+          "mode2": "Jason called their friends. The bunny gently moved the soil, the owl pointed out the safest spot from above, and Phoebus pulled the twig. Jason supported the star with both hands. Together, patiently, they freed it. The star sparkled again!"
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_14",
+      "number": 14,
+      "image": "page_14.png",
+      "image_note": "Το αστέρι ανεβαίνει στον ουρανό και το δάσος γεμίζει χρυσό φως.",
+      "text": {
+        "el": {
+          "mode1": "Το αστέρι επιστρέφει στον ουρανό. Το δάσος γεμίζει φως.",
+          "mode2": "Το μικρό αστέρι ανέβηκε αργά πάνω από το δέντρο. Οι ακτίνες του άγγιξαν τα λουλούδια, το ποταμάκι και τα φύλλα. Όλο το δάσος γέμισε χρυσές σπίθες. «Η καλοσύνη και η συνεργασία ξαναφέρνουν τη μαγεία», είπε ο Φοίβος. Ο Ιάσονας ένιωσε την καρδιά του ζεστή σαν μικρό φαναράκι."
+        },
+        "en": {
+          "mode1": "The star returns to the sky. The forest fills with light.",
+          "mode2": "The little star rose slowly above the tree. Its rays touched the flowers, the stream, and the leaves. The whole forest filled with golden sparks. “Kindness and teamwork bring the magic back,” said Phoebus. Jason’s heart felt warm as a tiny lantern."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_15",
+      "number": 15,
+      "image": "page_15.png",
+      "image_note": "Ο Ιάσονας αποχαιρετά τον Φοίβο στην άκρη του κήπου.",
+      "text": {
+        "el": {
+          "mode1": "Ο Ιάσονας αποχαιρετά τον Φοίβο. Υπόσχεται να επιστρέψει.",
+          "mode2": "Στο μονοπάτι της επιστροφής, ο Φοίβος συνόδεψε τον Ιάσονα ως την άκρη του κήπου. «Θα ξανάρθεις;» ρώτησε. «Όταν το δάσος με χρειαστεί», απάντησε ο Ιάσονας. Οι δυο φίλοι ακούμπησαν απαλά τις παλάμες τους. Μια μικρή χρυσή σπίθα έμεινε στο σακίδιό του σαν ενθύμιο."
+        },
+        "en": {
+          "mode1": "Jason says goodbye to Phoebus and promises to return.",
+          "mode2": "On the way back, Phoebus walked with Jason to the edge of the garden. “Will you come back?” he asked. “Whenever the forest needs me,” Jason replied. The friends gently touched palms. A tiny golden spark stayed in Jason’s backpack as a keepsake."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    },
+    {
+      "id": "page_16",
+      "number": 16,
+      "image": "page_16.png",
+      "image_note": "Ο Ιάσονας κοιμάται στο κρεβάτι του. Το αστέρι λάμπει έξω από το παράθυρο.",
+      "text": {
+        "el": {
+          "mode1": "Ο Ιάσονας κοιμάται γλυκά. Έξω από το παράθυρο, το αστέρι λάμπει.",
+          "mode2": "Ο Ιάσονας βρέθηκε ξανά στο ζεστό του κρεβάτι. Έξω από το παράθυρο, το αστέρι έλαμπε ήσυχα πάνω από τα δέντρα. Ίσως όλα να ήταν όνειρο — όμως στο σακίδιό του γυάλιζε μια μικρή χρυσή σπίθα. Ο Ιάσονας έκλεισε τα μάτια και αποκοιμήθηκε, ενώ μακριά στο δάσος ένα καινούριο φωτάκι άρχισε να αναβοσβήνει."
+        },
+        "en": {
+          "mode1": "Jason falls asleep peacefully. The star shines outside his window.",
+          "mode2": "Jason was back in his warm bed. Outside the window, the star shone quietly above the trees. Perhaps it had all been a dream—but a tiny golden spark glimmered in his backpack. Jason closed his eyes and fell asleep, while far away in the forest a new little light began to blink."
+        }
+      },
+      "audio": {
+        "el": {"mode1": null, "mode2": null},
+        "en": {"mode1": null, "mode2": null}
+      }
+    }
+  ]
+}

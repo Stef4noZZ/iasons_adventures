@@ -1,0 +1,27 @@
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# IDE και λειτουργικό σύστημα
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Παραγόμενα αρχεία
+build/
+dist/
+*.spec
+
+# PDF exports — δεν παρακολουθούνται από το Git
+exports/*.pdf
+
+# Τοπικές ρυθμίσεις χρήστη
+config/user_state.json
+
+# Ιδιωτικές φωτογραφίες αναφοράς του Ιάσονα
+assets/characters/private_reference_photos/
