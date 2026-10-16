@@ -174,7 +174,11 @@ function setClip(key, blob) {
 
 function refreshFooter() {
   const footer = root.querySelector(".footer");
-  if (footer) footer.replaceWith(buildFooter());
+  if (footer) {
+    const next = buildFooter();
+    footer.replaceWith(next);
+    addTooltips(next);
+  }
 }
 
 function tickTimer() {
@@ -323,13 +327,13 @@ function buildTopbar() {
   const lang = settings.uiLang;
   const langToggle = `<div class="lang-toggle" role="group" aria-label="${t(lang, "language")}">${["el", "en"].map((code) =>
     `<button data-act="lang" data-lang="${code}" aria-pressed="${settings.uiLang === code}">${code.toUpperCase()}</button>`).join("")}</div>`;
-  return h(`<header class="topbar">
-    ${story ? `<h1 class="sr-only">${story.series_title[lang]}: ${story.title[lang]}</h1>` : ""}
+  return h(`<header class="topbar${story ? " topbar--book" : ""}">
+    ${story ? `<h1 class="sr-only">${story.series_title[lang]}: ${story.title[lang]}</h1>
+    <button class="icon-btn" data-act="home" aria-label="${t(lang, "home")}">⌂</button>` : ""}
     <div class="topbar__actions">
-      ${installPrompt ? `<button class="btn btn--small" data-act="install">${t(lang, "install")}</button>` : ""}
+      ${!story && installPrompt ? `<button class="btn btn--small" data-act="install">${t(lang, "install")}</button>` : ""}
       ${story ? "" : langToggle}
       ${story && recordingSupported() ? `<button class="icon-btn${recordMode ? " icon-btn--on" : ""}" data-act="record" aria-pressed="${recordMode}" aria-label="${t(lang, "recordMode")}">🎙</button>` : ""}
-      ${story ? `<button class="icon-btn" data-act="home" aria-label="${t(lang, "home")}">⌂</button>` : ""}
       <button class="icon-btn" data-act="fullscreen" aria-label="${t(lang, "fullscreen")}">⛶</button>
       <button class="icon-btn" data-act="settings" aria-label="${t(lang, "settings")}">⚙</button>
     </div></header>`);
@@ -413,6 +417,12 @@ function render(animate = false) {
   document.title = story ? `${story.title[settings.uiLang]} · ${series.title[settings.uiLang]}` : series.title[settings.uiLang];
   root.classList.toggle("app--home", !story);
   root.replaceChildren(buildTopbar(), ...(story ? [buildStage(animate), buildFooter()] : [renderHome({ series, stories, settings })]));
+  addTooltips();
+}
+
+/** Hover text (title) for every labelled button, so icon buttons explain themselves on a computer. */
+function addTooltips(scope = root) {
+  for (const el of scope.querySelectorAll("button[aria-label]:not([title])")) el.title = el.getAttribute("aria-label");
 }
 
 const actions = {
