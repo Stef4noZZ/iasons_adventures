@@ -1,0 +1,9 @@
+/* 21 x 21 cm trim + 3 mm bleed on every side = 216 mm. */
+@page { size: 216mm 216mm; margin: 0; }
+html, body { margin: 0; background: #fff; }
+body { overflow: visible; }
+.print-sheet { width: 216mm; height: 216mm; break-after: page; overflow: hidden; }
+.print-sheet .page { --bleed: 1.39cqw; width: 216mm; height: 216mm; }
+.print-sheet .page__soon { display: none; }
+body.proof .print-sheet .page__soon { display: block; }
+@media screen { body { background: #888; } .print-sheet { margin: 1rem auto; } }

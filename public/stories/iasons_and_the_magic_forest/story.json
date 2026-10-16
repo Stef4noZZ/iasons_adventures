@@ -31,7 +31,6 @@
   },
   "trim_size_cm": [21, 21],
   "cover_image": "cover.png",
-  "asset_dir": "assets/images",
   "art_direction": {
     "style": "soft watercolor, handmade texture, soft outlines, no text embedded in illustrations",
     "palette": [

@@ -13,8 +13,8 @@
 ## Αρχεία
 
 - `story.json`: περιεχόμενο όλων των σελίδων
-- `../../assets/images/cover.png`: εξώφυλλο
-- `../../assets/images/page_01.png` έως `page_16.png`: εικονογράφηση
+- `images/cover.png`: εξώφυλλο
+- `images/page_01.png` έως `page_16.png`: εικονογράφηση
 
 ## Κανόνες περιεχομένου
 

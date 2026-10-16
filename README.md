@@ -1,115 +1,50 @@
 # Jason and the Magic Forest
 
-A bilingual, illustrated children's storybook application inspired by the adventures of little Jason.
+A bilingual (Greek / English) illustrated children's storybook, inspired by the adventures of little Jason.
+One codebase produces both the interactive web app and the print-ready 21 × 21 cm PDF.
 
-The project is being developed in Python with PySide6, with support for Greek and English storytelling, multiple reading modes, and future PDF book exports.
+## Quick start
+
+```bash
+npm install --legacy-peer-deps
+npm run dev          # app at http://localhost:5173
+npm test             # unit tests
+npm run validate     # story content + image checks
+npm run export:pdf   # print PDFs into exports/ (needs Google Chrome)
+```
 
 ## Features
 
-- **Bilingual interface:** Greek and English.
-- **Bilingual stories:** Choose the language of the story independently from the application interface.
-- **Two reading modes:**
-  - `mode1` — a simple, gentle bedtime story.
-  - `mode2` — a more detailed narrative.
-- **16 story pages** with structured text content.
-- **Page navigation** with progress indication.
-- **Fullscreen reading mode.**
-- **Automatic image loading** when page illustrations are available.
-- **Persistent user settings:** Language preferences, reading mode, last page, and fullscreen preference.
-- **Planned PDF exports:** Greek and English editions in both reading modes, formatted for a 21 × 21 cm book.
+- Page-turn reader: arrow keys, swipe, dots, fullscreen, remembers where you stopped.
+- App language and story language are independent (Greek / English).
+- Two reading modes: `mode1` bedtime story, `mode2` adventure story.
+- Optional per-page narration audio (`audio` fields in `story.json`).
+- Placeholder night-forest scenes are shown until real illustrations exist.
 
-## Technology Stack
+## Print
 
-- Python
-- PySide6
-- ReportLab
-- Pillow
-- JSON for story content and metadata
+`npm run export:pdf [-- --lang el|en|all --mode mode1|mode2|all --proof]` writes
+`exports/iasons_and_the_magic_forest_<lang>_<mode>.pdf`: cover, 16 pages, back cover.
+Pages are 216 × 216 mm (21 × 21 cm trim + 3 mm bleed each side). The app and the PDF use the same page renderer.
+`--proof` shows placeholder captions.
 
-## Project Structure
+## Adding illustrations
+
+Put square images in `public/stories/iasons_and_the_magic_forest/images/` named `cover.png` and `page_01.png` … `page_16.png`,
+with no text inside the art. For 300 dpi print use at least 2551 × 2551 px (21.6 cm). Text is drawn over the lower part of each
+page (30% in `mode1`, 38% in `mode2`), so keep the subject in the upper area. `npm run validate` checks presence, squareness and resolution.
+
+## Structure
 
 ```text
-iasons_adventures/
-├── main.py
-├── check_content.py
-├── requirements.txt
-├── README.md
-├── .gitignore
-├── core/
-│   ├── content.py
-│   └── settings.py
-├── stories/
-│   └── iasons_and_the_magic_forest/
-│       ├── README.md
-│       └── story.json
-├── assets/
-│   └── images/
-├── config/
-├── tests/
-└── exports/
+index.html, print.html        app and print entry points
+src/core/                     story validation, settings, UI strings
+src/ui/                       page renderer (shared by app and print), placeholder art
+src/styles/                   tokens, page, app, print
+scripts/                      validate.mjs, export-pdf.mjs
+public/stories/<id>/          story.json and images/
+tests/
 ```
 
-Some directories may remain empty during development and may not appear in Git until files are added.
-
-## Requirements
-
-- Python 3.10 or newer recommended.
-- pip
-
-## Installation
-
-Clone the repository:
-
-```bash
-git clone https://github.com/Stef4noZZ/iasons_adventures.git
-cd iasons_adventures
-```
-
-Create and activate a virtual environment.
-
-**Windows — PowerShell**
-
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-```
-
-**Windows — Command Prompt**
-
-```bat
-python -m venv .venv
-.venv\Scripts\activate.bat
-```
-
-Install dependencies:
-
-```bash
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-```
-
-## Run the Application
-
-Start the storybook application:
-
-```bash
-python main.py
-```
-
-## Validate Story Content
-
-Run the content validation script:
-
-```bash
-python check_content.py
-```
-
-The script checks the story metadata, page structure, translations, and required text fields. It also reports missing illustration files.
-
-## Story Content
-
-The story source is stored in:
-
-`stories/iasons_and_the_magic_forest/story.json`
-
-The JSON file contains story metadata, Greek and English text, reading modes, page
+The story schema is documented implicitly by `validateStory` in `src/core/story.js`.
+Reference photos of Jason must stay private (`assets/characters/private_reference_photos/` is git-ignored).

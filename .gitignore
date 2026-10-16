@@ -1,27 +1,12 @@
-
-# Python
-__pycache__/
-*.py[cod]
-.venv/
-venv/
-.env
-
-# IDE και λειτουργικό σύστημα
+node_modules/
+dist/
+.DS_Store
 .vscode/
 .idea/
-.DS_Store
-Thumbs.db
+.env
 
-# Παραγόμενα αρχεία
-build/
-dist/
-*.spec
-
-# PDF exports — δεν παρακολουθούνται από το Git
+# Generated PDFs
 exports/*.pdf
 
-# Τοπικές ρυθμίσεις χρήστη
-config/user_state.json
-
-# Ιδιωτικές φωτογραφίες αναφοράς του Ιάσονα
+# Private reference photos of Jason
 assets/characters/private_reference_photos/

@@ -1,0 +1,16 @@
+@import "@fontsource-variable/playpen-sans/index.css";
+@import "@fontsource-variable/comfortaa/index.css";
+
+:root {
+  --sage: #7f9b7e;
+  --sage-deep: #3f5a47;
+  --midnight: #1f2a52;
+  --lavender: #b9aee0;
+  --gold: #e8c46a;
+  --gold-deep: #b98d2e;
+  --beige: #f6efe0;
+  --ink: #2b3329;
+  --font-body: "Playpen Sans Variable", "Comic Sans MS", system-ui, sans-serif;
+  --font-display: "Comfortaa Variable", var(--font-body);
+  --radius: 1.1rem;
+}

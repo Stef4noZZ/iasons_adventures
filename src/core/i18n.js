@@ -1,0 +1,49 @@
+const UI = {
+  el: {
+    appTitle: "Οι Περιπέτειες του μικρού Ιάσονα",
+    start: "Ξεκίνα την ιστορία",
+    resume: "Συνέχισε",
+    previous: "Προηγούμενη σελίδα",
+    next: "Επόμενη σελίδα",
+    settings: "Ρυθμίσεις",
+    close: "Κλείσιμο",
+    fullscreen: "Πλήρης οθόνη",
+    uiLanguage: "Γλώσσα εφαρμογής",
+    storyLanguage: "Γλώσσα ιστορίας",
+    readingMode: "Αφήγηση",
+    listen: "Άκουσε",
+    pause: "Παύση",
+    pageOf: "Σελίδα {current} από {total}",
+    theEnd: "Τέλος",
+    readAgain: "Διάβασε ξανά",
+    toCover: "Στο εξώφυλλο",
+    illustrationSoon: "Η εικονογράφηση έρχεται σύντομα",
+    loadError: "Δεν ήταν δυνατή η φόρτωση της ιστορίας.",
+  },
+  en: {
+    appTitle: "The Adventures of Little Jason",
+    start: "Start the story",
+    resume: "Continue",
+    previous: "Previous page",
+    next: "Next page",
+    settings: "Settings",
+    close: "Close",
+    fullscreen: "Full screen",
+    uiLanguage: "App language",
+    storyLanguage: "Story language",
+    readingMode: "Reading mode",
+    listen: "Listen",
+    pause: "Pause",
+    pageOf: "Page {current} of {total}",
+    theEnd: "The End",
+    readAgain: "Read again",
+    toCover: "Back to cover",
+    illustrationSoon: "Illustration coming soon",
+    loadError: "The story could not be loaded.",
+  },
+};
+
+export function t(lang, key, vars = {}) {
+  const template = UI[lang]?.[key] ?? UI.en[key] ?? key;
+  return template.replace(/\{(\w+)\}/g, (_, name) => vars[name] ?? "");
+}

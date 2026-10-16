@@ -1,0 +1,55 @@
+/* One square book page, sized in container units so the app and the print PDF match. */
+.page {
+  --bleed: 0cqw;
+  --panel-h: 30cqw;
+  position: relative;
+  aspect-ratio: 1;
+  container-type: inline-size;
+  overflow: hidden;
+  background: var(--beige);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+.page__art { position: absolute; inset: 0 0 var(--panel-h) 0; background: var(--midnight); }
+.page__art img, .page__art svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+.page__soon {
+  position: absolute; left: 50%; bottom: 5cqw; translate: -50% 0;
+  font: 500 2.2cqw var(--font-display); color: #fbeab8cc; letter-spacing: .04em; white-space: nowrap;
+}
+
+.page__panel {
+  position: absolute; inset: auto 0 0 0; height: var(--panel-h);
+  background: var(--beige);
+  display: grid; place-items: center;
+  padding: 3cqw calc(8cqw + var(--bleed)) calc(5cqw + var(--bleed));
+}
+/* Soft scalloped edge between art and paper. */
+.page__panel::before {
+  content: ""; position: absolute; left: 0; right: 0; top: -3.2cqw; height: 3.4cqw;
+  background: var(--beige);
+  mask: radial-gradient(circle at 50% 100%, #000 69%, #0000 71%) 0 0 / 7cqw 100%;
+}
+
+.page__text { margin: 0; text-align: center; text-wrap: balance; line-height: 1.5; }
+.page--mode1 .page__text { font-size: 4.6cqw; font-weight: 500; }
+.page--mode2 { --panel-h: 38cqw; }
+.page--mode2 .page__text { font-size: 3.1cqw; font-weight: 400; line-height: 1.45; text-wrap: pretty; }
+
+.page__number {
+  position: absolute; bottom: calc(2cqw + var(--bleed)); left: 50%; translate: -50% 0;
+  font: 700 2.1cqw var(--font-display); color: var(--gold-deep);
+}
+
+.page--cover .page__art { inset: 0; }
+.cover__head {
+  position: absolute; inset: calc(7cqw + var(--bleed)) 8cqw auto; text-align: center; color: #fff8e4;
+  text-shadow: 0 .4cqw 2cqw #1f2a52cc;
+}
+.cover__series { margin: 0 0 2cqw; font: 600 3cqw var(--font-display); letter-spacing: .06em; color: var(--gold); }
+.cover__title { margin: 0; font: 700 8.4cqw/1.12 var(--font-display); text-wrap: balance; }
+
+.page--back { background: var(--midnight); display: grid; place-items: center; }
+.back__series { color: var(--gold); font: 600 3.2cqw var(--font-display); letter-spacing: .06em; text-align: center; padding: 8cqw; }
+
+.page--cover .page__soon { display: none; }

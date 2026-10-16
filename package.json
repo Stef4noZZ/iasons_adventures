@@ -1,0 +1,22 @@
+{
+  "name": "iasons-adventures",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "validate": "node scripts/validate.mjs",
+    "export:pdf": "node scripts/export-pdf.mjs",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@fontsource-variable/comfortaa": "^5.3.0",
+    "@fontsource-variable/playpen-sans": "^5.3.0",
+    "image-size": "^2.0.4",
+    "playwright-core": "^1.64.1",
+    "vite": "^8.3.4",
+    "vitest": "^4.1.12"
+  }
+}
