@@ -21,7 +21,10 @@ npm run export:pdf   # print PDFs into exports/ (needs Google Chrome)
 - Page-turn reader: arrow keys, swipe, dots, fullscreen, remembers where you stopped (per book).
 - App language and story language are independent (Greek / English). Two reading modes: `mode1` bedtime, `mode2` adventure.
 - Soft synthesised page-turn and end-of-story sounds (can be switched off in settings), gentle motion that respects the system "reduce motion" setting.
-- Optional per-page narration audio (`audio` fields in `story.json`).
+- **Record your own voice**: tap the microphone button in the top bar, open a page, press Record and read it aloud. One recording per page, per story language and per reading mode. Dots with a red ring are recorded pages; re-record or delete any time.
+  The listen button then plays your voice, and "Read along" in settings plays each page and turns it automatically (good for bedtime).
+  Recordings are stored on the device only (IndexedDB), never uploaded. Back up and restore them from Settings, "My voice". Recording needs `localhost` or HTTPS and microphone permission.
+- Optional per-page narration audio files (`audio` fields in `story.json`) are used when there is no own recording.
 - Installable (PWA) and fully offline after the first visit: Chrome/Edge show an "Install" button, on iPad use Share, then Add to Home Screen.
   The service worker is only active in the production build (`npm run build && npm run preview`).
 - A library button appears automatically once `series.json` lists more than one book.
@@ -52,6 +55,10 @@ npm run art          # renders 2551 px masters into assets/stories/<id>/images/ 
 node art/build.mjs --only page_03   # one scene
 npm run icons        # app icons into public/icons
 ```
+
+To make the images with an AI image tool (for example together with your son), use the ready-made prompts in
+[docs/prompts/iasons_and_the_magic_forest.md](docs/prompts/iasons_and_the_magic_forest.md): style, negative prompt, character sheets and one complete prompt per picture.
+They are generated from `story.json` (`art_direction`, `cover_prompt`, and `characters` and `image_prompt` on every page); edit them there and run `npm run prompts`.
 
 To use your own images instead, put square files named `cover.png` and `page_01.png` ... `page_16.png` in
 `assets/stories/<id>/images/` (no text inside the art, at least 2551 px for 300 dpi), then run `npm run images`.

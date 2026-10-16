@@ -5,6 +5,8 @@ import { fetchSeries, fetchStory, validateStory } from "./core/story.js";
 import { loadSettings, progressOf, saveSettings } from "./core/settings.js";
 import { t } from "./core/i18n.js";
 import { chime, pageTurn } from "./core/sound.js";
+import { clipKey, deleteClip, exportClips, importClips, listClips, saveClip } from "./core/recordings.js";
+import { recordingSupported, startRecorder } from "./core/recorder.js";
 import { renderCover, renderPage } from "./ui/page.js";
 
 const root = document.getElementById("app");
@@ -16,6 +18,13 @@ let direction = "next";
 let audio = null;
 let installPrompt = null;
 
+// Voice recording state. Clips are the parent's recordings for the current story.
+let recordMode = false;
+let recording = null; // { handle, pageId, lang, mode, startedAt }
+let recordError = "";
+let recordTimer = null;
+const clips = new Map(); // key -> { url }
+
 const h = (html) => {
   const tpl = document.createElement("template");
   tpl.innerHTML = html.trim();
@@ -25,6 +34,8 @@ const h = (html) => {
 const last = () => story.pages.length + 1; // position 0 = cover, last = end card
 const clamp = (n) => Math.min(Math.max(n, 0), last());
 const position = () => progressOf(settings, story.id).position;
+const currentPage = () => story.pages[position() - 1] ?? null;
+const keyFor = (pageId, lang = settings.storyLang, mode = settings.mode) => clipKey(story.id, lang, mode, pageId);
 
 function setProgress(next) {
   const current = progressOf(settings, story.id);
@@ -38,26 +49,164 @@ function go(target) {
   const current = position();
   if (next === current) return;
   direction = next > current ? "next" : "prev";
+  finishRecording();
   setProgress(next);
   stopAudio();
   if (settings.sound) (next === last() ? chime : pageTurn)();
   render(true);
+  autoplay();
+}
+
+// ---- Narration playback (own voice first, then bundled audio files) ----
+
+function narrationSrc(page) {
+  return clips.get(keyFor(page.id))?.url ?? page.audio?.[settings.storyLang]?.[settings.mode] ?? null;
+}
+
+const isPlaying = () => Boolean(audio && !audio.paused);
+
+function syncListen() {
+  const lang = settings.uiLang;
+  const button = document.querySelector(".listen");
+  if (button) {
+    button.textContent = isPlaying() ? "⏸" : "🔊";
+    button.setAttribute("aria-label", t(lang, isPlaying() ? "pause" : "listen"));
+  }
+  const play = document.querySelector('[data-act="rec-play"]');
+  if (play) play.textContent = `${isPlaying() ? "⏸" : "▶"} ${t(lang, isPlaying() ? "pause" : "play")}`;
 }
 
 function stopAudio() {
-  audio?.pause();
+  if (audio) {
+    audio.onended = null;
+    audio.pause();
+  }
   audio = null;
+  syncListen();
 }
 
-function toggleAudio(button, src) {
-  if (audio && !audio.paused) return stopAudio(), render();
-  audio = new Audio(src);
-  audio.onended = () => (audio = null, render());
-  audio.play().catch(() => (audio = null));
-  button.textContent = "⏸";
+function playAudio(src, { advance = false } = {}) {
+  stopAudio();
+  const player = new Audio(src);
+  audio = player;
+  player.onended = () => {
+    if (audio !== player) return;
+    audio = null;
+    syncListen();
+    if (advance && settings.readAlong) setTimeout(() => !audio && !recording && go(position() + 1), 900);
+  };
+  player.play().then(syncListen).catch(() => {
+    if (audio === player) audio = null;
+  });
 }
 
-const narrationSrc = (page) => page.audio?.[settings.storyLang]?.[settings.mode] ?? null;
+/** Read-along: after a page turn, play the narration and turn the page when it ends. */
+function autoplay() {
+  const page = currentPage();
+  if (!settings.readAlong || recordMode || !page) return;
+  const src = settings.narration && narrationSrc(page);
+  if (src) playAudio(src, { advance: true });
+}
+
+// ---- Voice recording ----
+
+async function loadClips() {
+  for (const { url } of clips.values()) URL.revokeObjectURL(url);
+  clips.clear();
+  try {
+    for (const clip of await listClips(story.id)) clips.set(clip.key, { url: URL.createObjectURL(clip.blob) });
+  } catch (error) {
+    console.warn("Recordings unavailable:", error);
+  }
+}
+
+function setClip(key, blob) {
+  const old = clips.get(key);
+  if (old) URL.revokeObjectURL(old.url);
+  clips.set(key, { url: URL.createObjectURL(blob) });
+}
+
+function refreshFooter() {
+  const footer = root.querySelector(".footer");
+  if (footer) footer.replaceWith(buildFooter());
+}
+
+function tickTimer() {
+  const node = document.querySelector(".recorder__time");
+  if (node && recording) node.textContent = formatTime((Date.now() - recording.startedAt) / 1000);
+}
+
+const formatTime = (seconds) => `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, "0")}`;
+
+async function beginRecording() {
+  const page = currentPage();
+  if (!page || recording) return;
+  stopAudio();
+  recordError = "";
+  try {
+    const handle = await startRecorder();
+    recording = { handle, pageId: page.id, lang: settings.storyLang, mode: settings.mode, startedAt: Date.now() };
+    recordTimer = setInterval(tickTimer, 250);
+  } catch (error) {
+    recordError = error?.name === "NotAllowedError" ? "micDenied" : "micUnsupported";
+  }
+  refreshFooter();
+}
+
+async function finishRecording() {
+  if (!recording) return;
+  const { handle, pageId, lang, mode } = recording;
+  recording = null;
+  clearInterval(recordTimer);
+  const blob = await handle.stop();
+  if (blob.size) {
+    const key = clipKey(story.id, lang, mode, pageId);
+    await saveClip({ key, storyId: story.id, lang, mode, pageId, blob, createdAt: Date.now() });
+    setClip(key, blob);
+  }
+  refreshFooter();
+}
+
+async function removeClip() {
+  const page = currentPage();
+  if (!page || !confirm(t(settings.uiLang, "confirmDelete"))) return;
+  const key = keyFor(page.id);
+  stopAudio();
+  await deleteClip(key);
+  URL.revokeObjectURL(clips.get(key)?.url);
+  clips.delete(key);
+  refreshFooter();
+}
+
+const recordedCount = () => story.pages.filter((page) => clips.has(keyFor(page.id))).length;
+
+function buildRecorder() {
+  const lang = settings.uiLang;
+  const page = currentPage();
+  const label = `${t(lang, "recordFor")}: ${settings.storyLang === "el" ? "Ελληνικά" : "English"} · ${story.modes[settings.mode].label[lang]}`;
+  const count = t(lang, "recordedCount", { n: recordedCount(), total: story.pages.length });
+  let controls = "";
+  let message = count;
+
+  if (!page) {
+    message = t(lang, "recordHint");
+  } else if (recording) {
+    controls = `<span class="rec-dot" aria-hidden="true"></span><span class="recorder__time">0:00</span>
+      <button class="btn btn--primary" data-act="rec-stop">■ ${t(lang, "stopRecording")}</button>`;
+  } else if (clips.has(keyFor(page.id))) {
+    controls = `<button class="btn btn--primary" data-act="rec-play">▶ ${t(lang, "play")}</button>
+      <button class="btn" data-act="rec-start">● ${t(lang, "rerecord")}</button>
+      <button class="btn" data-act="rec-delete">🗑 ${t(lang, "deleteClip")}</button>`;
+  } else {
+    controls = `<button class="btn btn--primary btn--rec" data-act="rec-start">● ${t(lang, "record")}</button>`;
+  }
+  if (recordError) message = t(lang, recordError);
+
+  return h(`<div class="recorder"><div class="recorder__label">🎙 ${label}</div>
+    <div class="recorder__row">${controls}</div><div class="recorder__msg${recordError ? " recorder__msg--error" : ""}">${message}</div></div>`);
+}
+
+// ---- Views ----
 
 /** Drifting fireflies over the artwork; purely decorative. */
 function fireflies() {
@@ -91,14 +240,10 @@ function buildStage(animate) {
     book.append(h(`<div class="end-card"><h2>${t(lang, "theEnd")}</h2><div class="end-card__stars" aria-hidden="true">✦ ✦ ✦</div>
       <button class="btn btn--primary" data-act="again">${t(lang, "readAgain")}</button></div>`));
   } else {
-    const page = story.pages[pos - 1];
+    const page = currentPage();
     book.append(renderPage(story, page, opts), fireflies());
-    const src = settings.narration && narrationSrc(page);
-    if (src) {
-      const playing = audio && !audio.paused;
-      const b = h(`<button class="icon-btn listen" data-act="listen" aria-label="${t(lang, playing ? "pause" : "listen")}">${playing ? "⏸" : "🔊"}</button>`);
-      b.addEventListener("click", () => toggleAudio(b, src));
-      book.append(b);
+    if (settings.narration && narrationSrc(page) && !recordMode) {
+      book.append(h(`<button class="icon-btn listen" data-act="listen" aria-label="${t(lang, isPlaying() ? "pause" : "listen")}">${isPlaying() ? "⏸" : "🔊"}</button>`));
     }
   }
   if (animate) book.firstElementChild.classList.add(`turn-in-${direction}`);
@@ -114,13 +259,15 @@ function buildFooter() {
     <div class="mobile-nav"><button class="icon-btn" data-act="prev" aria-label="${t(lang, "previous")}" ${pos === 0 ? "disabled" : ""}>←</button>
     <button class="icon-btn" data-act="next" aria-label="${t(lang, "next")}" ${pos === last() ? "disabled" : ""}>→</button></div></footer>`);
   const dots = footer.querySelector(".dots");
-  story.pages.forEach((_, i) => {
-    const dot = h(`<button class="dot${pos > i + 1 ? " dot--read" : ""}" role="tab" aria-label="${t(lang, "pageOf", { current: i + 1, total: story.pages.length })}" ${pos === i + 1 ? 'aria-current="true"' : ""}></button>`);
+  story.pages.forEach((page, i) => {
+    const recorded = recordMode && clips.has(keyFor(page.id));
+    const dot = h(`<button class="dot${pos > i + 1 ? " dot--read" : ""}${recorded ? " dot--rec" : ""}" role="tab" aria-label="${t(lang, "pageOf", { current: i + 1, total: story.pages.length })}" ${pos === i + 1 ? 'aria-current="true"' : ""}></button>`);
     dot.addEventListener("click", () => go(i + 1));
     dots.append(dot);
   });
   const inBook = pos >= 1 && pos <= story.pages.length;
   footer.querySelector(".status").textContent = inBook ? t(lang, "pageOf", { current: pos, total: story.pages.length }) : "";
+  if (recordMode) footer.prepend(buildRecorder());
   return footer;
 }
 
@@ -131,6 +278,7 @@ function buildTopbar() {
     <h1 class="topbar__title">${position() === 0 ? "" : story.series_title[lang]}</h1>
     <div class="topbar__actions">
       ${installPrompt ? `<button class="btn btn--small" data-act="install">${t(lang, "install")}</button>` : ""}
+      ${recordingSupported() ? `<button class="icon-btn${recordMode ? " icon-btn--on" : ""}" data-act="record" aria-pressed="${recordMode}" aria-label="${t(lang, "recordMode")}">🎙</button>` : ""}
       ${many ? `<button class="icon-btn" data-act="library" aria-label="${t(lang, "library")}">▤</button>` : ""}
       <button class="icon-btn" data-act="home" aria-label="${t(lang, "toCover")}">⌂</button>
       <button class="icon-btn" data-act="fullscreen" aria-label="${t(lang, "fullscreen")}">⛶</button>
@@ -148,29 +296,67 @@ function openDialog(dialog) {
   return dialog;
 }
 
+const SETTING_FIELDS = new Set(["uiLang", "storyLang", "mode", "sound", "readAlong"]);
+
 function openSettings() {
   const lang = settings.uiLang;
   const langs = [["el", "Ελληνικά"], ["en", "English"]];
   const modes = ["mode1", "mode2"].map((m) => [m, story.modes[m].label[lang]]);
   const onOff = [[true, t(lang, "on")], [false, t(lang, "off")]];
+  const voice = recordingSupported() ? `<fieldset class="field"><legend>${t(lang, "myVoice")}</legend>
+      <p class="about">${t(lang, "recordedCount", { n: recordedCount(), total: story.pages.length })} (${settings.storyLang.toUpperCase()}, ${story.modes[settings.mode].label[lang]}). ${t(lang, "voiceNote")}</p>
+      <div class="row"><button class="btn btn--small" data-voice="export">${t(lang, "exportVoice")}</button>
+      <button class="btn btn--small" data-voice="import">${t(lang, "importVoice")}</button>
+      <input type="file" accept="application/json,.json" hidden></div></fieldset>` : "";
   const dialog = h(`<dialog><h2>${t(lang, "settings")}</h2>
     <fieldset class="field"><legend>${t(lang, "uiLanguage")}</legend><div class="seg">${seg("uiLang", langs, settings.uiLang)}</div></fieldset>
     <fieldset class="field"><legend>${t(lang, "storyLanguage")}</legend><div class="seg">${seg("storyLang", langs, settings.storyLang)}</div></fieldset>
     <fieldset class="field"><legend>${t(lang, "readingMode")}</legend><div class="seg">${seg("mode", modes, settings.mode)}</div></fieldset>
     <fieldset class="field"><legend>${t(lang, "sound")}</legend><div class="seg">${seg("sound", onOff, settings.sound)}</div></fieldset>
+    <fieldset class="field"><legend>${t(lang, "readAlong")}</legend><div class="seg">${seg("readAlong", onOff, settings.readAlong)}</div></fieldset>
+    ${voice}
     <p class="about">© ${series.copyright.year} ${series.copyright.holder}</p>
     <button class="btn btn--primary" value="close">${t(lang, "close")}</button></dialog>`);
+
   dialog.addEventListener("change", (e) => {
     const { name, value } = e.target;
-    settings[name] = name === "sound" ? value === "true" : value;
+    if (!SETTING_FIELDS.has(name)) return;
+    settings[name] = name === "sound" || name === "readAlong" ? value === "true" : value;
     saveSettings(settings);
+    finishRecording();
     stopAudio();
     dialog.close();
     render();
     openSettings();
   });
-  dialog.querySelector(".btn").addEventListener("click", () => dialog.close());
+  dialog.addEventListener("click", async (e) => {
+    const action = e.target.closest("[data-voice]")?.dataset.voice;
+    if (action === "export") await downloadVoice();
+    if (action === "import") dialog.querySelector('input[type="file"]').click();
+  });
+  dialog.querySelector('input[type="file"]')?.addEventListener("change", async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    try {
+      const { storyId, count } = await importClips(await file.text());
+      if (storyId === story.id) await loadClips();
+      alert(t(lang, "importDone", { n: count }));
+      dialog.close();
+      render();
+    } catch {
+      alert(t(lang, "importFailed"));
+    }
+  });
+  dialog.querySelector('[value="close"]').addEventListener("click", () => dialog.close());
   openDialog(dialog);
+}
+
+async function downloadVoice() {
+  if (!clips.size) return alert(t(settings.uiLang, "exportEmpty"));
+  const blob = new Blob([await exportClips(story.id)], { type: "application/json" });
+  const link = Object.assign(document.createElement("a"), { href: URL.createObjectURL(blob), download: `voice-${story.id}.json` });
+  link.click();
+  URL.revokeObjectURL(link.href);
 }
 
 function openLibrary() {
@@ -184,6 +370,7 @@ function openLibrary() {
   dialog.addEventListener("click", (e) => {
     const id = e.target.closest("[data-story]")?.dataset.story;
     if (!id) return;
+    finishRecording();
     stopAudio();
     selectStory(id);
     dialog.close();
@@ -191,7 +378,7 @@ function openLibrary() {
   openDialog(dialog);
 }
 
-function selectStory(id) {
+async function selectStory(id) {
   story = stories[id];
   settings.storyId = id;
   const errors = validateStory(story);
@@ -200,6 +387,7 @@ function selectStory(id) {
   settings.progress[id] = { ...p, position: clamp(p.position) };
   saveSettings(settings);
   direction = "next";
+  await loadClips();
   render();
 }
 
@@ -217,6 +405,28 @@ const actions = {
   home: () => go(0),
   settings: openSettings,
   library: openLibrary,
+  listen: () => {
+    const page = currentPage();
+    const src = page && narrationSrc(page);
+    if (isPlaying()) stopAudio();
+    else if (src) playAudio(src, { advance: settings.readAlong });
+  },
+  record: async () => {
+    await finishRecording();
+    stopAudio();
+    recordMode = !recordMode;
+    recordError = "";
+    render();
+  },
+  "rec-start": beginRecording,
+  "rec-stop": finishRecording,
+  "rec-play": () => {
+    const page = currentPage();
+    const src = page && clips.get(keyFor(page.id))?.url;
+    if (isPlaying()) stopAudio();
+    else if (src) playAudio(src);
+  },
+  "rec-delete": removeClip,
   install: async () => {
     const event = installPrompt;
     installPrompt = null;
@@ -259,7 +469,7 @@ if ("serviceWorker" in navigator && import.meta.env.PROD) {
 try {
   series = await fetchSeries();
   stories = Object.fromEntries(await Promise.all(series.stories.map(async (id) => [id, await fetchStory(id)])));
-  selectStory(series.stories.includes(settings.storyId) ? settings.storyId : series.stories[0]);
+  await selectStory(series.stories.includes(settings.storyId) ? settings.storyId : series.stories[0]);
 } catch (error) {
   console.error(error);
   root.textContent = t(settings.uiLang, "loadError");

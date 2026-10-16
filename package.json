@@ -18,6 +18,7 @@
   "devDependencies": {
     "@fontsource-variable/comfortaa": "^5.3.0",
     "@fontsource-variable/playpen-sans": "^5.3.0",
+    "fake-indexeddb": "^6.2.5",
     "image-size": "^2.0.4",
     "playwright-core": "^1.64.1",
     "sharp": "^0.35.5",

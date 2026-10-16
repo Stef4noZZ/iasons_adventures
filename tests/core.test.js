@@ -28,6 +28,13 @@ describe("validateStory", () => {
     expect(errors).toContain("Page 'page_01' must have number=1.");
   });
 
+  it("rejects image prompts that use unknown characters", () => {
+    const s = story();
+    s.pages[0].characters.push("dragon");
+    s.cover_characters.push("wizard");
+    expect(validateStory(s)).toEqual(["Page 'page_01' uses unknown character 'dragon'.", "Cover uses unknown character 'wizard'."]);
+  });
+
   it("rejects unknown print pages", () => {
     const s = story();
     s.print.front_matter.push("dedication");

@@ -10,6 +10,7 @@ export const DEFAULTS = Object.freeze({
   progress: {},
   narration: true,
   sound: true,
+  readAlong: false,
 });
 
 export function sanitize(raw) {
@@ -27,6 +28,7 @@ export function sanitize(raw) {
   s.progress = progress;
   s.narration = Boolean(s.narration);
   s.sound = Boolean(s.sound);
+  s.readAlong = Boolean(s.readAlong);
   return s;
 }
 
