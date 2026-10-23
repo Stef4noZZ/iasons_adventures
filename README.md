@@ -25,7 +25,8 @@ npm run export:pdf   # print PDFs into exports/ (needs Google Chrome)
   The listen button then plays your voice, and "Read along" in settings plays each page and turns it automatically (good for bedtime).
   Recordings are stored on the device only (IndexedDB), never uploaded. Back up and restore them from Settings, "My voice". Recording needs `localhost` or HTTPS and microphone permission.
 - Optional per-page narration audio files (`audio` fields in `story.json`) are used when there is no own recording.
-- Installable (PWA) and fully offline after the first visit: Chrome/Edge show an "Install" button, on iPad use Share, then Add to Home Screen.
+- Works offline after the first visit and can be added to the home screen by the browser's own menu (on iPad: Share, then Add to Home Screen).
+  The in-app "Install" button on the home screen is switched off for now: set `installButton: true` in `src/config.js` to bring it back.
   The service worker is only active in the production build (`npm run build && npm run preview`).
 - **Home screen** (the app always opens on it): the series title and one card per book, in Greek or English (EL/EN switch in the top bar, also in Settings). Cards show New, the page reached or Finished. Slots not filled yet appear as "Coming soon" cards.
 - A book opens on its cover. Start always begins at page 1; "Continue from page N" appears when you stopped partway. The home button returns to the home screen and your place is kept.
@@ -44,6 +45,11 @@ Print PDFs are not published; only the app and the small web images are.
 Each book lives in `public/stories/<id>/story.json` (its own title, pages, `print` front and back matter) with art in `assets/stories/<id>/images/`.
 
 To add a book: copy the story folder, change the id, title, pages and images, and add the id to `stories` in `series.json` (it takes the next free place on the home screen). `npm run validate` checks all of it.
+
+**Unreleased books** live in `unreleased/stories/<id>/` (and their prompts in `unreleased/prompts/`). That folder is git-ignored, so it is never pushed or published; it exists only on this computer, so keep your own backup of it. `npm run validate`, `npm run prompts` and `npm run images` work on those books too.
+To release a book: move its folder to `public/stories/<id>/`, add the id to `stories` in `series.json`, and run `npm run prompts` (the prompts document then moves to `docs/prompts/`).
+
+**What the live site publishes:** the build removes the art prompts and character notes (`art_direction`, `cover_prompt`, `image_prompt` and the character lists) from the published story and series files. The full files stay in the repository. Full-size images and reference photos are never published.
 The copyright page text in `series.json` was drafted without input from you, so check it (author credit, year, ISBN, publisher) before printing.
 
 ## Print

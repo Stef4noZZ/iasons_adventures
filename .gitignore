@@ -13,3 +13,6 @@ assets/characters/private_reference_photos/
 
 # Full-resolution illustration masters (regenerate with npm run art; web versions are committed)
 assets/stories/*/images/
+
+# Books that are not released yet (texts, prompts, pictures). Move a book to public/stories/ to release it.
+unreleased/

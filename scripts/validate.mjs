@@ -1,7 +1,8 @@
-// Usage: npm run validate [-- <story-id>]  (default: every story in series.json)
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+// Usage: npm run validate [-- <story-id>]  (default: every book, released or not)
+import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { imageSize } from "image-size";
+import { listBooks, rel } from "./books.mjs";
 import { interiorPageCount, validateSeries, validateStory } from "../src/core/story.js";
 
 const root = join(import.meta.dirname, "..");
@@ -17,15 +18,18 @@ function report(label, errors, warnings) {
   failed ||= errors.length > 0;
 }
 
-const unregistered = readdirSync(join(root, "public", "stories"), { withFileTypes: true })
-  .filter((entry) => entry.isDirectory() && !series.stories.includes(entry.name) && existsSync(join(root, "public", "stories", entry.name, "story.json")))
-  .map((entry) => entry.name);
-report("series", validateSeries(series), unregistered.map((id) => `story '${id}' exists but is not in "stories" (it will not show on the home screen yet)`));
+const books = listBooks().filter((book) => !process.argv[2] || book.id === process.argv[2]);
+const unregistered = books.filter((book) => book.released && !series.stories.includes(book.id)).map((book) => book.id);
+report("series", validateSeries(series), [
+  ...unregistered.map((id) => `story '${id}' is in public/stories but not in "stories" (it will not show on the home screen yet)`),
+  ...series.stories.filter((id) => !books.some((book) => book.id === id) && !process.argv[2]).map((id) => `series lists '${id}' but its folder is missing`),
+]);
 
-for (const id of process.argv[2] ? [process.argv[2]] : [...series.stories, ...unregistered]) {
-  const story = readJson("public", "stories", id, "story.json");
+for (const book of books) {
+  const id = book.id;
+  const story = JSON.parse(readFileSync(join(book.dir, "story.json"), "utf8"));
   const masters = join(root, "assets", "stories", id, "images");
-  const web = join(root, "public", "stories", id, "images");
+  const web = join(book.dir, "images");
   const minPx = Math.round(((story.trim_size_cm[0] * 10 + 2 * BLEED_MM) / 25.4) * 300); // 300 dpi incl. bleed
 
   const errors = validateStory(story, { sharedCharacters: series.art_direction?.characters });
@@ -44,7 +48,7 @@ for (const id of process.argv[2] ? [process.argv[2]] : [...series.stories, ...un
   }
   if (present.length && present.length < files.length) warnings.push(`missing images: ${files.filter((f) => !present.includes(f)).map(([n]) => n).join(", ")}`);
 
-  console.log(`${story.title.en}: ${story.pages.length} story pages, ${interior} interior pages, ${present.length}/${files.length} images`);
+  console.log(`${story.title.en}${book.released ? "" : " (unreleased)"}: ${story.pages.length} story pages, ${interior} interior pages, ${present.length}/${files.length} images`);
   report(id, errors, warnings);
 }
 

@@ -3,6 +3,7 @@ import "./styles/page.css";
 import "./styles/app.css";
 import { fetchSeries, fetchStory, validateStory } from "./core/story.js";
 import { loadSettings, progressOf, saveSettings } from "./core/settings.js";
+import { features } from "./config.js";
 import { t } from "./core/i18n.js";
 import { chime, pageTurn } from "./core/sound.js";
 import { clipKey, deleteClip, exportClips, importClips, listClips, saveClip } from "./core/recordings.js";
@@ -332,7 +333,7 @@ function buildTopbar() {
     ${story ? `<h1 class="sr-only">${story.series_title[lang]}: ${story.title[lang]}</h1>
     <button class="icon-btn" data-act="home" aria-label="${t(lang, "home")}">⌂</button>` : ""}
     <div class="topbar__actions">
-      ${!story && installPrompt ? `<button class="btn btn--small" data-act="install">${t(lang, "install")}</button>` : ""}
+      ${features.installButton && !story && installPrompt ? `<button class="btn btn--small" data-act="install">${t(lang, "install")}</button>` : ""}
       ${story ? "" : langToggle}
       ${story && recordingSupported() ? `<button class="icon-btn${recordMode ? " icon-btn--on" : ""}" data-act="record" aria-pressed="${recordMode}" aria-label="${t(lang, "recordMode")}">🎙</button>` : ""}
       <button class="icon-btn" data-act="fullscreen" aria-label="${t(lang, "fullscreen")}">⛶</button>
@@ -493,6 +494,7 @@ root.addEventListener("pointerup", (e) => {
 });
 
 window.addEventListener("beforeinstallprompt", (e) => {
+  if (!features.installButton) return; // leave the browser's own install behaviour alone
   e.preventDefault();
   installPrompt = e;
   if (series) render();
