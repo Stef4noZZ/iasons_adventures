@@ -5,7 +5,7 @@ import { DEFAULTS, loadSettings, progressOf, sanitize } from "../src/core/settin
 import { t } from "../src/core/i18n.js";
 
 const json = (path) => JSON.parse(readFileSync(path, "utf8"));
-const story = () => json("public/stories/iasons_and_the_magic_forest/story.json");
+const story = () => json("public/stories/iasonas_and_the_magic_forest/story.json");
 const series = () => json("public/series.json");
 const shared = () => series().art_direction.characters;
 

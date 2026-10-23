@@ -5,7 +5,7 @@ import { join, parse } from "node:path";
 import sharp from "sharp";
 import { findBook, root } from "./books.mjs";
 
-const ID = process.argv[2] ?? "iasons_and_the_magic_forest";
+const ID = process.argv[2] ?? "iasonas_and_the_magic_forest";
 const src = join(root, "assets", "stories", ID, "images");
 const book = findBook(ID);
 if (!book) throw new Error(`No book folder for '${ID}'`);

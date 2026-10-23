@@ -4,7 +4,7 @@ import { publicSeries, publicStory } from "../src/core/publish.js";
 import { validateStory } from "../src/core/story.js";
 
 const json = (path) => JSON.parse(readFileSync(path, "utf8"));
-const story = () => json("public/stories/iasons_and_the_magic_forest/story.json");
+const story = () => json("public/stories/iasonas_and_the_magic_forest/story.json");
 const series = () => json("public/series.json");
 
 describe("publish", () => {

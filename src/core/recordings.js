@@ -1,5 +1,8 @@
 // Parent voice recordings, kept on the device in IndexedDB (never uploaded).
-const DB_NAME = "iasons-recordings";
+import { renameLegacyId } from "./ids.js";
+
+const DB_NAME = "iasonas-recordings";
+const LEGACY_DB_NAME = "iasons-recordings";
 const STORE = "clips";
 
 export const clipKey = (storyId, lang, mode, pageId) => [storyId, lang, mode, pageId].join("/");
@@ -59,14 +62,60 @@ export async function importClips(json, idb = globalThis.indexedDB) {
   if (file?.version !== 1 || typeof file.storyId !== "string" || !Array.isArray(file.clips)) {
     throw new Error("Not a recordings backup file.");
   }
+  const storyId = renameLegacyId(file.storyId); // backups made before the rename still import
   let count = 0;
   for (const { lang, mode, pageId, type, data } of file.clips) {
     if (![lang, mode, pageId, type, data].every((value) => typeof value === "string")) continue;
     await saveClip({
-      key: clipKey(file.storyId, lang, mode, pageId), storyId: file.storyId, lang, mode, pageId,
+      key: clipKey(storyId, lang, mode, pageId), storyId, lang, mode, pageId,
       blob: fromBase64(data, type), createdAt: Date.now(),
     }, idb);
     count++;
   }
-  return { storyId: file.storyId, count };
+  return { storyId, count };
+}
+
+/** Clips from the database used before the rename; [] when there is none (and none is created). */
+async function readLegacyClips(idb) {
+  if (typeof idb.databases === "function") {
+    const names = (await idb.databases()).map((db) => db.name);
+    if (!names.includes(LEGACY_DB_NAME)) return [];
+  }
+  const db = await new Promise((resolve) => {
+    const request = idb.open(LEGACY_DB_NAME);
+    request.onupgradeneeded = () => request.transaction.abort(); // it did not exist: do not create it
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => resolve(null);
+  });
+  if (!db) return [];
+  if (!db.objectStoreNames.contains(STORE)) {
+    db.close();
+    return [];
+  }
+  const clips = await new Promise((resolve, reject) => {
+    const request = db.transaction(STORE, "readonly").objectStore(STORE).getAll();
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+  db.close();
+  return clips;
+}
+
+/**
+ * Copies recordings made before the rename into the current database, under the new book ids.
+ * The old database is left untouched, and clips already present in the new one are not overwritten.
+ */
+export async function migrateLegacyRecordings(idb = globalThis.indexedDB) {
+  const legacy = await readLegacyClips(idb);
+  if (!legacy.length) return 0;
+  const existing = new Set(await run(idb, "readonly", (store) => store.getAllKeys()));
+  let copied = 0;
+  for (const clip of legacy) {
+    const storyId = renameLegacyId(clip.storyId);
+    const key = clipKey(storyId, clip.lang, clip.mode, clip.pageId);
+    if (existing.has(key)) continue;
+    await saveClip({ ...clip, key, storyId }, idb);
+    copied++;
+  }
+  return copied;
 }

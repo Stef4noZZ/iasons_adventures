@@ -1,7 +1,7 @@
 // The version and precache list below are filled in at build time by the precache plugin in vite.config.js.
 const VERSION = "__VERSION__";
 const PRECACHE = __PRECACHE__;
-const CACHE = `iasons-${VERSION}`;
+const CACHE = `iasonas-${VERSION}`;
 const scope = self.registration.scope;
 
 self.addEventListener("install", (event) => {
@@ -13,7 +13,7 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys()
-      .then((keys) => Promise.all(keys.filter((key) => key.startsWith("iasons-") && key !== CACHE).map((key) => caches.delete(key))))
+      .then((keys) => Promise.all(keys.filter((key) => /^iasons?-/.test(key) && key !== CACHE).map((key) => caches.delete(key))))
       .then(() => self.clients.claim()),
   );
 });

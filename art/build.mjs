@@ -8,7 +8,7 @@ const arg = (n, d) => { const i = process.argv.indexOf(`--${n}`); return i > -1 
 const only = arg("only");
 const size = Number(arg("size", 2551));
 const scenesDir = join(import.meta.dirname, "scenes");
-const outDir = join(import.meta.dirname, "..", "assets", "stories", "iasons_and_the_magic_forest", "images");
+const outDir = join(import.meta.dirname, "..", "assets", "stories", "iasonas_and_the_magic_forest", "images");
 const svgDir = join(import.meta.dirname, "dist");
 mkdirSync(outDir, { recursive: true });
 mkdirSync(svgDir, { recursive: true });

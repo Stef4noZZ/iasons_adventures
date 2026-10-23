@@ -6,7 +6,7 @@ import { loadSettings, progressOf, saveSettings } from "./core/settings.js";
 import { features } from "./config.js";
 import { t } from "./core/i18n.js";
 import { chime, pageTurn } from "./core/sound.js";
-import { clipKey, deleteClip, exportClips, importClips, listClips, saveClip } from "./core/recordings.js";
+import { clipKey, deleteClip, exportClips, importClips, listClips, migrateLegacyRecordings, saveClip } from "./core/recordings.js";
 import { recordingSupported, startRecorder } from "./core/recorder.js";
 import { renderCover, renderPage } from "./ui/page.js";
 import { renderHome } from "./ui/home.js";
@@ -501,6 +501,18 @@ window.addEventListener("beforeinstallprompt", (e) => {
 });
 window.addEventListener("appinstalled", () => (installPrompt = null));
 
+/** One-time copy of recordings made before the project was renamed; failures never block the app. */
+async function migrateRecordingsOnce() {
+  const flag = "iasonas-adventures:recordings-migrated";
+  try {
+    if (localStorage.getItem(flag)) return;
+    await migrateLegacyRecordings();
+    localStorage.setItem(flag, "1");
+  } catch (error) {
+    console.warn("Recordings migration:", error);
+  }
+}
+
 if ("serviceWorker" in navigator && import.meta.env.PROD) {
   navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch((error) => console.warn("Service worker:", error));
 }
@@ -512,6 +524,7 @@ try {
     const errors = validateStory(loaded, { sharedCharacters: series.art_direction?.characters });
     if (errors.length) console.warn(`Story ${id}:`, errors);
   }
+  await migrateRecordingsOnce();
   window.addEventListener("hashchange", applyRoute);
   await applyRoute();
 } catch (error) {

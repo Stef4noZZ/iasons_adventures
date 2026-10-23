@@ -72,7 +72,7 @@ npm run icons        # app icons into public/icons
 ```
 
 To make the images with an AI image tool (for example together with your son), use the ready-made prompts in
-[docs/prompts/iasons_and_the_magic_forest.md](docs/prompts/iasons_and_the_magic_forest.md): style, negative prompt, character sheets and one complete prompt per picture.
+[docs/prompts/iasonas_and_the_magic_forest.md](docs/prompts/iasonas_and_the_magic_forest.md): style, negative prompt, character sheets and one complete prompt per picture.
 They are generated from `story.json` (`art_direction`, `cover_prompt`, and `characters` and `image_prompt` on every page); edit them there and run `npm run prompts`.
 
 To use your own images instead, put square files named `cover.png` and `page_01.png` ... `page_16.png` in

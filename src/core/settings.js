@@ -1,7 +1,8 @@
+import { renameLegacyId } from "./ids.js";
 import { LANGUAGES, MODES } from "./story.js";
 
-// Keeps the old spelling on purpose: renaming it would reset everyone's saved settings and reading progress.
-const KEY = "iasons-adventures:settings";
+const KEY = "iasonas-adventures:settings";
+const LEGACY_KEY = "iasons-adventures:settings";
 
 export const DEFAULTS = Object.freeze({
   uiLang: "el",
@@ -35,9 +36,28 @@ export function sanitize(raw) {
 
 export const progressOf = (settings, id) => settings.progress[id] ?? { position: 0, lastRead: 1, finished: false };
 
+/** Settings saved before the rename: same data, with the old book ids translated to the new ones. */
+export function migrateSettings(raw) {
+  if (!raw || typeof raw !== "object") return raw;
+  const progress = {};
+  for (const [id, value] of Object.entries(raw.progress && typeof raw.progress === "object" ? raw.progress : {})) {
+    progress[renameLegacyId(id)] = value;
+  }
+  return { ...raw, storyId: renameLegacyId(raw.storyId), progress };
+}
+
 export function loadSettings(storage = globalThis.localStorage) {
   try {
-    return sanitize(JSON.parse(storage.getItem(KEY)));
+    const saved = storage.getItem(KEY);
+    if (saved == null) {
+      const legacy = storage.getItem(LEGACY_KEY);
+      if (legacy != null) {
+        const migrated = sanitize(migrateSettings(JSON.parse(legacy)));
+        storage.setItem(KEY, JSON.stringify(migrated)); // the old entry stays untouched as a fallback
+        return migrated;
+      }
+    }
+    return sanitize(JSON.parse(saved));
   } catch {
     return sanitize(null);
   }
