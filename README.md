@@ -46,7 +46,7 @@ Each book lives in `public/stories/<id>/story.json` (its own title, pages, `prin
 
 To add a book: copy the story folder, change the id, title, pages and images, and add the id to `stories` in `series.json` (it takes the next free place on the home screen). `npm run validate` checks all of it.
 
-**Unreleased books** live in `unreleased/stories/<id>/` (and their prompts in `unreleased/prompts/`). That folder is git-ignored, so it is never pushed or published; it exists only on this computer, so keep your own backup of it. `npm run validate`, `npm run prompts` and `npm run images` work on those books too.
+**Unreleased books** live in `unreleased/stories/<id>/` (their prompts in `unreleased/prompts/`). The folder is in git, so it syncs between computers, but it is outside `public/`, so the build never puts it on the site. Note that the repository itself is public, so anyone can read these files on GitHub. `npm run validate`, `npm run prompts` and `npm run images` work on those books too.
 To release a book: move its folder to `public/stories/<id>/`, add the id to `stories` in `series.json`, and run `npm run prompts` (the prompts document then moves to `docs/prompts/`).
 
 **What the live site publishes:** the build removes the art prompts and character notes (`art_direction`, `cover_prompt`, `image_prompt` and the character lists) from the published story and series files. The full files stay in the repository. Full-size images and reference photos are never published.

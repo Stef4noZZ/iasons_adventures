@@ -1,4 +1,4 @@
-// Finds every book: released ones in public/stories, unreleased ones in the git-ignored unreleased/stories.
+// Finds every book: released ones in public/stories (published), unreleased ones in unreleased/stories (in git, never built into the site).
 import { existsSync, readdirSync } from "node:fs";
 import { join, relative } from "node:path";
 
