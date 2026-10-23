@@ -1,5 +1,6 @@
 import { LANGUAGES, MODES } from "./story.js";
 
+// Keeps the old spelling on purpose: renaming it would reset everyone's saved settings and reading progress.
 const KEY = "iasons-adventures:settings";
 
 export const DEFAULTS = Object.freeze({
